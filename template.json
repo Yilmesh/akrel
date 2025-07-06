@@ -1,0 +1,38 @@
+{
+    "Actor": {
+
+        "types": [
+            "PlayerCharacter"
+        ],
+        
+        "PlayerCharacter" : {
+
+            "race": "",
+            "gender": "",
+            "age": 0,
+            "height": 0,
+            "weight": 0
+        }
+    },
+
+    "Item": {
+        "types":[
+            "item"
+        ],
+
+        "templates": {
+        
+        "generalItems": {
+            "weight": 10,
+            "value": 100,
+            "description": ""
+        }
+    },
+
+        "item" : {
+            "templates": ["generalItems"],
+            "type": "item",
+            "quantity": 1
+        }
+    }
+}
