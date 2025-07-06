@@ -2,37 +2,73 @@
     "Actor": {
 
         "types": [
-            "PlayerCharacter"
+            "Personnage joueur",
+            "Personnage non-joueur"
         ],
         
-        "PlayerCharacter" : {
+        "Personnage joueur" : {
 
-            "race": "",
-            "gender": "",
-            "age": 0,
-            "height": 0,
-            "weight": 0
+            "origine": "Nain",
+            "genre": "Femme",
+            "age": 18,
+            "taille": "1m50",
+            "morphologie": "X",
+            "caste": "Artisan",
+            "divinité": "0mnun",
+            "alignement": "loyal"
+        },
+
+        "personnage non-joueur" : {
+            "origine": "Humain",
+            "genre": "Homme",
+            "age": 18
         }
     },
 
     "Item": {
         "types":[
-            "item"
+            "butin",
+            "arme",
+            "armure"
         ],
 
         "templates": {
-        
-        "generalItems": {
-            "weight": 10,
-            "value": 100,
+            
+        "butin":{
+            "prix": 100,
+            "description": ""
+        },
+
+        "arme": {
+            "prix": 100,
+            "dégât": 1,
+            "description": ""
+        },
+
+        "armure": {
+            "prix": 100,
+            "protection": 1,
             "description": ""
         }
     },
+    
+        "butin" : {
+            "templates": ["butin"],
+            "type": "butin",
+            "quantité":1
+        },
 
-        "item" : {
-            "templates": ["generalItems"],
-            "type": "item",
-            "quantity": 1
+        "arme" : {
+            "templates": ["arme"],
+            "type": "arme",
+            "quantité": 1
+        },
+
+        "armure" : {
+            "templates": ["armure"],
+            "type": "armure",
+            "quantité":1
         }
+
     }
 }

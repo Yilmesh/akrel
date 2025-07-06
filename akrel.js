@@ -1,22 +1,28 @@
 import { AKREL } from "./modules/config.js";
+import akrelActor from "./modules/objects/akrelActor.js";
+import akrelCharakterSheet from "./modules/sheets/akrelcharakterSheet.js";
 
 Hooks.once("init", async () => {
 
-    console.log("AKREL | Initalizing Nethergard Core System");
+    console.log("AKREL | Initalizing Akrel Core System");
 
     // Setting up the Global Configuration Object
     CONFIG.AKREL = AKREL;
     CONFIG.INIT = true;
+    CONFIG.Actor.documentClass = akrelActor;
 
     // Register custom Sheets and unregister the start Sheets
     // Items.unregisterSheet("core", ItemSheet);
-    // Actors.unregisterSheet("core", ActorSheet);
+
+    const DocumentSheetConfig = foundry.applications.apps.DocumentSheetConfig;
+    DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
+    DocumentSheetConfig.registerSheet(Actor, "akrel", akrelCharakterSheet, { types: ["character"], makeDefault: true, label: "AKREL.SheetClassCharacter"});
 
     // Load all Partial-Handlebar Files
     preloadHandlebarsTemplates();
 
     // Register Additional Handelbar Helpers
-    registerHandelbarsHelpers();  
+    registerHandlebarsHelpers();  
 });
 
 Hooks.once("ready", async () => {
@@ -32,14 +38,18 @@ function preloadHandlebarsTemplates() {
 
     const templatePaths = [
 
-        // "systems/akrel/templates/partials/template.hbs",
+        "systems/akrel/templates/partials/character-sheet-character.hbs",
+        "systems/akrel/templates/partials/character-sheet-background.hbs",
+        "systems/akrel/templates/partials/character-sheet-skill.hbs",
+        "systems/akrel/templates/partials/character-sheet-combat.hbs",
+        "systems/akrel/templates/partials/character-sheet-progression.hbs",
 
     ];
     
-    return loadTemplates(templatePaths);
+    return foundry.applications.handlebars.loadTemplates(templatePaths);
 };
 
-function registerHandelbarsHelpers() {
+function registerHandlebarsHelpers() {
 
     Handlebars.registerHelper("equals", function(v1, v2) { return (v1 === v2)});
 
