@@ -1,74 +1,36 @@
 {
-    "Actor": {
-
-        "types": [
-            "Personnage",
-            "Personnage non-joueur"
-        ],
-        
-        "Personnage" : {
-
-            "origine": "Nain",
-            "genre": "Femme",
-            "age": 18,
-            "taille": "1m50",
-            "morphologie": "X",
-            "caste": "Artisan",
-            "divinité": "0mnun",
-            "alignement": "loyal"
-        },
-
-        "personnage non-joueur" : {
-            "origine": "Humain",
-            "genre": "Homme",
-            "age": 18
-        }
-    },
-
+    "Actor": {},
     "Item": {
-        "types":[
-            "butin",
-            "arme",
-            "armure"
+        "types": [
+            "weapon",
+            "armor",
+            "loot",
+            "spell"
         ],
-
         "templates": {
+            "itemDescription": {
+                "description": ""
+            }
+        },
+        "weapon": {
+            "templates": ["itemDescription"],
+            "attackWith": ["SOC","PHY","INT","ADR"],
+            "damage": 0,
+            "price": 0
+        },
+        "armor": {
+            "templates": ["itemDescription"],
+            "where": ["head","chest","pant","gloves","boots"],
+            "price": 0
             
-        "butin":{
-            "prix": 100,
-            "description": ""
         },
-
-        "arme": {
-            "prix": 100,
-            "dégât": 1,
-            "description": ""
+        "loot": {
+            "templates": ["itemDescription"],
+            "price": 0
         },
-
-        "armure": {
-            "prix": 100,
-            "protection": 1,
-            "description": ""
+        "spell": {
+            "templates": ["itemDescription"],
+            "school": ""
         }
-    },
-    
-        "butin" : {
-            "templates": ["butin"],
-            "type": "butin",
-            "quantité":1
-        },
-
-        "arme" : {
-            "templates": ["arme"],
-            "type": "arme",
-            "quantité": 1
-        },
-
-        "armure" : {
-            "templates": ["armure"],
-            "type": "armure",
-            "quantité":1
-        }
-
     }
 }

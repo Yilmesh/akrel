@@ -1,6 +1,8 @@
-export const AKREL = {};
+export const akrel = {};
 
-AKREL.attributes = {
-    
-    Test: "TEST!"
+akrel.attackTypes = {
+    Social: "akrel.attack.SOC",
+    Physics: "akrel.attack.PHY",
+    Intelligency: "akrel.attack.INT",
+    Dexterity: "akrel.attack.DEX"
 }

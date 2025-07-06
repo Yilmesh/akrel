@@ -1,0 +1,36 @@
+{    
+    "akrel": {
+        "SystemName": "Akrel",
+        "SheetClassCharacter": "Personnage",
+
+        "Caracs": {
+            "SOC": "Social",
+            "PHY": "Endurence",
+            "INT": "Intelligency",
+            "ADR": "Dexterity",
+            "INI": "Initiative",
+            "BLO": "Blocage",
+            "ESQ": "Esquive",
+            "VIG": "Vigilance"
+        },
+
+        "weapon" : {
+            "attackWith": "Attack with:",
+            "damage": "Damage",
+            "price": "Price" 
+        },
+
+        "attack": {
+            "SOC": "Social",
+            "PHY": "Endurence",
+            "INT": "Intelligency",
+            "ADR": "Dexterity"
+        },
+
+        "Identity": {
+            "age": "Age",
+            "origine": "Origine",
+            "gender": "Gender"
+        }
+    }
+}

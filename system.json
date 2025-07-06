@@ -2,30 +2,51 @@
   "id": "akrel",
   "title": "Akrel",
   "description": "",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "compatibility": {
     "minimum": 13,
-    "verified": "13.346"
+    "verified": 13
   },
   "authors": [{
     "name": "De Beer Jordan",
     "discord": "Beeder"
-    },
-    {
+  },
+  {
     "name": "Permentier Maxim",
     "discord": "Liziba"
-    }],
-  "styles": ["akrel.css"],
+  }],
+  "esmodules": ["akrel.js"],
+  "styles": ["styles/akrel.css"],
   "packs": [],
   "languages": [{
+    "lang": "en",
+    "name": "English",
+    "path": "lang/en.json"
+  },
+  {
     "lang": "fr",
     "name": "Français",
     "path": "lang/fr.json"
   }],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "non-player-character": {}
+    },
+    "Item": {
+      "weapon": {},
+      "armor": {},
+      "spell": {}
+    }
+  },
   "socket": false,
+  "initiative": "1d20 + @ini",
   "grid": {
     "distance": 1,
     "units": "m"
   },
-  "url": "https://github.com/Yilmesh/akrel.git/"
+  "primaryTokenAttribute": "resources.health",
+  "secondaryTokenAttribute": "resources.power",
+  "url": "https://github.com/Yilmesh/akrel",
+  "manifest": "https://github.com/Yilmesh/akrel/system.json"
 }
