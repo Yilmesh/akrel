@@ -1,9 +1,7 @@
 {    
     "akrel": {
-        "SystemName": "Akrel",
-        "SheetClassCharacter": "Personnage",
 
-        "Caracs": {
+        "caracs": {
             "SOC": "Social",
             "PHY": "Endurence",
             "INT": "Intelligency",
@@ -18,13 +16,6 @@
             "attackWith": "Attack with:",
             "damage": "Damage",
             "price": "Price" 
-        },
-
-        "attack": {
-            "SOC": "Social",
-            "PHY": "Endurence",
-            "INT": "Intelligency",
-            "ADR": "Dexterity"
         },
 
         "Identity": {

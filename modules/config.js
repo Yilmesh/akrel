@@ -1,8 +1,8 @@
 export const akrel = {};
 
 akrel.attackTypes = {
-    Social: "akrel.attack.SOC",
-    Physics: "akrel.attack.PHY",
-    Intelligency: "akrel.attack.INT",
-    Dexterity: "akrel.attack.DEX"
+    Social: "akrel.caracs.SOC",
+    Physics: "akrel.caracs.PHY",
+    Intelligency: "akrel.caracs.INT",
+    Dexterity: "akrel.caracs.DEX"
 }
