@@ -2,11 +2,11 @@
     "Actor": {
 
         "types": [
-            "Personnage joueur",
+            "Personnage",
             "Personnage non-joueur"
         ],
         
-        "Personnage joueur" : {
+        "Personnage" : {
 
             "origine": "Nain",
             "genre": "Femme",

@@ -1,7 +1,7 @@
 const api = foundry.applications.api;
 const sheets = foundry.applications.sheets;
 
-export default class akrelcharacterSheet extends api.HandlebarsApplicationMixin(sheets.ActorSheetV2) {
+export default class akrelCharakterSheet extends api.HandlebarsApplicationMixin(sheets.ActorSheetV2) {
 
     sheetContext = {};
 

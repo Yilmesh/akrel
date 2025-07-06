@@ -16,7 +16,7 @@ Hooks.once("init", async () => {
 
     const DocumentSheetConfig = foundry.applications.apps.DocumentSheetConfig;
     DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
-    DocumentSheetConfig.registerSheet(Actor, "akrel", akrelCharakterSheet, { types: ["character"], makeDefault: true, label: "AKREL.SheetClassCharacter"});
+    DocumentSheetConfig.registerSheet(Actor, "akrel", akrelCharakterSheet, { types: ["Personnage"], makeDefault: true, label: "AKREL.SheetClassCharacter"});
 
     // Load all Partial-Handlebar Files
     preloadHandlebarsTemplates();
