@@ -1,0 +1,54 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    </header>
+
+    <section class="sheet-body">
+
+        <table>
+            <tr>
+                <td><p>Type:</p></td>
+                <td><input name="data.type" type="text" value="{{data.type}}" data-dtype="String" /></td>
+                <td>Durabilité:</td>
+                <td><input name="data.dura" type="text" value="{{data.dura}}" data-dtype="String"</td>
+            </tr>
+        </table>
+
+        {{!-- Sheet Tab Navigation --}}
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="description">Description</a>
+            <a class="item" data-tab="configuration">{{localize "Configuration"}}</a>
+        </nav>
+
+        {{!-- Contenu de l'onglet Description --}}
+        <div class="tab description" data-group="primary" data-tab="description">
+            <p>Description</p>
+            <textarea name="data.description">{{data.description}}</textarea>
+            <div>
+                <p>{{localize "akrel.weapon.price"}} :</p>
+                <input name="data.price" type="text" value="{{data.price}}" data-dtype="Number" />
+            </div>
+        </div>
+
+        {{!-- Contenu de l'onglet Configuration --}}
+        <div class="tab configuration" data-group="primary" data-tab="configuration">
+            <table>
+                <tr>
+                    <th>{{localize "akrel.weapon.attackWith"}}</th>
+                    <th>{{localize "akrel.weapon.damage"}}</th>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="data.attackWith">
+                            {{selectOptions config.attackTypes selected=data.attackWith localize=true}}
+                        </select>
+                    </td>
+                    <td>
+                        <input name="data.damage" type="text" value="{{data.damage}}" data-dtype="String" /> {{!-- Souvent, le dégât est un string (ex: "2d6") --}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+</form>

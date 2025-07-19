@@ -13,6 +13,8 @@
             }
         },
         "weapon": {
+            "type": "",
+            "dura": "ok",
             "templates": ["itemDescription"],
             "attackWith": ["SOC","PHY","INT","ADR"],
             "damage": 0,
