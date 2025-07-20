@@ -1,7 +1,57 @@
 <form class="{{cssClass}}" autocomplete="off">
     <header class="sheet-header">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom"/></h1>
     </header>
-    <p>Hello</p>
+
+    <section class="sheet-body">
+
+        <table>
+            <tr>
+                <td><p>Type:</p></td>
+                <td><input name="data.ecole" type="text" value="{{data.ecole}}" data-dtype="String"/></td>
+                <td>Mana:</td>
+                <td><input name="data.manaCost" type="text" value="{{data.manaCost}}" data-dtype="Number"/></td>
+                <div>
+                    <button type="button" class="roll-damage" data-roll="{{data.dice}}">
+                        <i class="fas fa-dice-d20"></i> Lancer un dés
+                    </button>
+                </div>
+            </tr>
+        </table>
+
+        {{!-- Sheet Tab Navigation --}}
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="description">Description</a>
+            <a class="item" data-tab="configuration">{{localize "Configuration"}}</a>
+        </nav>
+
+        {{!-- Contenu de l'onglet Description --}}
+        <div class="tab description" data-group="primary" data-tab="description">
+            <p>Description</p>
+            <textarea name="data.description">{{data.description}}</textarea>
+        </div>
+
+        {{!-- Contenu de l'onglet Configuration --}}
+        <div class="tab configuration" data-group="primary" data-tab="configuration">
+            <table>
+                 <tr>
+                    <td>Caractéristique utilisée:</td>
+                    <td><select name="data.attackWith">{{selectOptions config.attackTypes selected=data.attackWith localize=true}}</select></td>
+                </tr>
+                <tr>
+                    <td>Nature: </td>
+                    <td><input name="date.nature" type="text" value="{{data.nature}}" data-dtype="String"/></td>
+                </tr>
+                <tr>
+                    <td>Dés:</td>
+                    <td><input name="data.dice" type="text" value="{{data.dice}}" data-dtype="String"/></td>
+                </tr>
+                <tr>
+                    <td>Est-ce un sort rapide ?</td>
+                    <td><input type="checkbox" name="data.isRapide" {{checked data.isRapide}} data-dtype="Boolean"/></td>
+                </tr>
+            </table>
+        </div>
+    </section>
 </form>

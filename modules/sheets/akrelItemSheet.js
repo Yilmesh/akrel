@@ -9,7 +9,7 @@ export default class akrelItemSheet extends ItemSheet {
             // IMPORTANT : NE PAS DÉFINIR 'template' ICI si tu utilises 'get template()'
             // Foundry utilisera la méthode 'get template()' pour déterminer le bon fichier.
             width: 620,
-            height: 350,
+            height: 500,
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }],
             scrollY: [".attributes"], // Si tu as des éléments défilants
         });

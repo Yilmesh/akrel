@@ -19,19 +19,14 @@
   "styles": ["styles/akrel.css"],
   "packs": [],
   "languages": [{
-    "lang": "en",
-    "name": "English",
-    "path": "lang/en.json"
-  },
-  {
     "lang": "fr",
     "name": "Français",
     "path": "lang/fr.json"
   }],
   "documentTypes": {
     "Actor": {
-      "character": {},
-      "non-player-character": {}
+      "personnage": {},
+      "personnage-non-joueur": {}
     },
     "Item": {
       "weapon": {},
@@ -45,8 +40,8 @@
     "distance": 1,
     "units": "m"
   },
-  "primaryTokenAttribute": "resources.health",
-  "secondaryTokenAttribute": "resources.power",
+  "primaryTokenAttribute": "resources.vie",
+  "secondaryTokenAttribute": "resources.mana",
   "url": "https://github.com/Yilmesh/akrel",
   "manifest": "https://github.com/Yilmesh/akrel/system.json"
 }

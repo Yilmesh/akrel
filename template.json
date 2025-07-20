@@ -1,5 +1,16 @@
 {
-    "Actor": {},
+    "Actor": {
+        "types":[
+            "personnage",
+            "personnage-non-joueur"
+        ],
+        "personnage":{
+            "niveau": 0
+        },
+        "personnage-non-joueur": {
+            "niveau": 0
+        }
+    },
     "Item": {
         "types": [
             "weapon",
@@ -13,17 +24,23 @@
             }
         },
         "weapon": {
-            "type": "",
+            "weaponType": "",
             "dura": "ok",
             "templates": ["itemDescription"],
             "attackWith": ["SOC","PHY","INT","ADR"],
-            "damage": 0,
-            "price": 0
+            "damage": "",
+            "price": 0,
+            "nature": "",
+            "enchantement": ""
         },
         "armor": {
             "templates": ["itemDescription"],
-            "where": ["head","chest","pant","gloves","boots"],
-            "price": 0
+            "where": ["head","chest","pant","arms","feets"],
+            "price": 0,
+            "dura": "",
+            "point": 0,
+            "enchantement": "",
+            "armorType":"lourde"
             
         },
         "loot": {
@@ -32,7 +49,12 @@
         },
         "spell": {
             "templates": ["itemDescription"],
-            "school": ""
+            "nature": "",
+            "niveau": 0,
+            "attackWith": ["SOC","PHY","INT","ADR"],
+            "dice": "",
+            "isRapide": false,
+            "manaCost": 0
         }
     }
 }
