@@ -1,14 +1,23 @@
 {
     "Actor": {
         "types":[
-            "personnage",
-            "personnage-non-joueur"
+            "character",
+            "npc"
         ],
-        "personnage":{
-            "niveau": 0
+        "character":{
+            "age": "",
+            "origin": "",
+            "gender": "",
+            "size": "",
+            "morphology": "",
+            "caste": "",
+            "divinity": "",
+            "alignment": "",
+            "experience": 0,
+            "story": ""
         },
-        "personnage-non-joueur": {
-            "niveau": 0
+        "npc": {
+            "level": 0
         }
     },
     "Item": {
@@ -16,7 +25,8 @@
             "weapon",
             "armor",
             "loot",
-            "spell"
+            "spell",
+            "passive"
         ],
         "templates": {
             "itemDescription": {
@@ -25,23 +35,22 @@
         },
         "weapon": {
             "weaponType": "",
-            "dura": "ok",
+            "durability": "ok",
             "templates": ["itemDescription"],
-            "attackWith": ["SOC","PHY","INT","ADR"],
+            "attackAttribute": ["SOC","PHY","INT","ADR"],
             "damage": "",
             "price": 0,
             "nature": "",
-            "enchantement": ""
+            "enchantment": ""
         },
         "armor": {
             "templates": ["itemDescription"],
-            "where": ["head","chest","pant","arms","feets"],
+            "wornLocation": ["head","chest","pants","arms","feet"],
             "price": 0,
-            "dura": "",
-            "point": 0,
-            "enchantement": "",
-            "armorType":"lourde"
-            
+            "durability": "", 
+            "defensePoints": 0,
+            "enchantment": "",
+            "armorType": "" 
         },
         "loot": {
             "templates": ["itemDescription"],
@@ -49,12 +58,17 @@
         },
         "spell": {
             "templates": ["itemDescription"],
-            "nature": "",
-            "niveau": 0,
-            "attackWith": ["SOC","PHY","INT","ADR"],
-            "dice": "",
-            "isRapide": false,
+            "spellNature": "", 
+            "spellLevel": 0,
+            "attackAttribute": ["SOC","PHY","INT","ADR"],
+            "damageDice": "",
+            "isQuickSpell": false,
             "manaCost": 0
+        },
+        "passive": { 
+            "templates": ["itemDescription"],
+            "spellNature": "", 
+            "spellLevel": 0
         }
     }
 }

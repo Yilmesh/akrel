@@ -1,27 +1,107 @@
-{    
-    "akrel": {
-
-        "caracs": {
+{
+    "TYPES": {
+            "Actor": {
+                "character": "Personnage",
+                "npc": "Personnage Non-Joueur"
+            },
+            "Item": {
+                "weapon": "Arme",
+                "armor": "Armure",
+                "loot": "Butin",
+                "spell": "Sort",
+                "passive": "Passive"
+            }
+        },
+    "AKREL": {
+        "ATTRIBUTES": { 
             "SOC": "Social",
             "PHY": "Physique",
-            "INT": "Intélligence",
+            "INT": "Intelligence",
             "ADR": "Adresse",
             "INI": "Initiative",
-            "BLO": "Blocking",
-            "ESQ": "Dodge",
+            "BLO": "Blocage", 
+            "ESQ": "Esquive",
             "VIG": "Vigilance"
         },
-
-        "weapon" : {
-            "attackWith": "Attaque avec:",
-            "damage": "dégât",
-            "price": "prix"
+        "WEAPON": {
+            "ATTACK_ATTRIBUTE": "Attaque avec :",
+            "DAMAGE": "Dégâts",
+            "PRICE": "Prix",
+            "TYPE": "Type d'arme",
+            "DURABILITY": "Durabilité",
+            "NATURE": "Nature",
+            "ENCHANTMENT": "Enchantement",
+            "ATTACKWITH": "Attaque avec "
         },
-
-        "Identity": {
-            "age": "Âge",
-            "origine": "Origine",
-            "genre": "Genre"
+        "ARMOR": {
+            "TYPE": "Type d'armure",
+            "WORN_LOCATION": "Emplacement",
+            "PRICE": "Prix",
+            "DURABILITY": "Durabilité",
+            "DEFENSE_POINTS": "Points de Défense",
+            "ENCHANTMENT": "Enchantement"
+        },
+        "LOOT": { 
+            "PRICE": "Prix"
+        },
+        "CHARACTER": { 
+            "AGE": "Âge",
+            "ORIGIN": "Origine",
+            "GENDER": "Genre",
+            "SIZE": "Taille",
+            "MORPHOLOGY": "Morphologie",
+            "CASTE": "Caste",
+            "DIVINITY": "Divinité",
+            "ALIGNMENT": "Alignement",
+            "EXPERIENCE": "Expérience",
+            "IDENTITY": "Identité",
+            "STORY": "Histoire"
+        },
+        "NPC": {
+            "LEVEL": "Niveau"
+        },
+        "SPELL": {
+            "ATTACK_ATTRIBUTE": "Attaque avec :",
+            "MANA_COST": "Coût en Mana",
+            "NATURE": "Nature du sort",
+            "LEVEL": "Niveau du sort",
+            "DAMAGE_DICE": "Dés de dégâts",
+            "IS_QUICK_SPELL": "Sort rapide"
+        },
+        "PASSIVE": {
+            "LEVEL": "Niveau",
+            "NATURE": "Nature"
+        },
+        "SHEET": {
+            "COMPETENCIES": "Compétences",
+            "ADD_SPELL": "Ajouter un sort",
+            "CREATE_SPELL": "Créer un nouveau sort",
+            "SPELL_NAME": "Nom du sort",
+            "QUICK_SPELL_SHORT": "Rapide",
+            "NATURE": "Nature du sort",
+            "TYPE": "Type",
+            "COST": "Coût",
+            "CAST_SPELL": "Lancer le sort",
+            "EDIT_ITEM": "Éditer l'objet",
+            "DELETE_ITEM": "Supprimer l'objet",
+            "NO_SPELLS_FOUND": "Aucun sort trouvé. Cliquez sur le '+' pour en ajouter un.",
+            "PASSIVES": "Passives",
+            "CONFIRM_DELETE": "Confirmer la suppression",
+            "CONFIRM_DELETE_ITEM": "Voulez-vous vraiment supprimer {itemName} ?",
+            "DESCRIPTION_TAB": "Description",
+            "CONFIGURATION_TAB": "Configuration",
+            "ARMEMENTS": "Armements",
+            "ARMORS": "Armures",
+            "BAG": "Saccoche",
+            "YOURGROUP": "Vos avis"
+        },
+        "ITEM": {
+            "DESCRIPTION": "DESCRIPTION",
+            "HEAD": "Tête",
+            "CHEST": "Torse",
+            "HANDS": "Mains",
+            "LEGS": "Jambes",
+            "FEETS": "Pieds"
         }
     }
 }

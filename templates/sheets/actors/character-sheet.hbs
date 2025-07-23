@@ -1,0 +1,110 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{actor.name}}" placeholder="Nom"/></h1>
+    </header>
+
+    <section class="sheet-body">
+
+        {{!-- Contenue du block gauche --}}
+
+        {{!-- Barre de Navigation --}}
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="identity"><i class="fas fa-user-circle"></i></a>
+            <a class="item" data-tab="competencies"><i class="fas fa-book-open"></i></a>
+            <a class="item" data-tab="bag"><i class="fas fa-bag-shopping"></i></a>
+            <a class="item" data-tab="group"><i class="fas fa-users"></i></a>
+            {{!-- <a class="item" data-tab="config"><i class="fas fa-cogs"></i></a> --}}
+        </nav>
+
+        {{!-- Contenu de l'onglet identity --}}
+        <div class="tab identity" data-group="primary" data-tab="identity"> 
+            {{localize "AKREL.CHARACTER.IDENTITY"}}
+            <table>
+                <tr>
+                    <td>{{localize "AKREL.CHARACTER.AGE"}}</td>
+                    <td><input type="text" name="system.age" value="{{system.age}}" data-dtype="String"></td>
+                </tr>
+                <tr>
+                    <td>{{localize "AKREL.CHARACTER.ORIGIN"}}</td>
+                    <td><input type="text" name="system.origin" value="{{system.origin}}" data-dtype="String"></td>
+                </tr>
+                <tr>
+                    <td>{{localize "AKREL.CHARACTER.GENDER"}}</td>
+                    <td><input type="text" name="system.gender" value="{{system.gender}}" data-dtype="String"></td>
+                </tr>
+                <tr>
+                    <td>{{localize "AKREL.CHARACTER.SIZE"}}</td>
+                    <td><input type="text" name="system.size" value="{{system.size}}" data-dtype="String"></td>
+                </tr>
+                <tr>
+                    <td>{{localize "AKREL.CHARACTER.MORPHOLOGY"}}</td>
+                    <td><input type="text" name="system.morphology" value="{{system.morphology}}" data-dtype="String"></td>
+                </tr>
+                <tr>
+                    <td>{{localize "AKREL.CHARACTER.CASTE"}}</td>
+                    <td><input type="text" name="system.caste" value="{{system.caste}}" data-dtype="String"></td>
+                </tr>
+                <tr>
+                    <td>{{localize "AKREL.CHARACTER.DIVINITY"}}</td>
+                    <td><input type="text" name="system.divinity" value="{{system.divinity}}" data-dtype="String"></td>
+                </tr>
+                <tr>
+                    <td>{{localize "AKREL.CHARACTER.ALIGNMENT"}}</td>
+                    <td><input type="text" name="system.alignment" value="{{system.alignment}}" data-dtype="String"></td>
+                </tr>
+            </table>
+            {{localize "AKREL.CHARACTER.STORY"}}
+            <textarea name="story" id="system.story" name="system.story" value="{{system.story}}" data-dtype="String"></textarea>
+        </div>
+
+        {{!-- Contenu de l'onglet compétences --}}
+        <div class="tab competencies" data-group="primary" data-tab="competencies">
+            <p class="title">{{localize "AKREL.SHEET.COMPETENCIES"}}</p>
+            {{!-- liste d'objet --}}
+            {{!-- FAIT COMME TU LE PENSE, UNE LISTE, UN DRAG AND DROP POINT. --}}
+            <table class="item-list spell-list">
+                <thead>
+                    <tr class="item-header">
+                        <th class="item-name-header">{{localize "AKREL.SHEET.SPELL_NAME"}}</th>
+                        <th class="item-quick-header">{{localize "AKREL.SHEET.QUICK_SPELL_SHORT"}}</th>
+                        <th class="item-nature-header">{{localize "AKREL.SHEET.NATURE"}}</th>
+                        <th class="item-cost-header">{{localize "AKREL.SHEET.COST"}}</th>
+                        <th class="item-actions-header"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each actor.spell as |spell|}}
+                        <tr class="item-row spell-item-row" data-item-id="{{spell.id}}">
+                            <td class="item-name-cell">
+                                <img src="{{spell.img}}" title="{{spell.name}}" width="24" height="24"/>
+                                {{spell.name}}
+                            </td>
+                            <td>{{spell.isQuickSpell}}</td>
+                            <td>{{spell.spellNature}}</td>
+                            <td>{{spell.manaCost}}</td>
+                        </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+            {{localize "AKREL.SHEET.PASSIVES"}}
+            {{!-- liste d'objet --}}
+        </div>
+
+        {{!-- Contenu de l'onglet bag --}}
+        <div class="tab bag" data-group="primary" data-tab="bag">
+            {{localize "AKREL.SHEET.ARMEMENTS"}}
+            {{!-- liste d'objet --}}
+            {{localize "AKREL.SHEET.ARMORS"}}
+            {{!-- liste d'objet --}}
+            {{localize "AKREL.SHEET.BAG"}}
+            {{!-- liste d'objet --}}
+        </div>
+
+        {{!-- Contenu de l'onglet group --}}
+        <div class="tab group" data-group="primary" data-tab="group">
+            {{localize "AKREL.SHEET.YOURGROUP"}}
+            {{!-- liste d'objet --}}
+        </div>
+    </section>
+</form>

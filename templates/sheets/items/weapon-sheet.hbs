@@ -5,13 +5,14 @@
     </header>
 
     <section class="sheet-body">
-
+        {{!-- infobulle d'en haut --}}
         <table>
             <tr>
-                <td><p>Type:</p></td>
+                <td>{{localize "AKREL.WEAPON.TYPE"}}</td>
                 <td><input name="data.weaponType" type="text" value="{{data.weaponType}}" data-dtype="String"/></td>
-                <td>Durabilité:</td>
+                <td>{{localize "AKREL.WEAPON.DURABILITY"}}</td>
                 <td><input name="data.dura" type="text" value="{{data.dura}}" data-dtype="String"/></td>
+                {{!-- lancer de dés --}}
                 <div>
                     <button type="button" class="roll-damage" data-roll="{{data.damge}}">
                         <i class="fas fa-dice-d20"></i> Lancer un dés
@@ -20,18 +21,18 @@
             </tr>
         </table>
 
-        {{!-- Sheet Tab Navigation --}}
+        {{!-- Navigation --}}
         <nav class="sheet-tabs tabs" data-group="primary">
-            <a class="item" data-tab="description">Description</a>
-            <a class="item" data-tab="configuration">{{localize "Configuration"}}</a>
+            <a class="item" data-tab="description">{{localize "AKREL.SHEET.DESCRIPTION_TAB"}}</a>
+            <a class="item" data-tab="configuration">{{localize "AKREL.SHEET.CONFIGURATION_TAB"}}</a>
         </nav>
 
         {{!-- Contenu de l'onglet Description --}}
         <div class="tab description" data-group="primary" data-tab="description">
-            <p>Description</p>
+            {{localize "AKREL.ITEM.DESCRIPTION"}}
             <textarea name="data.description">{{data.description}}</textarea>
             <div>
-                <p>{{localize "akrel.weapon.price"}} :</p>
+                {{localize "AKREL.WEAPON.PRICE"}}
                 <input name="data.price" type="text" value="{{data.price}}" data-dtype="Number"/>
             </div>
         </div>
@@ -40,20 +41,20 @@
         <div class="tab configuration" data-group="primary" data-tab="configuration">
             <table>
                  <tr>
-                    <td>{{localize "akrel.weapon.attackWith"}}</td>
-                    <td><select name="data.attackWith">{{selectOptions config.attackTypes selected=data.attackWith localize=true}}</select></td>
+                    <td>{{localize "AKREL.WEAPON.ATTACKWITH"}}</td>
+                    <td><select name="data.attackAttribute">{{selectOptions config.attackTypes selected=data.attackAttribute localize=true}}</select></td>
                 </tr>
                 <tr>
-                    <td>{{localize "akrel.weapon.damage"}}</td>
+                    <td>{{localize "AKREL.WEAPON.DAMAGE"}}</td>
                     <td><input name="data.damage" type="text" value="{{data.damage}}" data-dtype="String"/></td>
                 </tr>
                 <tr>
-                    <td>Nature: </td>
+                    <td>{{localize "AKREL.WEAPON.NATURE"}}</td>
                     <td><input name="date.nature" type="text" value="{{data.nature}}" data-dtype="String"/></td>
                 </tr>
                 <tr>
-                    <td>Enchantement: </td>
-                    <td><input name="data.enchantement" type="text" value="{{data.enchantement}}" data-dtype="String"/></td>
+                    <td>{{localize "AKREL.WEAPON.ENCHANTMENT"}}</td>
+                    <td><input name="data.enchantment" type="text" value="{{data.enchantment}}" data-dtype="String"/></td>
                 </tr>
             </table>
         </div>

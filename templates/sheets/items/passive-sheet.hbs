@@ -1,0 +1,23 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom"/></h1>
+    </header>
+
+    <section class="sheet-body">
+
+        <table>
+            <tr>
+                <td>{{localize "AKREL.PASSIVE.LEVEL"}}</td>
+                <td><input name="data.spellLevel" type="text" value="{{data.spellLevel}}" data-dtype="String"/></td>
+                <td>{{localize "AKREL.SPELL.NATURE"}}</td>
+                <td><input name="data.spellNature" type="text" value="{{data.spellNature}}" data-dtype="String"/></td>
+                <div>
+                    <button type="button" class="roll-damage" data-roll="{{data.dice}}">
+                        <i class="fas fa-dice-d20"></i> ENVOYER DANS LE CHAT
+                    </button>
+                </div>
+            </tr>
+        </table>
+    </section>
+</form>

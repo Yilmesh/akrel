@@ -23,17 +23,6 @@
     "name": "Français",
     "path": "lang/fr.json"
   }],
-  "documentTypes": {
-    "Actor": {
-      "personnage": {},
-      "personnage-non-joueur": {}
-    },
-    "Item": {
-      "weapon": {},
-      "armor": {},
-      "spell": {}
-    }
-  },
   "socket": false,
   "initiative": "1d20 + @ini",
   "grid": {

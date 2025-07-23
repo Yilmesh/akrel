@@ -9,8 +9,8 @@ export default class akrelActorSheet extends ActorSheet {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["akrel", "sheet", "actor"], 
             // IMPORTANT : NE PAS DÉFINIR 'template' ICI si tu utilises 'get template()'
-            width: 620,
-            height: 800, 
+            width: 800,
+            height: 700, 
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "identity" }], // OK
             scrollY: [".attributes"], 
             dragDrop: [{dragSelector: ".draggable", dropSelector: null}],

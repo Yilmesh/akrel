@@ -5,37 +5,38 @@
     </header>
     
     <section class="sheet-body">
-        <p>Description</p>
-        <textarea name="data.description">{{data.description}}</textarea>
         <table>
             <tr>
-                <td><p>Où:</p></td>
+                <td>{{localize "AKREL.ARMOR.WORN_LOCATION"}}</td>
                 <td>
                     <select name="data.where">
-                        <option value="head">Tête</option>
-                        <option value="chest">Torse</option>
-                        <option value="arms">Bras</option>
-                        <option value="pant">Jambes</option>
-                        <option value="feets">Pieds</option>
+                        <option value="head">{{localize "AKREL.ITEM.HEAD"}}</option>
+                        <option value="chest">{{localize "AKREL.ITEM.CHEST"}}</option>
+                        <option value="arms">{{localize "AKREL.ITEM.HANDS"}}</option>
+                        <option value="pant">{{localize "AKREL.ITEM.LEGS"}}</option>
+                        <option value="feets">{{localize "AKREL.ITEM.FEETS"}}</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td><p>Type: </p></td>
+                <td>{{localize "AKREL.ARMOR.TYPE"}}</td>
                 <td><input name="data.armorType" type="text" value="{{data.armorType}}" data-dtype="String"/></td>
             </tr>
             <tr></tr>
-                <td>Durabilité:</td>
+                <td>{{localize "AKREL.ARMOR.DURABILITY"}}</td>
                 <td><input name="data.dura" type="text" value="{{data.dura}}" data-dtype="String"/></td>
             </tr>
             <tr>
-                <td><p>Point d'armure:</p></td>
+                <td>{{localize "AKREL.ARMOR.DEFENSE_POINTS"}}</td>
                 <td><input name="data.point" type="text" value="{{data.point}}" data-dtype="Number"/></td>
             </tr>
             <tr>
-                <td><p>{{localize "akrel.weapon.price"}} :</p></td>
+                <td>{{localize "AKREL.ARMOR.PRICE"}}</td>
                 <td><input name="data.price" type="text" value="{{data.price}}" data-dtype="Number"/></td>
             </tr>
         </table>
+        
+        {{localize "AKREL.ITEM.DESCRIPTION"}}
+        <textarea name="data.description">{{data.description}}</textarea>
     </section>
 </form>

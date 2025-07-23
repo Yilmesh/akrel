@@ -8,9 +8,9 @@
 
         <table>
             <tr>
-                <td><p>Type:</p></td>
-                <td><input name="data.ecole" type="text" value="{{data.ecole}}" data-dtype="String"/></td>
-                <td>Mana:</td>
+                <td>{{localize "AKREL.SPELL.LEVEL"}}</td>
+                <td><input name="data.spellLevel" type="text" value="{{data.spellLevel}}" data-dtype="String"/></td>
+                <td>{{localize "AKREL.SPELL.MANA_COST"}}</td>
                 <td><input name="data.manaCost" type="text" value="{{data.manaCost}}" data-dtype="Number"/></td>
                 <div>
                     <button type="button" class="roll-damage" data-roll="{{data.dice}}">
@@ -20,15 +20,15 @@
             </tr>
         </table>
 
-        {{!-- Sheet Tab Navigation --}}
+        {{!-- Navigation --}}
         <nav class="sheet-tabs tabs" data-group="primary">
-            <a class="item" data-tab="description">Description</a>
-            <a class="item" data-tab="configuration">{{localize "Configuration"}}</a>
+            <a class="item" data-tab="description">{{localize "AKREL.SHEET.DESCRIPTION_TAB"}}</a>
+            <a class="item" data-tab="configuration">{{localize "AKREL.SHEET.CONFIGURATION_TAB"}}</a>
         </nav>
 
         {{!-- Contenu de l'onglet Description --}}
         <div class="tab description" data-group="primary" data-tab="description">
-            <p>Description</p>
+            {{localize "AKREL.ITEM.DESCRIPTION"}}
             <textarea name="data.description">{{data.description}}</textarea>
         </div>
 
@@ -36,20 +36,20 @@
         <div class="tab configuration" data-group="primary" data-tab="configuration">
             <table>
                  <tr>
-                    <td>Caractéristique utilisée:</td>
-                    <td><select name="data.attackWith">{{selectOptions config.attackTypes selected=data.attackWith localize=true}}</select></td>
+                    <td>{{localize "AKREL.SPELL.ATTACK_ATTRIBUTE"}}</td>
+                    <td><select name="data.attackAttribute">{{selectOptions config.attackTypes selected=data.attackAttribute localize=true}}</select></td>
                 </tr>
                 <tr>
-                    <td>Nature: </td>
-                    <td><input name="date.nature" type="text" value="{{data.nature}}" data-dtype="String"/></td>
+                    <td>{{localize "AKREL.SPELL.NATURE"}}</td>
+                    <td><input name="date.spellNature" type="text" value="{{data.spellNature}}" data-dtype="String"/></td>
                 </tr>
                 <tr>
-                    <td>Dés:</td>
-                    <td><input name="data.dice" type="text" value="{{data.dice}}" data-dtype="String"/></td>
+                    <td>{{localize "AKREL.SPELL.DAMAGE_DICE"}}</td>
+                    <td><input name="data.damageDice" type="text" value="{{data.damageDice}}" data-dtype="String"/></td>
                 </tr>
                 <tr>
-                    <td>Est-ce un sort rapide ?</td>
-                    <td><input type="checkbox" name="data.isRapide" {{checked data.isRapide}} data-dtype="Boolean"/></td>
+                    <td>{{localize "AKREL.SPELL.IS_QUICK_SPELL"}}</td>
+                    <td><input type="checkbox" name="data.isQuickSpell" {{checked data.isQuickSpell}} data-dtype="Boolean"/></td>
                 </tr>
             </table>
         </div>
