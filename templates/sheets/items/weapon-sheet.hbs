@@ -9,12 +9,12 @@
         <table>
             <tr>
                 <td>{{localize "AKREL.WEAPON.TYPE"}}</td>
-                <td><input name="data.weaponType" type="text" value="{{data.weaponType}}" data-dtype="String"/></td>
+                <td><input name="system.weaponType" type="text" value="{{system.weaponType}}"/></td>
                 <td>{{localize "AKREL.WEAPON.DURABILITY"}}</td>
-                <td><input name="data.dura" type="text" value="{{data.dura}}" data-dtype="String"/></td>
+                <td><input name="system.durability" type="text" value="{{system.durability}}"/></td>
                 {{!-- lancer de dés --}}
                 <div>
-                    <button type="button" class="roll-damage" data-roll="{{data.damge}}">
+                    <button type="button" class="roll-damage" data-roll="{{system.damageDice}}">
                         <i class="fas fa-dice-d20"></i> Lancer un dés
                     </button>
                 </div>
@@ -30,10 +30,10 @@
         {{!-- Contenu de l'onglet Description --}}
         <div class="tab description" data-group="primary" data-tab="description">
             {{localize "AKREL.ITEM.DESCRIPTION"}}
-            <textarea name="data.description">{{data.description}}</textarea>
+            <textarea name="system.description">{{system.description}}</textarea>
             <div>
                 {{localize "AKREL.WEAPON.PRICE"}}
-                <input name="data.price" type="text" value="{{data.price}}" data-dtype="Number"/>
+                <input name="system.price" type="number" value="{{system.price}}"/>
             </div>
         </div>
 
@@ -42,19 +42,19 @@
             <table>
                  <tr>
                     <td>{{localize "AKREL.WEAPON.ATTACKWITH"}}</td>
-                    <td><select name="data.attackAttribute">{{selectOptions config.attackTypes selected=data.attackAttribute localize=true}}</select></td>
+                    <td><select name="system.attackAttribute">{{selectOptions config.attackTypes selected=system.attackAttribute localize=true}}</select></td>
                 </tr>
                 <tr>
                     <td>{{localize "AKREL.WEAPON.DAMAGE"}}</td>
-                    <td><input name="data.damage" type="text" value="{{data.damage}}" data-dtype="String"/></td>
+                    <td><input name="system.damageDice" type="text" value="{{system.damageDice}}"/></td>
                 </tr>
                 <tr>
                     <td>{{localize "AKREL.WEAPON.NATURE"}}</td>
-                    <td><input name="date.nature" type="text" value="{{data.nature}}" data-dtype="String"/></td>
+                    <td><input name="system.nature" type="text" value="{{system.nature}}"/></td>
                 </tr>
                 <tr>
                     <td>{{localize "AKREL.WEAPON.ENCHANTMENT"}}</td>
-                    <td><input name="data.enchantment" type="text" value="{{data.enchantment}}" data-dtype="String"/></td>
+                    <td><input name="system.enchantment" type="text" value="{{system.enchantment}}"/></td>
                 </tr>
             </table>
         </div>

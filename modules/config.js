@@ -26,3 +26,11 @@ AKREL.itemTypes = {
     "spell": "AKREL.TYPES.Item.spell",
     "passive": "AKREL.TYPES.Item.passive"
 };
+
+AKREL.wornLocations = {
+    "head": "AKREL.ITEM.HEAD",
+    "chest": "AKREL.ITEM.CHEST",
+    "arms": "AKREL.ITEM.ARMS",
+    "pant": "AKREL.ITEM.LEGS",
+    "feets": "AKREL.ITEM.FEETS"
+};

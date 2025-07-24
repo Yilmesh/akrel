@@ -99,7 +99,7 @@
             "DESCRIPTION": "DESCRIPTION",
             "HEAD": "Tête",
             "CHEST": "Torse",
-            "HANDS": "Mains",
+            "ARMS": "Mains",
             "LEGS": "Jambes",
             "FEETS": "Pieds"
         }
