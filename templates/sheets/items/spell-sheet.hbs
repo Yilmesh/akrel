@@ -9,11 +9,11 @@
         <table>
             <tr>
                 <td>{{localize "AKREL.SPELL.LEVEL"}}</td>
-                <td><input name="data.spellLevel" type="text" value="{{data.spellLevel}}" data-dtype="String"/></td>
+                <td><input type="number" name="system.spellLevel" value="{{system.spellLevel}}"/></td> 
                 <td>{{localize "AKREL.SPELL.MANA_COST"}}</td>
-                <td><input name="data.manaCost" type="text" value="{{data.manaCost}}" data-dtype="Number"/></td>
+                <td><input name="system.manaCost" type="number" value="{{system.manaCost}}" data-dtype="Number"/></td>
                 <div>
-                    <button type="button" class="roll-damage" data-roll="{{data.dice}}">
+                    <button type="button" class="roll-damage" data-roll="{{system.dice}}">
                         <i class="fas fa-dice-d20"></i> Lancer un dés
                     </button>
                 </div>
@@ -29,28 +29,27 @@
         {{!-- Contenu de l'onglet Description --}}
         <div class="tab description" data-group="primary" data-tab="description">
             {{localize "AKREL.ITEM.DESCRIPTION"}}
-            <textarea name="data.description">{{data.description}}</textarea>
-        </div>
+            <textarea name="system.description">{{system.description}}</textarea> </div>
 
         {{!-- Contenu de l'onglet Configuration --}}
         <div class="tab configuration" data-group="primary" data-tab="configuration">
             <table>
-                 <tr>
-                    <td>{{localize "AKREL.SPELL.ATTACK_ATTRIBUTE"}}</td>
-                    <td><select name="data.attackAttribute">{{selectOptions config.attackTypes selected=data.attackAttribute localize=true}}</select></td>
-                </tr>
-                <tr>
-                    <td>{{localize "AKREL.SPELL.NATURE"}}</td>
-                    <td><input name="date.spellNature" type="text" value="{{data.spellNature}}" data-dtype="String"/></td>
-                </tr>
-                <tr>
-                    <td>{{localize "AKREL.SPELL.DAMAGE_DICE"}}</td>
-                    <td><input name="data.damageDice" type="text" value="{{data.damageDice}}" data-dtype="String"/></td>
-                </tr>
-                <tr>
-                    <td>{{localize "AKREL.SPELL.IS_QUICK_SPELL"}}</td>
-                    <td><input type="checkbox" name="data.isQuickSpell" {{checked data.isQuickSpell}} data-dtype="Boolean"/></td>
-                </tr>
+                    <tr>
+                        <td>{{localize "AKREL.SPELL.ATTACK_ATTRIBUTE"}}</td>
+                        <td><select name="system.attackAttribute">{{selectOptions config.attackTypes selected=system.attackAttribute localize=true}}</select></td>
+                    </tr>
+                    <tr>
+                        <td>{{localize "AKREL.SPELL.NATURE"}}</td>
+                        <td><input name="system.spellNature" type="text" value="{{system.spellNature}}" data-dtype="String"/></td>
+                    </tr>
+                    <tr>
+                        <td>{{localize "AKREL.SPELL.DAMAGE_DICE"}}</td>
+                        <td><input name="system.damageDice" type="text" value="{{system.damageDice}}" data-dtype="String"/></td>
+                    </tr>
+                    <tr>
+                        <td>{{localize "AKREL.SPELL.IS_QUICK_SPELL"}}</td>
+                        <td><input type="checkbox" name="system.isQuickSpell" {{checked system.isQuickSpell}} data-dtype="Boolean"/></td>
+                    </tr>
             </table>
         </div>
     </section>

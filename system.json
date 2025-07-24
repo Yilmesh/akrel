@@ -18,6 +18,19 @@
   "esmodules": ["akrel.js"],
   "styles": ["styles/akrel.css"],
   "packs": [],
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {}
+    },
+    "Item":{
+      "weapon": {},
+      "armor": {},
+      "loot": {},
+      "spell": {},
+      "passive": {}
+    }
+  },
   "languages": [{
     "lang": "fr",
     "name": "Français",

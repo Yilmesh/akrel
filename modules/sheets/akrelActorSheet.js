@@ -1,4 +1,3 @@
-// systems/akrel/module/sheets/akrelActorSheet.js
 /**
  * @extends {ActorSheet}
  */
@@ -37,7 +36,7 @@ export default class akrelActorSheet extends ActorSheet {
         data.system = this.actor.system; // Si v10+, sinon data.data = this.actor.data;
 
         // Ajoute ici tes données de configuration si nécessaire
-        data.config = CONFIG.akrel;
+        data.config = CONFIG.AKREL;
 
         return data;
     }

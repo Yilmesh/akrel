@@ -9,14 +9,10 @@
         <table>
             <tr>
                 <td>{{localize "AKREL.PASSIVE.LEVEL"}}</td>
-                <td><input name="data.spellLevel" type="text" value="{{data.spellLevel}}" data-dtype="String"/></td>
+                <td><input type="text" name="system.spellLevel" value="{{system.spellLevel}}" data-dtype="String"/></td>
                 <td>{{localize "AKREL.SPELL.NATURE"}}</td>
-                <td><input name="data.spellNature" type="text" value="{{data.spellNature}}" data-dtype="String"/></td>
-                <div>
-                    <button type="button" class="roll-damage" data-roll="{{data.dice}}">
-                        <i class="fas fa-dice-d20"></i> ENVOYER DANS LE CHAT
-                    </button>
-                </div>
+                <td><input type="text" name="system.spellNature" value="{{system.spellNature}}" data-dtype="String"/></td>
+                
             </tr>
         </table>
     </section>

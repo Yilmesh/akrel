@@ -32,7 +32,7 @@ export default class akrelItemSheet extends ItemSheet {
         const data = super.getData();
 
         // Ajoute ici tes données de configuration si nécessaire
-        data.config = CONFIG.akrel;
+        data.config = CONFIG.AKREL;
 
         return data;
     }
