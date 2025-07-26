@@ -4,6 +4,7 @@ export class LootDataModel extends foundry.abstract.TypeDataModel {
         const {NumberField, HTMLField } = foundry.data.fields;
         let data = {
             description: new HTMLField({initial: ""}),
+            quantity: new NumberField({initial: 0}),
             price: new NumberField({initial: 1})
         }
 

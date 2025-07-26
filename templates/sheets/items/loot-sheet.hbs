@@ -5,13 +5,15 @@
     </header>
     
     <section class="sheet-body">
-        {{localize "AKREL.ITEM.DESCRIPTION"}}
-        <textarea name="system.description">{{system.description}}</textarea>
         <table>
             <tr>
+                <td>{{localize "AKREL.LOOT.QUANTITY"}}</td>
+                <td><input name="system.quantity" type="number" value="{{system.quantity}}"/></td>
                 <td>{{localize "AKREL.LOOT.PRICE"}}</td>
                 <td><input name="system.price" type="number" value="{{system.price}}"/></td>
             </tr>
         </table>
+        {{localize "AKREL.ITEM.DESCRIPTION"}}
+        <textarea name="system.description">{{system.description}}</textarea>
     </section>
 </form>

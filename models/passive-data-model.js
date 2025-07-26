@@ -4,8 +4,8 @@ export class PassiveDataModel extends foundry.abstract.TypeDataModel {
         const {StringField, NumberField, HTMLField } = foundry.data.fields;
         let data = {
             description: new HTMLField({initial: ""}),
-            spellNature: new StringField({initial: ""}),
-            spellLevel: new NumberField({initial: 1})
+            Nature: new StringField({initial: ""}),
+            Level: new NumberField({initial: 1})
         }
 
         return data;

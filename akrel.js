@@ -65,6 +65,18 @@ Hooks.once("init", async function () {
         return result;
     });
 
+    Handlebars.registerHelper('gt', function(a,b) {
+        return a > b;
+    });
+
+    Handlebars.registerHelper('lt', function(a,b) {
+        return a < b;
+    });
+
+    Handlebars.registerHelper('subtract', function(a,b) {
+        return a - b;
+    });
+
     console.log("AKREL | Initialising Akrel System");
     return preloadHandlebarsTemplates();
 });

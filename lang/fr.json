@@ -38,11 +38,12 @@
             "WORN_LOCATION": "Emplacement",
             "PRICE": "Prix",
             "DURABILITY": "Durabilité",
-            "DEFENSE_POINTS": "Points de Défense",
+            "DEFENSE_POINTS": "Points de défense",
             "ENCHANTMENT": "Enchantement"
         },
         "LOOT": { 
-            "PRICE": "Prix"
+            "PRICE": "Prix",
+            "QUANTITY": "Quantité"
         },
         "CHARACTER": { 
             "AGE": "Âge",
@@ -74,17 +75,22 @@
         },
         "SHEET": {
             "COMPETENCIES": "Compétences",
-            "ADD_SPELL": "Ajouter un sort",
-            "CREATE_SPELL": "Créer un nouveau sort",
-            "SPELL_NAME": "Nom du sort",
-            "QUICK_SPELL_SHORT": "Rapide",
-            "NATURE": "Nature du sort",
+            "SPELLS": "Compétences",
+            "PASSIVE_NAME": "Nom",
+            "SPELL_NAME": "Nom",
+            "QUICK_SPELL_SHORT": "Vitesse",
+            "NATURE": "Nature",
+            "LEVEL": "Niveau",
             "TYPE": "Type",
             "COST": "Coût",
             "CAST_SPELL": "Lancer le sort",
             "EDIT_ITEM": "Éditer l'objet",
             "DELETE_ITEM": "Supprimer l'objet",
-            "NO_SPELLS_FOUND": "Aucun sort trouvé. Cliquez sur le '+' pour en ajouter un.",
+            "NO_SPELLS_FOUND": "Aucune compétence trouvé. Cliquez sur le '+' pour en ajouter un.",
+            "NO_PASSIFS_FOUND": "Aucune compétence passive trouvé. Cliquez sur le '+' pour en ajouter un.",
+            "NO_ARMORS_FOUND": "Aucune armure trouvé. Cliquez sur le '+' pour en ajouter un.",
+            "NO_WEAPONS_FOUND": "Aucune arme trouvé. Cliquez sur le '+' pour en ajouter un.",
+            "NO_LOOTS_FOUND": "Aucun butin trouvé. Cliquez sur le '+' pour en ajouter un.",
             "PASSIVES": "Passives",
             "CONFIRM_DELETE": "Confirmer la suppression",
             "CONFIRM_DELETE_ITEM": "Voulez-vous vraiment supprimer {itemName} ?",
@@ -93,7 +99,20 @@
             "ARMEMENTS": "Armements",
             "ARMORS": "Armures",
             "BAG": "Saccoche",
-            "YOURGROUP": "Vos avis"
+            "BAG_TITLE" : "Saccoche",
+            "ITEM_NAME": "Nom",
+            "DAMAGE": "Dégâts",
+            "RANGE": "Distance",
+            "YOURGROUP": "Vos avis",
+            "GROUP_MEMBER_NAME": "Nom",
+            "GROUP_MEMBER_OPINION": "Opinion"
+        },
+        "ACTIONS": {
+            "CAST_SPELL": "Lancer le sort",
+            "MOVE_UP": "Monter",
+            "MOVE_DOWN": "Descendre",
+            "DELETE": "Supprimer",
+            "ADD_GROUP_MEMBER": "Ajouter un membre"
         },
         "ITEM": {
             "DESCRIPTION": "DESCRIPTION",
@@ -102,6 +121,11 @@
             "ARMS": "Mains",
             "LEGS": "Jambes",
             "FEETS": "Pieds"
+        },
+        "DIALOG" : {
+            "DELETE_CONFIRM_TITLE": "Suppression",
+            "DELETE_MEMBER_CONFIRM_CONTENT": "Voulez-vous le supprimer",
+            "DELETE_CONFIRM_CONTENT": "Voulez-vous vraiment supprimer ?"
         }
     }
 }
