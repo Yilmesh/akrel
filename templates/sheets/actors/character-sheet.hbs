@@ -7,9 +7,7 @@
         <input class="experience" type="number" name="system.experience" value="{{system.experience}}"/>
     </header>
 
-    
-
-    {{!-- Barre de Navigation --}}
+    {{!-- Navigation Bar --}}
     <section>
         <nav class="sheet-tabs tabs" data-group="primary">
             <a class="item-tab" data-tab="identity"><i class="fas fa-user-circle"></i></a>
@@ -20,21 +18,18 @@
     </section>
 
     <section class="sheet-body">
-        {{!-- Menu a gauche --}}
         <div class="left-panel">
             <div>
                 <img class="character-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="248" width="248"/>
 
-                {{!-- Nouveau conteneur principal pour toutes les ressources ET le niveau qui va flotter --}}
                 <section class="resource-layout-container">
-
-                    {{!-- Le VRAI INPUT de Niveau - positionné en absolu --}}
+                    {{!-- Level Input --}}
                     <div class="level-input-container">
                         <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" class="level-input"/>
                     </div>
 
-                    <div class="resource-row"> {{!-- Première ligne pour Vie et Mana --}}
-                        {{!-- Barre de Vie (Health) --}}
+                    {{!-- Resource Row 1: Health & Mana --}}
+                    <div class="resource-row">
                         <div class="akrel-resource-bar health-bar">
                             <div class="bar-background">
                                 <div class="bar-fill" style="width: {{max 0 (percent system.resources.health.value system.resources.health.max)}}%;"></div>
@@ -45,10 +40,7 @@
                                 <input type="number" name="system.resources.health.max" value="{{system.resources.health.max}}" data-dtype="Number" class="resource-input max-value"/>
                             </div>
                         </div>
-
-                        <div class="level-placeholder"></div> {{!-- Boîte vide transparente pour le niveau --}}
-
-                        {{!-- Barre de Mana --}}
+                        <div class="level-placeholder"></div>
                         <div class="akrel-resource-bar mana-bar">
                             <div class="bar-background">
                                 <div class="bar-fill" style="width: {{max 0 (percent system.resources.mana.value system.resources.mana.max)}}%;"></div>
@@ -59,10 +51,10 @@
                                 <input type="number" name="system.resources.mana.max" value="{{system.resources.mana.max}}" data-dtype="Number" class="resource-input max-value"/>
                             </div>
                         </div>
-                    </div> {{!-- Fin .resource-row --}}
+                    </div>
 
-                    <div class="resource-row"> {{!-- Deuxième ligne pour Armure et Barrière --}}
-                        {{!-- Barre d'Armure --}}
+                    {{!-- Resource Row 2: Armor & Barrier --}}
+                    <div class="resource-row">
                         <div class="akrel-resource-bar armor-bar">
                             <div class="bar-background">
                                 <div class="bar-fill" style="width: {{max 0 (percent system.resources.armor.value system.resources.armor.max)}}%;"></div>
@@ -73,10 +65,7 @@
                                 <input type="number" name="system.resources.armor.max" value="{{system.resources.armor.max}}" data-dtype="Number" class="resource-input max-value"/>
                             </div>
                         </div>
-
-                        <div class="level-placeholder"></div> {{!-- Boîte vide transparente pour le niveau --}}
-
-                        {{!-- Barre de Barrière --}}
+                        <div class="level-placeholder"></div>
                         <div class="akrel-resource-bar barrier-bar">
                             <div class="bar-background">
                                 <div class="bar-fill" style="width: {{max 0 (percent system.resources.barrier.value system.resources.barrier.max)}}%;"></div>
@@ -87,74 +76,59 @@
                                 <input type="number" name="system.resources.barrier.max" value="{{system.resources.barrier.max}}" data-dtype="Number" class="resource-input max-value"/>
                             </div>
                         </div>
-                    </div> 
-                {{!-- Panneau des stats --}}
-                <div class="stat-container">
-                    <ul class="stat-ul">
-                        {{!-- social --}}
-                        <li class="stat-li">
-                            <i class="stat-icon fa-solid fa-users"></i>
-                            <input type="number" name="system.social" value="{{system.social}}" class="stat-item">
-                            <label>{{localize "AKREL.ATTRIBUTES.SOC"}}</label>
-                        </li>
+                    </div>
 
-                        {{!-- initiative --}}
-                        <li class="stat-li">
-                            <i class="stat-icon fa-solid fa-hourglass-start"></i>
-                            <input type="number" name="system.initiative" value="{{system.initiative}}" class="stat-item">
-                            <label>{{localize "AKREL.ATTRIBUTES.INI"}}</label>
-                        </li>
-
-                        {{!-- physique --}}
-                        <li class="stat-li">
-                            <i class="stat-icon fa-solid fa-dumbbell"></i>
-                            <input type="number" name="system.physical" value="{{system.physical}}" class="stat-item">
-                            <label>{{localize "AKREL.ATTRIBUTES.PHY"}}</label>
-                        </li>
-
-                        {{!-- block --}}
-                        <li class="stat-li">
-                            <i class="stat-icon fa-solid fa-shield-halved"></i>
-                            <input type="number" name="system.block" value="{{system.block}}" class="stat-item">
-                            <label>{{localize "AKREL.ATTRIBUTES.BLO"}}</label>
-                        </li>
-
-                        {{!-- intelligence --}}
-                        <li class="stat-li">
-                            <i class="stat-icon fa-solid fa-brain"></i>
-                            <input type="number" name="system.intelligence" value="{{system.intelligence}}" class="stat-item">
-                            <label>{{localize "AKREL.ATTRIBUTES.INT"}}</label>
-                        </li>
-
-                        {{!-- dodge --}}
-                        <li class="stat-li">
-                            <i class="stat-icon fa-solid fa-person-running"></i>
-                            <input type="number" name="system.dodge" value="{{system.dodge}}" class="stat-item">
-                            <label>{{localize "AKREL.ATTRIBUTES.ESQ"}}</label>
-                        </li>
-
-                        {{!-- dexterity --}}
-                        <li class="stat-li">
-                            <i class="stat-icon fa-solid fa-person-walking-arrow-right"></i>
-                            <input type="number" name="system.dexterity" value="{{system.dexterity}}" class="stat-item">
-                            <label>{{localize "AKREL.ATTRIBUTES.ADR"}}</label>
-                        </li>
-
-                        {{!-- vigilance --}}
-                        <li class="stat-li">
-                            <i class="stat-icon fa-solid fa-eye"></i>
-                            <input type="number" name="system.vigilance" value="{{system.vigilance}}" class="stat-item">
-                            <label>{{localize "AKREL.ATTRIBUTES.VIG"}}</label>
-                        </li>
-                    </ul>
-                </div>
-            </section> 
-
-            </div> {{!-- Fin du div global contenant l'image et les ressources --}}
+                    {{!-- Stat Panel --}}
+                    <div class="stat-container">
+                        <ul class="stat-ul">
+                            <li class="stat-li">
+                                <i class="stat-icon fa-solid fa-users"></i>
+                                <input type="number" name="system.social" value="{{system.social}}" class="stat-item">
+                                <label>{{localize "AKREL.ATTRIBUTES.SOC"}}</label>
+                            </li>
+                            <li class="stat-li">
+                                <i class="stat-icon fa-solid fa-hourglass-start"></i>
+                                <input type="number" name="system.initiative" value="{{system.initiative}}" class="stat-item">
+                                <label>{{localize "AKREL.ATTRIBUTES.INI"}}</label>
+                            </li>
+                            <li class="stat-li">
+                                <i class="stat-icon fa-solid fa-dumbbell"></i>
+                                <input type="number" name="system.physical" value="{{system.physical}}" class="stat-item">
+                                <label>{{localize "AKREL.ATTRIBUTES.PHY"}}</label>
+                            </li>
+                            <li class="stat-li">
+                                <i class="stat-icon fa-solid fa-shield-halved"></i>
+                                <input type="number" name="system.block" value="{{system.block}}" class="stat-item">
+                                <label>{{localize "AKREL.ATTRIBUTES.BLO"}}</label>
+                            </li>
+                            <li class="stat-li">
+                                <i class="stat-icon fa-solid fa-brain"></i>
+                                <input type="number" name="system.intelligence" value="{{system.intelligence}}" class="stat-item">
+                                <label>{{localize "AKREL.ATTRIBUTES.INT"}}</label>
+                            </li>
+                            <li class="stat-li">
+                                <i class="stat-icon fa-solid fa-person-running"></i>
+                                <input type="number" name="system.dodge" value="{{system.dodge}}" class="stat-item">
+                                <label>{{localize "AKREL.ATTRIBUTES.ESQ"}}</label>
+                            </li>
+                            <li class="stat-li">
+                                <i class="stat-icon fa-solid fa-person-walking-arrow-right"></i>
+                                <input type="number" name="system.dexterity" value="{{system.dexterity}}" class="stat-item">
+                                <label>{{localize "AKREL.ATTRIBUTES.ADR"}}</label>
+                            </li>
+                            <li class="stat-li">
+                                <i class="stat-icon fa-solid fa-eye"></i>
+                                <input type="number" name="system.vigilance" value="{{system.vigilance}}" class="stat-item">
+                                <label>{{localize "AKREL.ATTRIBUTES.VIG"}}</label>
+                            </li>
+                        </ul>
+                    </div>
+                </section> 
+            </div>
         </div>
         <div class="right-panel">
 
-            {{!-- Contenu de l'onglet Identité --}}
+            {{!-- Identity Tab Content --}}
             <div class="tab identity" data-group="primary" data-tab="identity"> 
                 <h3 class="section-header">{{localize "AKREL.CHARACTER.IDENTITY"}}</h3>
                 <table>
@@ -195,10 +169,9 @@
                 <textarea name="system.story">{{system.story}}</textarea>
             </div>
 
-            {{!-- Contenu de l'onglet Compétences --}}
+            {{!-- Competencies Tab Content --}}
             <div class="tab competencies" data-group="primary" data-tab="competencies">
-
-                {{!-- Liste des sorts --}}
+                {{!-- Spells List --}}
                 <section class="item-section spells-section">
                     <h3 class="section-header">{{localize "AKREL.SHEET.SPELLS"}}</h3>
                     <ol class="items-list items-list--spells">
@@ -236,7 +209,7 @@
                     </ol>
                 </section>
 
-                {{!-- Liste des compétences passives --}}
+                {{!-- Passives List --}}
                 <section class="item-section passives-section">
                     <h3 class="section-header">{{localize "AKREL.SHEET.PASSIVES"}}</h3>
                     <ol class="items-list items-list--passives">
@@ -256,7 +229,7 @@
                                 <div class="item-detail">{{item.system.Nature}}</div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_PASSIVE"}}" data-item-type="passive">
-                                        <i class="fas fa-hand-sparkles"></i> {{!-- Icône de base, ajustez si besoin --}}
+                                        <i class="fas fa-hand-sparkles"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
                                         <i class="fas fa-trash"></i>
@@ -271,10 +244,9 @@
                 </section>
             </div>
 
-            {{!-- Contenu de l'onglet Sac --}}
+            {{!-- Bag Tab Content --}}
             <div class="tab bag" data-group="primary" data-tab="bag">
-
-                {{!-- Liste des armements --}}
+                {{!-- Weapons List --}}
                 <section class="item-section weapons-section">
                     <h3 class="section-header">{{localize "AKREL.SHEET.ARMEMENTS"}}</h3>
                     <ol class="items-list items-list--weapons">
@@ -310,7 +282,7 @@
                     </ol>
                 </section>
                 
-                {{!-- Liste des armures --}}
+                {{!-- Armors List --}}
                 <section class="item-section armors-section">
                     <h3 class="section-header">{{localize "AKREL.SHEET.ARMORS"}}</h3>
                     <ol class="items-list items-list--armors">
@@ -344,7 +316,7 @@
                     </ol>
                 </section>
 
-                {{!-- Liste du butin --}}
+                {{!-- Loot List --}}
                 <section class="item-section loots-section">
                     <h3 class="section-header">{{localize "AKREL.SHEET.BAG"}}</h3>
                     <ol class="items-list items-list--loots">
@@ -364,7 +336,7 @@
                                 <div class="item-detail">{{item.system.price}}</div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_LOOT"}}" data-item-type="loot">
-                                        <i class="fas fa-flask"></i> {{!-- Icône de base, ajustez si besoin --}}
+                                        <i class="fas fa-flask"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
                                         <i class="fas fa-trash"></i>
@@ -379,27 +351,24 @@
                 </section>
             </div>
 
-            {{!-- Contenu de l'onglet Groupe --}}
+            {{!-- Group Tab Content --}}
             <div class="tab group" data-group="primary" data-tab="group">
-
                 <section class="item-section group-section">
                     <h3 class="section-header">{{localize "AKREL.CHARACTER.YOURGROUP"}}</h3>
                     <ol class="items-list items-list--group">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.GROUP_MEMBER_NAME"}}</div>
                             <div class="item-detail-header item-detail-header--large">{{localize "AKREL.SHEET.GROUP_MEMBER_OPINION"}}</div>
-                            <div class="item-actions-header"></div> {{!-- Colonne pour les boutons --}}
+                            <div class="item-actions-header"></div>
                         </li>
                         
-                        {{!-- Boucle sur les membres du groupe (maintenant un tableau) --}}
                         {{#each actor.system.groupMembers as |member i|}} 
-                            <li class="item-row flexrow" data-member-index="{{i}}"> {{!-- Utilise l'index pour l'identification --}}
+                            <li class="item-row flexrow" data-member-index="{{i}}">
                                 <div class="item-name-cell flexrow">
                                     <input type="text" name="system.groupMembers.{{i}}.name" value="{{member.name}}" data-dtype="String" placeholder="{{localize "AKREL.SHEET.GROUP_MEMBER_NAME_PLACEHOLDER"}}"/>
                                 </div>
                                 <div class="item-detail item-detail--large">
-                                    {{!-- NOUVEAU CODE pour le champ opinion en textarea --}}
-            <textarea name="system.groupMembers.{{i}}.opinion" data-dtype="String">{{member.opinion}}</textarea>
+                                    <textarea name="system.groupMembers.{{i}}.opinion" data-dtype="String">{{member.opinion}}</textarea>
                                 </div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control group-member-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
@@ -409,8 +378,7 @@
                             </li>
                         {{/each}}
                         
-                        {{!-- Gérer le cas où il n'y a pas de membres du groupe --}}
-                        {{#unless actor.system.groupMembers.length}} {{!-- Vérifie la longueur du tableau --}}
+                        {{#unless actor.system.groupMembers.length}}
                             <li class="item flexrow"><p class="notes">{{localize "AKREL.SHEET.NO_GROUP_MEMBERS_FOUND"}}</p></li>
                         {{/unless}}
                     </ol>

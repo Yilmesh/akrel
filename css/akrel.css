@@ -629,14 +629,12 @@ html {
 }
 
 .akrel.sheet.actor .item-img {
-    /* Votre CSS actuel */
-    width: 30px; /* Continuez à forcer la largeur */
-    height: 30px;  /* Force la hauteur */
-    flex-shrink: 0; /* Important si le parent est flex */
-    object-fit: cover; /* Gère comment l'image remplit la boîte 30x30 */
-    /* Assurez-vous qu'il n'y a pas de max-width: 100% qui soit appliqué ici et qui ferait grossir l'image */
-    max-width: 30px; /* Ajout possible pour être sûr qu'elle ne dépasse pas */
-    min-width: 30px; /* Ajout possible pour être sûr qu'elle ne descend pas en dessous */
+    width: 30px !important;
+    height: 30px !important;
+    flex-shrink: 0;
+    object-fit: cover;
+    max-width: 30px;
+    min-width: 30px;
 }
 
 .akrel.sheet.actor .item-name-cell p {
@@ -658,7 +656,7 @@ html {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: var(--akrel-color-text-primary); /* Répétition de la couleur pour clarté */
+    color: var(--akrel-color-text-primary);
 }
 
 .akrel.sheet.actor .item-detail--large {
@@ -694,7 +692,7 @@ html {
     padding: 10px;
     text-align: center;
     width: 100%;
-    margin: 10px 0; /* Ajouté pour un espacement correct */
+    margin: 10px 0;
 }
 
 /* --- Identity Tab (Table/Grid) --- */
