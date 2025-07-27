@@ -16,7 +16,7 @@
     "discord": "Liziba"
   }],
   "esmodules": ["akrel.js"],
-  "styles": ["styles/akrel.css"],
+  "styles": ["css/akrel.css"],
   "packs": [],
   "documentTypes": {
     "Actor": {

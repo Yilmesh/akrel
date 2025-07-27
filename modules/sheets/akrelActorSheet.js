@@ -11,7 +11,7 @@ export default class akrelActorSheet extends ActorSheet {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["akrel", "sheet", "actor"],
             width: 800,
-            height: 700,
+            height: 800,
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "identity" }],
             scrollY: [".attributes"], // Permet le défilement dans la section .attributes
             dragDrop: [{dragSelector: ".draggable", dropSelector: null}], // Permet le glisser-déposer pour les éléments avec la classe .draggable
@@ -37,7 +37,45 @@ export default class akrelActorSheet extends ActorSheet {
         
         // Assigne l'acteur et ses données système au contexte du template
         context.actor = this.actor;
-        context.system = this.actor.system;
+        
+        // --- Préparation pour le bonus de combat : Utilisation de baseStats et calcul de stats affichées ---
+        // Assurez-vous que votre actor.json a une structure comme system.baseStats.social
+        // Si vous n'avez pas encore basculé, system.social sera utilisé comme base.
+        const systemData = this.actor.system;
+        
+        // Initialisation des stats dérivées
+        // C'est ici que le bonus de combat sera appliqué
+        const computedStats = {};
+        
+        // Exemple pour chaque stat :
+        // Si actor.system.inCombat est true, ajoutez +20.
+        // Sinon, utilisez la valeur de base.
+        const combatBonus = systemData.inCombat ? 20 : 0;
+
+        // Assurez-vous que systemData.baseStats existe si vous l'avez introduit dans actor.json
+        // Si systemData.baseStats n'existe pas encore, utilisez directement systemData
+        const baseStatsSource = systemData.baseStats || systemData;
+
+        // Calcul des statistiques affichées avec le bonus de combat
+        // Assurez-vous que ces propriétés existent dans votre actor.json, idéalement sous `system.baseStats`
+        computedStats.social = baseStatsSource.social + combatBonus;
+        computedStats.initiative = baseStatsSource.initiative + combatBonus;
+        computedStats.physical = baseStatsSource.physical + combatBonus;
+        computedStats.block = baseStatsSource.block + combatBonus;
+        computedStats.intelligence = baseStatsSource.intelligence + combatBonus;
+        computedStats.dodge = baseStatsSource.dodge + combatBonus;
+        computedStats.dexterity = baseStatsSource.dexterity + combatBonus;
+        computedStats.vigilance = baseStatsSource.vigilance + combatBonus;
+
+        // Passez les stats calculées au contexte, en plus de toutes les données système
+        context.system = {
+            ...systemData, // Copie toutes les propriétés existantes de systemData
+            ...computedStats // Écrase ou ajoute les propriétés de stats calculées
+        };
+        // ATTENTION : Pour l'édition, vos inputs HBS devront pointer vers `system.baseStats.social`
+        // et l'affichage vers `system.social` (qui sera maintenant la valeur calculée).
+        // Si vous n'avez pas encore implémenté `baseStats`, les inputs HBS pointeront toujours vers `system.social`
+        // et devront être mis à jour pour pointer vers `system.baseStats.social` une fois cette structure prête.
         
         // --- GESTION DES MEMBRES DU GROUPE ---
         // Avec groupMembers défini comme un ArrayField dans CharacterDataModel.js,
@@ -137,18 +175,17 @@ export default class akrelActorSheet extends ActorSheet {
         });
 
         /**
-         * Désactive l'ouverture de la fiche d'un item au clic sur son nom.
-         * Si vous souhaitez réactiver cette fonctionnalité, décommentez le code à l'intérieur de ce bloc.
+         * Écouteur pour ouvrir la fiche d'un item au clic sur son nom.
+         * Ce bloc a été DÉCOMMENTÉ pour réactiver la fonctionnalité.
          */
         html.find(".item-name-cell").click(ev => {
             const li = $(ev.currentTarget).parents(".item-row");
             const itemId = li.data("item-id"); 
             
             // Console.log de débogage (peut être laissé ou retiré)
-            // console.log(`AKREL | Clic sur le nom. ID trouvé : ${itemId}.`);
+            console.log(`AKREL | Clic sur le nom. ID trouvé : ${itemId}.`);
 
-            // --- Logique d'ouverture de fiche d'item commentée car non désirée ---
-            /*
+            // --- Logique d'ouverture de fiche d'item ACTIVÉE ---
             const item = this.actor.items.get(itemId);
             if (item) {
                 item.sheet.render(true);
@@ -156,8 +193,7 @@ export default class akrelActorSheet extends ActorSheet {
                 console.error("AKREL | Erreur : Impossible de trouver l'item avec l'ID pour ouvrir la fiche :", itemId);
                 ui.notifications.error("AKREL | Impossible d'ouvrir la fiche : Item non trouvé.");
             }
-            */
-            // --- Fin de la logique commentée ---
+            // --- Fin de la logique ACTIVÉE ---
         });
 
         /**
@@ -263,7 +299,7 @@ export default class akrelActorSheet extends ActorSheet {
                 armors.push(i);
             } else if (i.type === 'loot') {
                 loots.push(i);
-            }        
+            }         
         }
         
         // Assigner les listes d'items filtrées à l'objet acteur, avec tri par la propriété 'sort'

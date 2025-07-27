@@ -5,6 +5,15 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
         const {SchemaField, StringField, NumberField, BooleanField, HTMLField, ArrayField, ObjectField} = foundry.data.fields;
         
         let data = {
+            social: new NumberField({initial:0}),
+            physical: new NumberField({initial:0}),
+            intelligence: new NumberField({initial:0}),
+            dexterity: new NumberField({initial:0}),
+            initiative: new NumberField({initial:0}),
+            block: new NumberField({initial:0}),
+            dodge: new NumberField({initial:0}),
+            vigilance: new NumberField({initial:0}),
+            experience: new NumberField({initial:0}),
             age: new StringField({initial:""}),
             origin: new StringField({initial:""}),
             gender: new StringField({initial:""}),
@@ -16,6 +25,8 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
             experience: new NumberField({initial:0}),
             level: new NumberField({ initial: 1, min: 0, integer: true }), // Ajout du champ niveau
             story: new HTMLField({initial:""}),
+            job: new StringField({initial:""}),
+            isFighting: new BooleanField({initial:false}),
             groupMembers: new ArrayField(
                 new ObjectField({
                     required: true,
@@ -45,8 +56,10 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
                     value: new NumberField({ initial: 0, min: 0, integer: true }),
                     max: new NumberField({ initial: 0, min: 0, integer: true })
                 })
-                // --- FIN NOUVEAU ---
             })
+
+            
+
         };
         return data;
     }

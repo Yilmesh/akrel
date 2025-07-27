@@ -56,7 +56,8 @@
             "ALIGNMENT": "Alignement",
             "EXPERIENCE": "Expérience",
             "IDENTITY": "Identité",
-            "STORY": "Histoire"
+            "STORY": "Histoire",
+            "YOURGROUP": "Vos avis"
         },
         "NPC": {
             "LEVEL": "Niveau"

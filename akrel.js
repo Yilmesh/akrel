@@ -13,6 +13,8 @@ import { PassiveDataModel } from "./models/passive-data-model.js";
 
 import { AKRELActor } from "./modules/documents/actor.js";
 import { AKRELItem } from "./modules/documents/item.js";
+
+import { registerHandlebarsHelpers } from "./modules/helpers/registerHandlebarsHelper.js";
 import { preloadHandlebarsTemplates } from "./modules/helpers/templates.js";
 
 Hooks.once("init", async function () {
@@ -76,6 +78,8 @@ Hooks.once("init", async function () {
     Handlebars.registerHelper('subtract', function(a,b) {
         return a - b;
     });
+
+    registerHandlebarsHelpers();
 
     console.log("AKREL | Initialising Akrel System");
     return preloadHandlebarsTemplates();

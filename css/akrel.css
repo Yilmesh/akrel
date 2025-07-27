@@ -1,0 +1,835 @@
+/* --- Global Reset & Box-Sizing --- */
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- CSS Variables (Theme & Layout) --- */
+:root {
+    /* AKREL Colors */
+    --akrel-color-text-primary: #e6d0b0 !important;
+    --akrel-color-interactive: #b18bc5 !important;
+    --akrel-color-background: #18171f !important;
+    --akrel-color-panel-background: #15131c !important;
+    --akrel-color-input-background: #302831 !important;
+    --akrel-color-header-background: #795789 !important;
+
+    /* Resource Bar Colors */
+    --color-bar-health: #a02020;
+    --color-bar-mana: #2020a0;
+    --color-bar-armor: #8b4513;
+    --color-bar-barrier: #4682b4;
+    --color-bar-empty: var(--akrel-color-input-background);
+
+    /* Dimensions */
+    --total-width: 248px;
+    --level-size: 70px;
+    --right-panel-size: 532px;
+    --grid-gap: 0px;
+    --bar-width: calc((var(--total-width) - var(--level-size)) / 2);
+    --bar-height: 35px;
+    --level-placeholder-height: var(--bar-height);
+    --total-resources-height: calc(var(--bar-height) * 2 + var(--grid-gap));
+
+    /* Typography */
+    --font-primary: 'Arial', sans-serif;
+
+    /* Foundry VTT Input Overrides */
+    --input-box-shadow: none !important;
+    --input-background-color: var(--akrel-color-input-background) !important;
+    --input-focus-outline-color: transparent !important;
+}
+
+/* --- Scrollbar Styles (WebKit - Chrome, Edge, Safari, Brave) --- */
+.akrel.sheet.actor .window-content::-webkit-scrollbar,
+.akrel.sheet.actor .sheet-body::-webkit-scrollbar,
+.akrel.sheet.actor .tab::-webkit-scrollbar,
+.akrel.sheet.actor .item-section::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.akrel.sheet.actor .window-content::-webkit-scrollbar-track,
+.akrel.sheet.actor .sheet-body::-webkit-scrollbar-track,
+.akrel.sheet.actor .tab::-webkit-scrollbar-track,
+.akrel.sheet.actor .item-section::-webkit-scrollbar-track {
+    background: var(--akrel-color-panel-background);
+    border-radius: 5px;
+}
+
+.akrel.sheet.actor .window-content::-webkit-scrollbar-thumb,
+.akrel.sheet.actor .sheet-body::-webkit-scrollbar-thumb,
+.akrel.sheet.actor .tab::-webkit-scrollbar-thumb,
+.akrel.sheet.actor .item-section::-webkit-scrollbar-thumb {
+    background: var(--akrel-color-interactive);
+    border-radius: 5px;
+    border: 1px solid var(--akrel-color-text-primary);
+}
+
+.akrel.sheet.actor .window-content::-webkit-scrollbar-thumb:hover,
+.akrel.sheet.actor .sheet-body::-webkit-scrollbar-thumb:hover,
+.akrel.sheet.actor .tab::-webkit-scrollbar-thumb:hover,
+.akrel.sheet.actor .item-section::-webkit-scrollbar-thumb:hover {
+    background: #c9a4d8;
+}
+
+/* --- Scrollbar Styles (Firefox) --- */
+.akrel.sheet.actor .window-content,
+.akrel.sheet.actor .sheet-body,
+.akrel.sheet.actor .tab,
+.akrel.sheet.actor .item-section {
+    scrollbar-width: thin;
+    scrollbar-color: var(--akrel-color-interactive) var(--akrel-color-panel-background);
+}
+
+/* --- General Sheet Scoping --- */
+.akrel.sheet.actor .window-resizable-handle {
+    z-index: 150;
+    background-color: var(--akrel-color-background);
+    color: var(--akrel-color-text-primary);
+    border: none;
+}
+
+.akrel.sheet.actor .window-header {
+    background-color: var(--akrel-color-background);
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel.sheet.actor .window-header h4 {
+    margin-left: 5px;
+}
+
+.akrel.sheet.actor .window-header a {
+    margin-right: 5px;
+}
+
+.akrel.sheet.actor .window-header i {
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.akrel.sheet.actor .editable {
+    background-color: var(--akrel-color-background);
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel.sheet.actor .editable input {
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel.sheet.actor .sheet-body {
+    background-color: var(--akrel-color-background);
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.akrel.sheet.actor .left-panel {
+    background-color: var(--akrel-color-panel-background);
+    width: 248px;
+    position: absolute;
+    top: 10%;
+    left: 20px;
+    z-index: 13;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    padding-bottom: 20px;
+}
+
+.akrel.sheet.actor .right-panel {
+    background-color: var(--akrel-color-panel-background);
+    width: var(--right-panel-size);
+    position: relative;
+    top: 170px;
+    left: 268px;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel.sheet.actor .title {
+    font-size: 30px;
+    display: block;
+    text-align: center;
+}
+
+.akrel.sheet.actor .sheet-header {
+    background-color: var(--akrel-color-header-background);
+    height: 170px;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 800px;
+    z-index: 12;
+}
+
+.akrel.sheet.actor .header-info {
+    width: var(--right-panel-size);
+    left: 288px;
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel.sheet.actor .header-item {
+    width: var(--right-panel-size);
+    color: var(--akrel-color-text-primary);
+    height: auto;
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel.sheet.actor .character-name {
+    font-size: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel.sheet.actor .character-name:placeholder-shown {
+    border: 1px solid var(--akrel-color-text-primary);
+}
+
+.akrel.sheet.actor .job {
+    font-size: 25px;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel.sheet.actor .job:placeholder-shown {
+    border: 1px solid var(--akrel-color-text-primary);
+}
+
+/* --- Experience Input --- */
+.akrel.sheet.actor .experience {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    color: var(--akrel-color-text-primary);
+    font-size: 1.2em;
+    text-align: right;
+    padding-right: 5px;
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+.akrel.sheet.actor .experience:focus {
+    background-color: var(--akrel-color-input-background) !important;
+}
+
+/* --- Character Image --- */
+.akrel.sheet.actor .character-img {
+    margin-bottom: var(--grid-gap);
+    border: 1px solid var(--akrel-color-text-primary);
+    box-sizing: border-box;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: var(--total-width);
+    height: auto;
+    max-width: 100%;
+    padding: 0;
+}
+
+/* --- Resource Layout Container --- */
+.akrel.sheet.actor .resource-layout-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--grid-gap);
+    width: var(--total-width);
+    position: relative;
+    height: var(--total-resources-height);
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Level Input --- */
+.akrel.sheet.actor .level-input-container {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: var(--level-size);
+    height: var(--total-resources-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--akrel-color-text-primary);
+    box-sizing: border-box;
+    background-color: var(--akrel-color-panel-background);
+    box-shadow: none;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel.sheet.actor .level-input-container .level-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: var(--akrel-color-text-primary);
+    font-size: 3.2em;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    box-sizing: border-box;
+}
+
+/* --- Resource Row --- */
+.akrel.sheet.actor .resource-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: var(--grid-gap);
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Level Placeholder --- */
+.akrel.sheet.actor .level-placeholder {
+    width: var(--level-size);
+    height: var(--level-placeholder-height);
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Resource Bars --- */
+.akrel.sheet.actor .akrel-resource-bar {
+    position: relative;
+    width: var(--bar-width);
+    height: var(--bar-height);
+    border: 1px solid var(--akrel-color-text-primary);
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: none;
+    background-color: var(--color-bar-empty);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel.sheet.actor .akrel-resource-bar .bar-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.akrel.sheet.actor .akrel-resource-bar .bar-fill {
+    height: 100%;
+    width: var(--bar-percentage);
+    transition: width 0.3s ease-in-out;
+}
+
+.akrel.sheet.actor .health-bar .bar-fill { background-color: var(--color-bar-health); }
+.akrel.sheet.actor .mana-bar .bar-fill { background-color: var(--color-bar-mana); }
+.akrel.sheet.actor .armor-bar .bar-fill { background-color: var(--color-bar-armor); }
+.akrel.sheet.actor .barrier-bar .bar-fill { background-color: var(--color-bar-barrier); }
+
+.akrel.sheet.actor .akrel-resource-bar .bar-label {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--akrel-color-text-primary);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    padding: 0 5px;
+    margin: 0;
+}
+
+.akrel.sheet.actor .akrel-resource-bar .resource-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: inherit;
+    font-weight: inherit;
+    font-size: 0.9em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width: 35px;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+.akrel.sheet.actor .akrel-resource-bar .resource-input.current-value {
+    text-align: right;
+}
+
+.akrel.sheet.actor .akrel-resource-bar .resource-input.max-value {
+    text-align: left;
+}
+
+.akrel.sheet.actor .akrel-resource-bar .separator {
+    font-size: 1em;
+    margin: 0 1px;
+    padding: 0;
+}
+
+/* --- Input Focus Styles --- */
+.akrel.sheet.actor input:focus,
+.akrel.sheet.actor textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: var(--akrel-color-interactive) !important;
+    background-color: var(--akrel-color-input-background) !important;
+}
+
+/* --- Statistics Panel --- */
+.akrel.sheet.actor .stat-ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 10px;
+    list-style: none;
+    padding: 0;
+    margin: 15px auto 0 auto;
+    width: var(--total-width);
+}
+
+.akrel.sheet.actor .stat-li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: var(--akrel-color-text-primary);
+    text-align: center;
+    height: 60px;
+    overflow: hidden;
+}
+
+.akrel.sheet.actor .stat-item {
+    color: var(--akrel-color-interactive) !important;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    width: 60px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.akrel.sheet.actor .stat-item::-webkit-outer-spin-button,
+.akrel.sheet.actor .stat-item::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.akrel.sheet.actor .stat-container {
+    border: 1px solid var(--akrel-color-text-primary);
+    box-sizing: border-box;
+    padding-bottom: 15px;
+}
+
+.akrel.sheet.actor .stat-icon {
+    font-size: 3em;
+    color: var(--akrel-color-header-background);
+    line-height: 1;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.akrel.sheet.actor .stat-li label {
+    font-weight: bold;
+    font-size: 0.95em;
+    text-align: center;
+    color: var(--akrel-color-interactive);
+    border: none;
+    border-radius: 0;
+    margin-top: 40px;
+    padding-bottom: 0px;
+    z-index: 3;
+}
+
+/* --- Sheet Tabs (Navigation) --- */
+.akrel.sheet.actor .sheet-tabs {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 800px;
+    top: 28.5%;
+    background-color: var(--akrel-color-panel-background);
+    border: 1px solid var(--akrel-color-text-primary);
+    box-sizing: border-box;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+    height: fit-content;
+}
+
+.akrel.sheet.actor .item-tab {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--akrel-color-text-primary);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    color: var(--akrel-color-text-primary);
+    background-color: var(--akrel-color-panel-background);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.akrel.sheet.actor .item-tab:hover {
+    background-color: var(--akrel-color-interactive);
+    color: var(--akrel-color-background);
+}
+
+.akrel.sheet.actor .item-tab.active {
+    background-color: var(--akrel-color-interactive);
+    color: var(--akrel-color-background);
+    border-right: none;
+}
+
+/* --- Flex Utilities --- */
+.akrel.sheet.actor .flexrow {
+    display: flex;
+    align-items: center;
+}
+
+/* --- Item Lists (Skills, Spells, etc.) --- */
+.akrel.sheet.actor .item-section {
+    margin-top: 15px;
+    border: 1px solid var(--akrel-color-text-primary);
+    padding: 10px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+    background-color: var(--akrel-color-input-background);
+}
+
+.akrel.sheet.actor .section-header {
+    color: var(--akrel-color-header-background);
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 1.5em;
+    border-bottom: 1px solid var(--akrel-color-text-primary);
+    padding-bottom: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.akrel.sheet.actor .items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.akrel.sheet.actor .items-header {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: var(--akrel-color-interactive);
+    border-bottom: 1px solid var(--akrel-color-text-primary);
+    padding: 5px 0;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    flex-wrap: nowrap;
+}
+
+.akrel.sheet.actor .item-name-header {
+    flex: 3;
+    padding-left: 5px;
+}
+
+.akrel.sheet.actor .item-detail-header {
+    flex: 1;
+    text-align: center;
+}
+
+.akrel.sheet.actor .item-detail-header--large {
+    flex: 2;
+}
+
+.akrel.sheet.actor .item-actions-header {
+    flex: 0 0 30px;
+    text-align: center;
+}
+
+.akrel.sheet.actor .item-row {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    color: var(--akrel-color-text-primary);
+    flex-wrap: nowrap;
+}
+
+.akrel.sheet.actor .item-row:last-child {
+    border-bottom: none;
+}
+
+.akrel.sheet.actor .item-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 3;
+    padding-left: 5px;
+    min-width: 0;
+}
+
+.akrel.sheet.actor .item-img {
+    /* Votre CSS actuel */
+    width: 30px; /* Continuez à forcer la largeur */
+    height: 30px;  /* Force la hauteur */
+    flex-shrink: 0; /* Important si le parent est flex */
+    object-fit: cover; /* Gère comment l'image remplit la boîte 30x30 */
+    /* Assurez-vous qu'il n'y a pas de max-width: 100% qui soit appliqué ici et qui ferait grossir l'image */
+    max-width: 30px; /* Ajout possible pour être sûr qu'elle ne dépasse pas */
+    min-width: 30px; /* Ajout possible pour être sûr qu'elle ne descend pas en dessous */
+}
+
+.akrel.sheet.actor .item-name-cell p {
+    margin: 0;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.akrel.sheet.actor .item-detail {
+    flex: 1;
+    text-align: center;
+    font-size: 0.9em;
+    padding: 0 5px;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--akrel-color-text-primary); /* Répétition de la couleur pour clarté */
+}
+
+.akrel.sheet.actor .item-detail--large {
+    flex: 2;
+}
+
+.akrel.sheet.actor .item-actions-cell {
+    flex: 0 0 30px;
+    justify-content: center;
+    gap: 5px;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.akrel.sheet.actor .item-control {
+    color: var(--akrel-color-interactive);
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: color 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.akrel.sheet.actor .item-control:hover {
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel.sheet.actor .item-list .notes {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    margin: 10px 0; /* Ajouté pour un espacement correct */
+}
+
+/* --- Identity Tab (Table/Grid) --- */
+.akrel.sheet.actor .tab.identity table {
+    width: calc(100% - 20px);
+    margin: 10px;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.akrel.sheet.actor .tab.identity td {
+    padding: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.akrel.sheet.actor .tab.identity td:first-child {
+    font-weight: bold;
+    color: var(--akrel-color-interactive);
+    width: 120px;
+    text-align: right;
+}
+
+.akrel.sheet.actor .tab.identity input[type="text"] {
+    width: 100%;
+    background-color: var(--akrel-color-input-background);
+    border: none;
+    color: var(--akrel-color-text-primary);
+    padding: 3px 5px;
+    box-shadow: none;
+    outline: none;
+}
+
+.akrel.sheet.actor .tab.identity input[type="text"]:focus {
+    background-color: var(--akrel-color-interactive);
+    color: var(--akrel-color-background);
+}
+
+/* --- Group Members Section --- */
+.akrel.sheet.actor .item-section.group-section .item-name-cell input[type="text"] {
+    background: transparent;
+    border: none;
+    color: var(--akrel-color-text-primary);
+    font-size: 1em;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    outline: none;
+    flex-grow: 1;
+}
+
+.akrel.sheet.actor .item-section.group-section .item-name-cell input[type="text"]:focus {
+    background-color: var(--akrel-color-input-background);
+    border-color: var(--akrel-color-interactive);
+    box-shadow: none;
+}
+
+.akrel.sheet.actor .item-section.group-section .item-detail--large textarea {
+    width: 100%;
+    height: 30px;
+    background-color: var(--akrel-color-input-background);
+    border: none;
+    color: var(--akrel-color-text-primary);
+    padding: 5px;
+    resize: vertical;
+    box-shadow: none;
+    outline: none;
+    font-size: 0.9em;
+}
+
+.akrel.sheet.actor .item-section.group-section .item-detail--large textarea:focus {
+    background-color: var(--akrel-color-interactive);
+    color: var(--akrel-color-background);
+}
+
+.akrel.sheet.actor .group-member-delete {
+    font-size: 1.1em;
+}
+
+.akrel.sheet.actor .add-group-member {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: var(--akrel-color-interactive);
+    color: var(--akrel-color-background);
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.akrel.sheet.actor .add-group-member:hover {
+    background-color: var(--akrel-color-text-primary);
+    color: var(--akrel-color-background);
+}
+
+/* --- Header Actions (e.g., Add Item button) --- */
+.akrel.sheet.actor .header-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 0;
+}
+
+/* --- Tab Content --- */
+.akrel.sheet.actor .tab {
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+/* --- Identity Grid --- */
+.akrel.sheet.actor .identity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 10px;
+    padding: 10px;
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel.sheet.actor .identity-grid div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.akrel.sheet.actor .identity-grid label {
+    font-weight: bold;
+    color: var(--akrel-color-interactive);
+    min-width: 80px;
+    text-align: right;
+}
