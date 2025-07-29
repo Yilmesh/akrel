@@ -1,89 +1,63 @@
 // systems/akrel/modules/documents/actor.js
 
 /**
- * Extend the base Actor document to support attributes and groups with a custom template creation dialog.
+ * Étend le document Actor de base pour gérer les comportements au niveau du document.
+ * La logique de données (structure et données dérivées) est gérée par les DataModels.
  * @extends {Actor}
  */
 export class AKRELActor extends Actor {
     /**
-     * Create a new entity using provided input data
      * @override
+     * Définit les images par défaut pour les nouveaux acteurs en fonction de leur type.
+     * Il est recommandé de définir ces chemins dans votre fichier `config.js` pour une meilleure gestion.
      */
     static async create(data, options = {}) {
-        // Replace default image
-        if (data.img === undefined){
-            // A CHANGER L'IMAGE
-            // Utiliser une logique similaire à celle de prepareDerivedData pour les images par défaut si besoin
-            switch (data.type) {
-                case "character":
-                    data.img = "systems/akrel/assets/icons/loot.png";
-                    break;
-                case "npc":
-                    data.img = "systems/akrel/assets/icons/loot.png";
-                    break;
-                default:
-                    data.img = "systems/akrel/assets/icons/loot.png";
-            }
-        }
         await super.create(data, options);
+  }
+
+  /** @override */
+  prepareData() {
+    // Prepare data for the actor. Calling the super version of this executes
+    // the following, in order: data reset (to clear active effects),
+    // prepareBaseData(), prepareEmbeddedDocuments() (including active effects),
+    // prepareDerivedData().
+    super.prepareData();
+  }
+
+  prepareDerivedData() {
+    this._prepareAkrelActorData();
+  }
+
+  _prepareAkrelActorData() {
+    const systemData = this.system;
+
+    switch (this.type) {
+        case 'character':
+            this._prepareCharacterData(systemData);
+            break;
+        case 'npc': 
+            this._prepareNpcData(systemData);
+            break;
     }
+  }
 
-    /** @override */
-    prepareData() {
-        // Calling the super version of this executes:
-        // data reset (to clear active effects),
-        // prepareBaseData(), prepareEmbeddedDocuments() (including active effects),
-        // prepareDerivedData().
-        super.prepareData();
-    }
-
-    prepareDerivedData() {
-        // Appelle la méthode dispatcher pour la préparation des données dérivées
-        this._prepareAkrelActorData();
-    }
-
-    /**
-     * Dispatcher pour la préparation des données dérivées spécifiques au type.
-     * @private
-     */
-    _prepareAkrelActorData() {
-        // Accède directement aux données du système via 'this.system'
-        const systemData = this.system;
-
-        // Dispatche la logique de préparation en fonction du type de l'acteur
-        switch (this.type) {
-            case 'character':
-                this._prepareCharacterData(systemData);
-                break;
-            case 'npc':
-                this._._prepareNpcData(systemData);
-                break;
-            // Ajoutez d'autres cas si vous avez d'autres types d'acteurs
-        }
-    }
-
-    /**
-     * Prépare les données dérivées spécifiquement pour les acteurs de type 'character'.
-     * @param {object} characterData Le sous-objet 'system' de l'acteur pour un personnage.
+  /**
+     * @param {object} characterData 
      * @private
      */
     _prepareCharacterData(characterData) {
-        // Assurez-vous que cette méthode ne s'exécute que pour les 'character'
         if (this.type !== 'character') return;
 
-        // Votre logique de préparation des données dérivées de personnage ici
         console.log(`AKREL | Préparation des données dérivées pour le personnage ${this.name}`);
-    };
-
+    }
     /**
-     * Prépare les données dérivées spécifiquement pour les acteurs de type 'npc'.
-     * @param {object} npcData Le sous-objet 'system' de l'acteur pour un PNJ.
+     * @param {object} npcData  
      * @private
      */
+
     _prepareNpcData(npcData) {
         if (this.type !== 'npc') return;
 
-        // Votre logique de préparation des données dérivées de PNJ ici
         console.log(`AKREL | Préparation des données dérivées pour le PNJ ${this.name}`);
     }
 }

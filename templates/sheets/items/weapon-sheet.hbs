@@ -1,27 +1,31 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="weapon-sheet-header">
+    <header class="sheet-header">
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom"/></h1>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'Nom'}}" data-dtype="String"/></h1>
     </header>
 
-    <section class="weapon-sheet-body">
-        {{!-- infobulle d'en haut --}}
-        <table>
-            <tr>
-                <td>{{localize "AKREL.WEAPON.TYPE"}}</td>
-                <td><input name="system.weaponType" type="text" value="{{system.weaponType}}"/></td>
-                <td>{{localize "AKREL.WEAPON.DURABILITY"}}</td>
-                <td><input name="system.durability" type="text" value="{{system.durability}}"/></td>
-                {{!-- lancer de dés --}}
-                <div>
-                    <button type="button" class="roll-damage" data-roll="{{system.damageDice}}">
-                        <i class="fas fa-dice-d20"></i> Lancer un dés
-                    </button>
-                </div>
-            </tr>
-        </table>
+    <section class="sheet-body">
+        {{!-- Informations de base de l'arme --}}
+        <div class="form-group-flex">
+            <div class="form-group">
+                <label>{{localize "AKREL.WEAPON.TYPE"}}</label>
+                <input name="system.weaponType" type="text" value="{{system.weaponType}}" data-dtype="String"/>
+            </div>
+            <div class="form-group">
+                <label>{{localize "AKREL.WEAPON.DURABILITY"}}</label>
+                <input name="system.durability" type="text" value="{{system.durability}}" data-dtype="String"/>
+            </div>
+        </div>
+        
+        {{!-- Bouton de jet d'arme sur la fiche d'item --}}
+        {{!-- Ce bouton déclenchera la même logique de dialogue de jet que depuis la feuille d'acteur --}}
+        <div class="form-group-button">
+            <button type="button" class="item-control" data-action="rollWeaponAttack">
+                <i class="fas fa-dice-d20"></i> {{localize 'AKREL.ACTIONS.ROLL_ATTACK'}}
+            </button>
+        </div>
 
-        {{!-- Navigation --}}
+        {{!-- Navigation par onglets --}}
         <nav class="sheet-tabs tabs" data-group="primary">
             <a class="item" data-tab="description">{{localize "AKREL.SHEET.DESCRIPTION_TAB"}}</a>
             <a class="item" data-tab="configuration">{{localize "AKREL.SHEET.CONFIGURATION_TAB"}}</a>
@@ -29,34 +33,36 @@
 
         {{!-- Contenu de l'onglet Description --}}
         <div class="tab description" data-group="primary" data-tab="description">
-            {{localize "AKREL.ITEM.DESCRIPTION"}}
-            <textarea name="system.description">{{system.description}}</textarea>
-            <div>
-                {{localize "AKREL.WEAPON.PRICE"}}
-                <input name="system.price" type="number" value="{{system.price}}"/>
+            <div class="form-group stacked">
+                <label>{{localize "AKREL.ITEM.DESCRIPTION"}}</label>
+                <textarea name="system.description" data-dtype="String">{{system.description}}</textarea>
+            </div>
+            <div class="form-group">
+                <label>{{localize "AKREL.WEAPON.PRICE"}}</label>
+                <input name="system.price" type="number" value="{{system.price}}" data-dtype="Number"/>
             </div>
         </div>
 
         {{!-- Contenu de l'onglet Configuration --}}
         <div class="tab configuration" data-group="primary" data-tab="configuration">
-            <table>
-                 <tr>
-                    <td>{{localize "AKREL.WEAPON.ATTACKWITH"}}</td>
-                    <td><select name="system.attackAttribute">{{selectOptions config.attackTypes selected=system.attackAttribute localize=true}}</select></td>
-                </tr>
-                <tr>
-                    <td>{{localize "AKREL.WEAPON.DAMAGE"}}</td>
-                    <td><input name="system.damageDice" type="text" value="{{system.damageDice}}"/></td>
-                </tr>
-                <tr>
-                    <td>{{localize "AKREL.WEAPON.NATURE"}}</td>
-                    <td><input name="system.nature" type="text" value="{{system.nature}}"/></td>
-                </tr>
-                <tr>
-                    <td>{{localize "AKREL.WEAPON.ENCHANTMENT"}}</td>
-                    <td><input name="system.enchantment" type="text" value="{{system.enchantment}}"/></td>
-                </tr>
-            </table>
+            <div class="form-group">
+                <label>{{localize "AKREL.WEAPON.ATTACKWITH"}}</label>
+                <select name="system.attackAttribute" data-dtype="String">
+                    {{selectOptions config.attackTypes selected=system.attackAttribute localize=true}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>{{localize "AKREL.WEAPON.DAMAGE"}}</label>
+                <input name="system.dice" type="text" value="{{system.dice}}" data-dtype="String"/>
+            </div>
+            <div class="form-group">
+                <label>{{localize "AKREL.WEAPON.NATURE"}}</label>
+                <input name="system.nature" type="text" value="{{system.nature}}" data-dtype="String"/>
+            </div>
+            <div class="form-group">
+                <label>{{localize "AKREL.WEAPON.ENCHANTMENT"}}</label>
+                <input name="system.enchantment" type="text" value="{{system.enchantment}}" data-dtype="String"/>
+            </div>
         </div>
     </section>
 </form>

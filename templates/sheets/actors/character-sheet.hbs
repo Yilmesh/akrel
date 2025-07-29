@@ -4,7 +4,10 @@
             <input class="header-item character-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize "AKREL.CHARACTER.NAME_PLACEHOLDER"}}"/>
             <input class="header-item job" name="system.job" type="text" value="{{system.job}}" placeholder="{{localize "AKREL.CHARACTER.JOB_PLACEHOLDER"}}"/>
         </div>
-        <input class="experience" type="number" name="system.experience" value="{{system.experience}}"/>
+        <div class="experience">
+            <input class="experience-text" type="number" name="system.experience" value="{{system.experience}}"/>
+            <p>{{localize "AKREL.CHARACTER.XP"}}</p>
+        </div>
     </header>
 
     {{!-- Navigation Bar --}}
@@ -82,44 +85,44 @@
                     <div class="stat-container">
                         <ul class="stat-ul">
                             <li class="stat-li">
-                                <i class="stat-icon fa-solid fa-users"></i>
-                                <input type="number" name="system.social" value="{{system.social}}" class="stat-item">
-                                <label>{{localize "AKREL.ATTRIBUTES.SOC"}}</label>
+                                <i class="stat-icon fa-solid fa-mandolin"></i>
+                                <input type="number" name="system.baseStats.social" value="{{system.baseStats.social}}" class="stat-item" data-dtype="Number">
+                                <label for="system.baseStats.social">{{localize "AKREL.ATTRIBUTES.SOCIAL"}}</label>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-hourglass-start"></i>
-                                <input type="number" name="system.initiative" value="{{system.initiative}}" class="stat-item">
-                                <label>{{localize "AKREL.ATTRIBUTES.INI"}}</label>
+                                <input type="number" name="system.baseStats.initiative" value="{{system.baseStats.initiative}}" class="stat-item" data-dtype="Number">
+                                <label for="system.baseStats.initiative">{{localize "AKREL.ATTRIBUTES.INITIATIVE"}}</label>
                             </li>
                             <li class="stat-li">
-                                <i class="stat-icon fa-solid fa-dumbbell"></i>
-                                <input type="number" name="system.physical" value="{{system.physical}}" class="stat-item">
-                                <label>{{localize "AKREL.ATTRIBUTES.PHY"}}</label>
+                                <i class="stat-icon fa-solid fa-axe-battle"></i>
+                                <input type="number" name="system.baseStats.physical" value="{{system.baseStats.physical}}" class="stat-item" data-dtype="Number">
+                                <label for="system.baseStats.physical">{{localize "AKREL.ATTRIBUTES.PHYSICAL"}}</label>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-shield-halved"></i>
-                                <input type="number" name="system.block" value="{{system.block}}" class="stat-item">
-                                <label>{{localize "AKREL.ATTRIBUTES.BLO"}}</label>
+                                <input type="number" name="system.baseStats.block" value="{{system.baseStats.block}}" class="stat-item" data-dtype="Number">
+                                <label for="system.baseStats.block">{{localize "AKREL.ATTRIBUTES.BLOCK"}}</label>
                             </li>
                             <li class="stat-li">
-                                <i class="stat-icon fa-solid fa-brain"></i>
-                                <input type="number" name="system.intelligence" value="{{system.intelligence}}" class="stat-item">
-                                <label>{{localize "AKREL.ATTRIBUTES.INT"}}</label>
+                                <i class="stat-icon fa-solid fa-staff"></i>
+                                <input type="number" name="system.baseStats.intelligence" value="{{system.baseStats.intelligence}}" class="stat-item" data-dtype="Number">
+                                <label for="system.baseStats.intelligence">{{localize "AKREL.ATTRIBUTES.INTELLIGENCE"}}</label>
                             </li>
                             <li class="stat-li">
-                                <i class="stat-icon fa-solid fa-person-running"></i>
-                                <input type="number" name="system.dodge" value="{{system.dodge}}" class="stat-item">
-                                <label>{{localize "AKREL.ATTRIBUTES.ESQ"}}</label>
+                                <i class="stat-icon fa-solid fa-person-running-fast"></i>
+                                <input type="number" name="system.baseStats.dodge" value="{{system.baseStats.dodge}}" class="stat-item" data-dtype="Number">
+                                <label for="system.baseStats.dodge">{{localize "AKREL.ATTRIBUTES.DODGE"}}</label>
                             </li>
                             <li class="stat-li">
-                                <i class="stat-icon fa-solid fa-person-walking-arrow-right"></i>
-                                <input type="number" name="system.dexterity" value="{{system.dexterity}}" class="stat-item">
-                                <label>{{localize "AKREL.ATTRIBUTES.ADR"}}</label>
+                                <i class="stat-icon fa-solid fa-bow-arrow"></i>
+                                <input type="number" name="system.baseStats.dexterity" value="{{system.baseStats.dexterity}}" class="stat-item" data-dtype="Number">
+                                <label for="system.baseStats.dexterity">{{localize "AKREL.ATTRIBUTES.DEXTERITY"}}</label>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-eye"></i>
-                                <input type="number" name="system.vigilance" value="{{system.vigilance}}" class="stat-item">
-                                <label>{{localize "AKREL.ATTRIBUTES.VIG"}}</label>
+                                <input type="number" name="system.baseStats.vigilance" value="{{system.baseStats.vigilance}}" class="stat-item" data-dtype="Number">
+                                <label for="system.baseStats.vigilance">{{localize "AKREL.ATTRIBUTES.VIGILANCE"}}</label>
                             </li>
                         </ul>
                     </div>
@@ -131,49 +134,47 @@
             {{!-- Identity Tab Content --}}
             <div class="tab identity" data-group="primary" data-tab="identity"> 
                 <h3 class="section-header">{{localize "AKREL.CHARACTER.IDENTITY"}}</h3>
+                <div class="section-separator"></div>
                 <table>
+                    {{!-- Row 1: Age & Morphology --}}
                     <tr>
                         <td>{{localize "AKREL.CHARACTER.AGE"}}</td>
                         <td><input type="text" name="system.age" value="{{system.age}}" data-dtype="String"></td>
-                    </tr>
-                    <tr>
-                        <td>{{localize "AKREL.CHARACTER.ORIGIN"}}</td>
-                        <td><input type="text" name="system.origin" value="{{system.origin}}" data-dtype="String"></td>
-                    </tr>
-                    <tr>
-                        <td>{{localize "AKREL.CHARACTER.GENDER"}}</td>
-                        <td><input type="text" name="system.gender" value="{{system.gender}}" data-dtype="String"></td>
-                    </tr>
-                    <tr>
-                        <td>{{localize "AKREL.CHARACTER.SIZE"}}</td>
-                        <td><input type="text" name="system.size" value="{{system.size}}" data-dtype="String"></td>
-                    </tr>
-                    <tr>
                         <td>{{localize "AKREL.CHARACTER.MORPHOLOGY"}}</td>
                         <td><input type="text" name="system.morphology" value="{{system.morphology}}" data-dtype="String"></td>
                     </tr>
+                    {{!-- Row 2: Origin & Caste --}}
                     <tr>
+                        <td>{{localize "AKREL.CHARACTER.ORIGIN"}}</td>
+                        <td><input type="text" name="system.origin" value="{{system.origin}}" data-dtype="String"></td>
                         <td>{{localize "AKREL.CHARACTER.CASTE"}}</td>
                         <td><input type="text" name="system.caste" value="{{system.caste}}" data-dtype="String"></td>
                     </tr>
+                    {{!-- Row 3: Gender & Divinity --}}
                     <tr>
+                        <td>{{localize "AKREL.CHARACTER.GENDER"}}</td>
+                        <td><input type="text" name="system.gender" value="{{system.gender}}" data-dtype="String"></td>
                         <td>{{localize "AKREL.CHARACTER.DIVINITY"}}</td>
                         <td><input type="text" name="system.divinity" value="{{system.divinity}}" data-dtype="String"></td>
                     </tr>
+                    {{!-- Row 4: Size & Alignment --}}
                     <tr>
+                        <td>{{localize "AKREL.CHARACTER.SIZE"}}</td>
+                        <td><input type="text" name="system.size" value="{{system.size}}" data-dtype="String"></td>
                         <td>{{localize "AKREL.CHARACTER.ALIGNMENT"}}</td>
                         <td><input type="text" name="system.alignment" value="{{system.alignment}}" data-dtype="String"></td>
                     </tr>
                 </table>
                 <h3 class="section-header">{{localize "AKREL.CHARACTER.STORY"}}</h3>
+                <div class="section-separator"></div>
                 <textarea name="system.story">{{system.story}}</textarea>
             </div>
 
             {{!-- Competencies Tab Content --}}
             <div class="tab competencies" data-group="primary" data-tab="competencies">
                 {{!-- Spells List --}}
+                <h3 class="section-header">{{localize "AKREL.SHEET.SPELLS"}}</h3>
                 <section class="item-section spells-section">
-                    <h3 class="section-header">{{localize "AKREL.SHEET.SPELLS"}}</h3>
                     <ol class="items-list items-list--spells">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.ITEM_NAME"}}</div>
@@ -190,14 +191,20 @@
                                     <p>{{item.name}}</p>
                                 </div>
                                 <div class="item-detail">{{item.system.spellLevel}}</div>
-                                <div class="item-detail">{{item.system.isQuickSpell}}</div>
+                                <div class="item-detail">
+                                    {{#if item.system.isQuickSpell}}
+                                        {{localize "AKREL.SHEET.QUICK_TRUE"}}
+                                    {{else}}
+                                        {{localize "AKREL.SHEET.QUICK_FALSE"}}
+                                    {{/if}}
+                                </div>
                                 <div class="item-detail">{{item.system.spellNature}}</div>
                                 <div class="item-detail">{{item.system.manaCost}}</div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.CAST_SPELL"}}" data-item-type="spell">
+                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.CAST_SPELL"}}" data-item-type="spell" data-action="roll">
                                         <i class="fas fa-comment-dots"></i>
                                     </a>
-                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
+                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -210,8 +217,8 @@
                 </section>
 
                 {{!-- Passives List --}}
+                <h3 class="section-header">{{localize "AKREL.SHEET.PASSIVES"}}</h3>
                 <section class="item-section passives-section">
-                    <h3 class="section-header">{{localize "AKREL.SHEET.PASSIVES"}}</h3>
                     <ol class="items-list items-list--passives">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.ITEM_NAME"}}</div>
@@ -228,10 +235,10 @@
                                 <div class="item-detail">{{item.system.Level}}</div>
                                 <div class="item-detail">{{item.system.Nature}}</div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_PASSIVE"}}" data-item-type="passive">
+                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_PASSIVE"}}" data-item-type="passive" data-action="chat">
                                         <i class="fas fa-hand-sparkles"></i>
                                     </a>
-                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
+                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -247,8 +254,8 @@
             {{!-- Bag Tab Content --}}
             <div class="tab bag" data-group="primary" data-tab="bag">
                 {{!-- Weapons List --}}
+                <h3 class="section-header">{{localize "AKREL.SHEET.ARMEMENTS"}}</h3>
                 <section class="item-section weapons-section">
-                    <h3 class="section-header">{{localize "AKREL.SHEET.ARMEMENTS"}}</h3>
                     <ol class="items-list items-list--weapons">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.ITEM_NAME"}}</div>
@@ -264,13 +271,13 @@
                                     <p>{{item.name}}</p>
                                 </div>
                                 <div class="item-detail">{{item.system.weaponType}}</div>
-                                <div class="item-detail">{{item.system.damageDice}}</div>
+                                <div class="item-detail">{{item.system.dice}}</div>
                                 <div class="item-detail">{{item.system.durability}}</div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_WEAPON"}}" data-item-type="weapon">
+                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_WEAPON"}}" data-item-type="weapon" data-action="roll">
                                         <i class="fas fa-gavel"></i>
                                     </a>
-                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
+                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -283,8 +290,8 @@
                 </section>
                 
                 {{!-- Armors List --}}
+                <h3 class="section-header">{{localize "AKREL.SHEET.ARMORS"}}</h3>
                 <section class="item-section armors-section">
-                    <h3 class="section-header">{{localize "AKREL.SHEET.ARMORS"}}</h3>
                     <ol class="items-list items-list--armors">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.ITEM_NAME"}}</div>
@@ -301,10 +308,10 @@
                                 <div class="item-detail">{{item.system.defensePoints}}</div>
                                 <div class="item-detail">{{item.system.durability}}</div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_WEAPON"}}" data-item-type="weapon">
+                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_WEAPON"}}" data-item-type="weapon" data-action="chat">
                                         <i class="fas fa-gavel"></i>
                                     </a>
-                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
+                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -317,8 +324,8 @@
                 </section>
 
                 {{!-- Loot List --}}
+                <h3 class="section-header">{{localize "AKREL.SHEET.BAG"}}</h3>
                 <section class="item-section loots-section">
-                    <h3 class="section-header">{{localize "AKREL.SHEET.BAG"}}</h3>
                     <ol class="items-list items-list--loots">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.ITEM_NAME"}}</div>
@@ -335,10 +342,10 @@
                                 <div class="item-detail">{{item.system.quantity}}</div>
                                 <div class="item-detail">{{item.system.price}}</div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_LOOT"}}" data-item-type="loot">
+                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_LOOT"}}" data-item-type="loot" data-action="chat">
                                         <i class="fas fa-flask"></i>
                                     </a>
-                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
+                                    <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>
@@ -353,8 +360,8 @@
 
             {{!-- Group Tab Content --}}
             <div class="tab group" data-group="primary" data-tab="group">
+                <h3 class="section-header">{{localize "AKREL.CHARACTER.YOURGROUP"}}</h3>
                 <section class="item-section group-section">
-                    <h3 class="section-header">{{localize "AKREL.CHARACTER.YOURGROUP"}}</h3>
                     <ol class="items-list items-list--group">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.GROUP_MEMBER_NAME"}}</div>
@@ -365,13 +372,13 @@
                         {{#each actor.system.groupMembers as |member i|}} 
                             <li class="item-row flexrow" data-member-index="{{i}}">
                                 <div class="item-name-cell flexrow">
-                                    <input type="text" name="system.groupMembers.{{i}}.name" value="{{member.name}}" data-dtype="String" placeholder="{{localize "AKREL.SHEET.GROUP_MEMBER_NAME_PLACEHOLDER"}}"/>
+                                    <input type="text" name="system.groupMembers.{{i}}.name" value="{{member.name}}" data-dtype="String" placeholder="{{localize "AKREL.SHEET.GROUP_MEMBER_NAME"}}"/>
                                 </div>
                                 <div class="item-detail item-detail--large">
-                                    <textarea name="system.groupMembers.{{i}}.opinion" data-dtype="String">{{member.opinion}}</textarea>
+                                    <textarea name="system.groupMembers.{{i}}.opinion" data-dtype="String" placeholder="{{localize "AKREL.SHEET.GROUP_MEMBER_OPINION"}}">{{member.opinion}}</textarea>
                                 </div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control group-member-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}">
+                                    <a class="item-control group-member-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete" data-index="{{i}}">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>

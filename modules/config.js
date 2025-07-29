@@ -6,10 +6,10 @@ export const AKREL = {};
  */
 // Définition des attributs si vous les utilisez pour les dropdowns
 AKREL.attackTypes = {
-    "SOC": "AKREL.ATTRIBUTES.SOC", // Ces valeurs sont les clés de localisation
-    "PHY": "AKREL.ATTRIBUTES.PHY",
-    "INT": "AKREL.ATTRIBUTES.INT",
-    "ADR": "AKREL.ATTRIBUTES.ADR"
+    "SOCIAL": "AKREL.ATTRIBUTES.SOCIAL", // Ces valeurs sont les clés de localisation
+    "PHYSICAL": "AKREL.ATTRIBUTES.PHYSICAL",
+    "INTELLIGENCE": "AKREL.ATTRIBUTES.INTELLIGENCE",
+    "DEXTERITY": "AKREL.ATTRIBUTES.DEXTERITY"
 };
 
 // Définir les chemins de localisation pour les noms de types d'acteurs
@@ -33,4 +33,10 @@ AKREL.wornLocations = {
     "arms": "AKREL.ITEM.ARMS",
     "pant": "AKREL.ITEM.LEGS",
     "feets": "AKREL.ITEM.FEETS"
+};
+
+AKREL.defaultActorImages = {
+    character: "systems/akrel/assets/icons/character-default.png",
+    npc: "systems/akrel/assets/icons/npc-default.png",
+    default: "systems/akrel/assets/icons/actor-default.png"
 };

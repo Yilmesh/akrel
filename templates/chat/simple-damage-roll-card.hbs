@@ -1,0 +1,45 @@
+<div class="akrel-chat-card akrel-weapon-attack">
+    <header class="card-header">
+        <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="36" height="36"/>
+        <span class="actor-name">{{actor.name}}</span>
+        <h3 class="item-name">{{itemName}}</h3>
+    </header>
+
+    <div class="card-content">
+        <h4>{{localize "AKREL.ROLL.ATTACK_ROLL"}}</h4>
+        <ul>
+            <li>
+                <strong>{{localize "AKREL.ROLL.ATTACKING_WITH"}}:</strong> {{attackAttribute}} ({{baseAttributeValue}})
+            </li>
+            {{#if inFightBonus}}
+            <li>
+                <strong>{{localize "AKREL.ROLL.IN_FIGHT_BONUS"}}:</strong> +{{inFightBonus}}
+            </li>
+            {{/if}}
+            {{#if modifier}}
+            <li>
+                <strong>{{localize "AKREL.DIALOG.BONUS_MALUS"}}:</strong> {{#if (lt modifier 0)}}{{modifier}}{{else}}+{{modifier}}{{/if}}
+            </li>
+            {{/if}}
+            <li>
+                <strong>{{localize "AKREL.ROLL.TOTAL_TARGET"}}:</strong> {{totalTarget}}
+            </li>
+            <li>
+                <strong>{{localize "AKREL.ROLL.RESULT_1D100"}}:</strong> <span class="{{#if isSuccess}}success{{else}}failure{{/if}}">{{rollResult}}</span>
+            </li>
+            <li class="roll-outcome">
+                <strong>{{localize "AKREL.ROLL.OUTCOME"}}:</strong> <span class="{{#if isSuccess}}success-text{{else}}failure-text{{/if}}">{{successText}}</span>
+            </li>
+            {{#if effectResult}} 
+            <li>
+                <strong>{{effectLabel}}:</strong> {{effectResult}} 
+            </li>
+            {{/if}}
+        </ul>
+        {{#if flavorText}}
+            <div class="item-description">
+                {{{flavorText}}}
+            </div>
+        {{/if}}
+    </div>
+</div>

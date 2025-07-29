@@ -22,7 +22,7 @@ html {
     /* Resource Bar Colors */
     --color-bar-health: #a02020;
     --color-bar-mana: #2020a0;
-    --color-bar-armor: #8b4513;
+    --color-bar-armor: #888786;
     --color-bar-barrier: #4682b4;
     --color-bar-empty: var(--akrel-color-input-background);
 
@@ -43,6 +43,10 @@ html {
     --input-box-shadow: none !important;
     --input-background-color: var(--akrel-color-input-background) !important;
     --input-focus-outline-color: transparent !important;
+}
+
+.akrel.sheet.actor {
+    font-family: "Modesto Condensed";
 }
 
 /* --- Scrollbar Styles (WebKit - Chrome, Edge, Safari, Brave) --- */
@@ -102,10 +106,13 @@ html {
 
 .akrel.sheet.actor .window-header h4 {
     margin-left: 5px;
+    font-size: 1.2em;
+    font-family: "Modesto Condensed";
 }
 
 .akrel.sheet.actor .window-header a {
     margin-right: 5px;
+    font-size: 1.2em;
 }
 
 .akrel.sheet.actor .window-header i {
@@ -144,7 +151,7 @@ html {
 }
 
 .akrel.sheet.actor .right-panel {
-    background-color: var(--akrel-color-panel-background);
+    background-color: var(--akrel-color-background);
     width: var(--right-panel-size);
     position: relative;
     top: 170px;
@@ -156,12 +163,16 @@ html {
 
 .akrel.sheet.actor .title {
     font-size: 30px;
+    font-family: "Modesto Condensed";
     display: block;
     text-align: center;
 }
 
 .akrel.sheet.actor .sheet-header {
     background-color: var(--akrel-color-header-background);
+    background-image: url('../assets/image1.png');
+    background-position: 50% 40%;
+    background-blend-mode: multiply;
     height: 170px;
     padding: 0;
     margin: 0;
@@ -181,7 +192,7 @@ html {
 }
 
 .akrel.sheet.actor .header-item {
-    width: var(--right-panel-size);
+    width: 80%;
     color: var(--akrel-color-text-primary);
     height: auto;
     border: none;
@@ -192,7 +203,7 @@ html {
 }
 
 .akrel.sheet.actor .character-name {
-    font-size: 50px;
+    font-size: 4em;
     padding: 0;
     margin: 0;
 }
@@ -202,7 +213,7 @@ html {
 }
 
 .akrel.sheet.actor .job {
-    font-size: 25px;
+    font-size: 2.5em;
     padding: 0;
     margin: 0;
 }
@@ -214,6 +225,7 @@ html {
 /* --- Experience Input --- */
 .akrel.sheet.actor .experience {
     position: absolute;
+    display: flex;
     bottom: 10px;
     right: 10px;
     width: 100px;
@@ -221,7 +233,7 @@ html {
     background-color: transparent;
     border: none;
     color: var(--akrel-color-text-primary);
-    font-size: 1.2em;
+    font-size: 2em;
     text-align: right;
     padding-right: 5px;
     box-shadow: none;
@@ -230,7 +242,18 @@ html {
     -moz-appearance: textfield;
 }
 
-.akrel.sheet.actor .experience:focus {
+.akrel.sheet.actor .experience-text {
+    background-color: transparent;
+    border: none;
+    color: var(--akrel-color-text-primary);
+    box-shadow: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    margin-right: 5px;
+}
+
+.akrel.sheet.actor .experience-text:focus {
     background-color: var(--akrel-color-input-background) !important;
 }
 
@@ -243,10 +266,14 @@ html {
     margin-left: auto;
     margin-right: auto;
     width: var(--total-width);
-    height: auto;
+    height: 248px;
     max-width: 100%;
+    max-height: 100%;
     padding: 0;
+    object-fit: cover;
+    object-position: 50% 0%;
 }
+
 
 /* --- Resource Layout Container --- */
 .akrel.sheet.actor .resource-layout-container {
@@ -286,7 +313,7 @@ html {
     outline: none;
     box-shadow: none;
     color: var(--akrel-color-text-primary);
-    font-size: 3.2em;
+    font-size: 3.6em;
     font-weight: bold;
     text-align: center;
     width: 100%;
@@ -364,7 +391,7 @@ html {
     justify-content: center;
     align-items: center;
     gap: 2px;
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: bold;
     color: var(--akrel-color-text-primary);
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
@@ -431,7 +458,6 @@ html {
     padding: 0;
     background-color: transparent;
     border: none;
-    border-radius: 0;
     box-shadow: none;
     color: var(--akrel-color-text-primary);
     text-align: center;
@@ -440,14 +466,14 @@ html {
 }
 
 .akrel.sheet.actor .stat-item {
-    color: var(--akrel-color-interactive) !important;
+    color: var(--akrel-color-text-primary) !important;
     border: none;
     background-color: transparent;
     outline: none;
     box-shadow: none;
     text-align: center;
     font-weight: bold;
-    font-size: 2em;
+    font-size: 2.5em;
     width: 60px;
     height: 40px;
     padding: 0;
@@ -455,7 +481,7 @@ html {
     -webkit-appearance: none;
     -moz-appearance: textfield;
     position: absolute;
-    top: 10px;
+    top: 5px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
@@ -476,6 +502,7 @@ html {
 .akrel.sheet.actor .stat-icon {
     font-size: 3em;
     color: var(--akrel-color-header-background);
+    opacity: 0.8;
     line-height: 1;
     position: absolute;
     top: 5px;
@@ -486,11 +513,10 @@ html {
 
 .akrel.sheet.actor .stat-li label {
     font-weight: bold;
-    font-size: 0.95em;
+    font-size: 1.7em;
     text-align: center;
     color: var(--akrel-color-interactive);
     border: none;
-    border-radius: 0;
     margin-top: 40px;
     padding-bottom: 0px;
     z-index: 3;
@@ -504,7 +530,7 @@ html {
     left: 800px;
     top: 28.5%;
     background-color: var(--akrel-color-panel-background);
-    border: 1px solid var(--akrel-color-text-primary);
+    border: 1px solid var(--akrel-color-panel-background);
     box-sizing: border-box;
     z-index: 10;
     padding: 0;
@@ -515,10 +541,11 @@ html {
 .akrel.sheet.actor .item-tab {
     width: 60px;
     height: 60px;
+    font-size: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--akrel-color-text-primary);
+    border: 1px solid var(--akrel-color-panel-background);
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -555,16 +582,28 @@ html {
 }
 
 .akrel.sheet.actor .section-header {
-    color: var(--akrel-color-header-background);
+    color: var(--akrel-color-text-primary);
     text-align: center;
     margin-top: 0;
     margin-bottom: 10px;
     text-transform: uppercase;
-    font-size: 1.5em;
-    border-bottom: 1px solid var(--akrel-color-text-primary);
-    padding-bottom: 5px;
+    font-size: 2em;
+    font-family: "Modesto Condensed";
+    padding-top: 5px;
+    margin-bottom: -17px;
     width: 100%;
     box-sizing: border-box;
+    border: none;
+}
+
+.akrel.sheet.actor .section-separator {
+    width: 80%; /* Largeur du séparateur, ajustez si besoin */
+    height: 1px; /* Épaisseur du séparateur */
+    background-color: var(--akrel-color-text-primary); /* Couleur du séparateur */
+    margin: 10px auto 10px auto; /* Centre le séparateur et ajoute une marge verticale */
+    margin-bottom: 15px;
+    margin-top: 18px;
+    display: block; /* Assure que c'est un bloc pour la marge auto */
 }
 
 .akrel.sheet.actor .items-list {
@@ -576,62 +615,96 @@ html {
 
 .akrel.sheet.actor .items-header {
     display: flex;
-    align-items: center;
+    align-items: center; /* Centre verticalement le contenu de l'en-tête */
+    text-align: center;
     font-weight: bold;
-    color: var(--akrel-color-interactive);
+    color: var(--akrel-color-text-primary);
     border-bottom: 1px solid var(--akrel-color-text-primary);
-    padding: 5px 0;
+    padding: 5px 0; /* Padding vertical, l'horizontal est géré par les largeurs des enfants */
     margin-bottom: 5px;
     text-transform: uppercase;
-    font-size: 0.9em;
+    font-size: 1.3em;
     flex-wrap: nowrap;
+    box-sizing: border-box;
+    min-height: 30px; /* Hauteur minimale pour les en-têtes */
 }
 
+/* --- Largeurs des En-têtes (Headers) --- */
 .akrel.sheet.actor .item-name-header {
-    flex: 3;
-    padding-left: 5px;
-}
-
-.akrel.sheet.actor .item-detail-header {
-    flex: 1;
+    flex-grow: 1; /* Permet au nom de prendre l'espace restant */
+    min-width: 150px; /* Largeur minimale pour "Nom", ajustez si besoin */
+    max-width: 150px;
+    padding-left: 5px; /* Pour aligner avec l'icône de l'item */
     text-align: center;
 }
 
-.akrel.sheet.actor .item-detail-header--large {
-    flex: 2;
+.akrel.sheet.actor .item-level-header {
+    width: 60px; /* Largeur fixe pour "Niveau", ajustez si besoin */
+    text-align: center;
+    flex-shrink: 0; /* Empêche de rétrécir */
+}
+
+.akrel.sheet.actor .item-speed-header {
+    width: 70px; /* Largeur fixe pour "Vitesse", ajustez si besoin */
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.akrel.sheet.actor .item-nature-header {
+    width: 80px; /* Largeur fixe pour "Nature", ajustez si besoin */
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.akrel.sheet.actor .item-cost-header {
+    width: 50px; /* Largeur fixe pour "Coût", ajustez si besoin */
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .akrel.sheet.actor .item-actions-header {
-    flex: 0 0 30px;
+    flex: 0 0 60px;
     text-align: center;
 }
+
 
 .akrel.sheet.actor .item-row {
     display: flex;
     align-items: center;
-    padding: 5px 0;
+    padding: 5px 0; /* Padding vertical, l'horizontal est géré par les largeurs des enfants */
     border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
     color: var(--akrel-color-text-primary);
     flex-wrap: nowrap;
+    box-sizing: border-box;
+    min-height: 40px; /* Hauteur minimale pour chaque ligne d'item */
 }
 
 .akrel.sheet.actor .item-row:last-child {
     border-bottom: none;
 }
 
+/* --- Largeurs des Cellules d'Items --- */
 .akrel.sheet.actor .item-name-cell {
     display: flex;
     align-items: center;
+    color: var(--akrel-color-interactive);
+    font-size: 1.3em;
     gap: 8px;
-    flex: 3;
-    padding-left: 5px;
-    min-width: 0;
+    flex-grow: 1; /* Permet au nom de prendre l'espace restant, comme son header */
+    min-width: 150px; /* Correspond à item-name-header */
+    max-width: 150px;
+    padding-left: 5px; /* Pour aligner l'icône de l'item */
+    box-sizing: border-box;
+    /* Pour gérer le texte qui dépasse si le nom est très long */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .akrel.sheet.actor .item-img {
     width: 30px !important;
     height: 30px !important;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Empêche l'image de rétrécir */
     object-fit: cover;
     max-width: 30px;
     min-width: 30px;
@@ -639,7 +712,7 @@ html {
 
 .akrel.sheet.actor .item-name-cell p {
     margin: 0;
-    flex-grow: 1;
+    flex-grow: 1; /* Permet au texte de prendre l'espace restant dans sa cellule */
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -648,38 +721,54 @@ html {
 }
 
 .akrel.sheet.actor .item-detail {
-    flex: 1;
     text-align: center;
-    font-size: 0.9em;
-    padding: 0 5px;
-    min-width: 0;
-    white-space: nowrap;
+    font-size: 1.3em;
+    padding: 0 5px; /* Petit padding pour le contenu interne */
+    box-sizing: border-box;
+    /* Pour gérer le texte qui dépasse */
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
     color: var(--akrel-color-text-primary);
 }
 
-.akrel.sheet.actor .item-detail--large {
-    flex: 2;
+/* Appliquez les largeurs fixes aux cellules individuelles */
+.akrel.sheet.actor .item-level-value {
+    width: 60px; /* Correspond à item-level-header */
+    flex-shrink: 0;
+}
+.akrel.sheet.actor .item-speed-value {
+    width: 70px; /* Correspond à item-speed-header */
+    flex-shrink: 0;
+}
+.akrel.sheet.actor .item-nature-value {
+    width: 80px; /* Correspond à item-nature-header */
+    flex-shrink: 0;
+}
+.akrel.sheet.actor .item-cost-value {
+    width: 50px; /* Correspond à item-cost-header */
+    flex-shrink: 0;
 }
 
 .akrel.sheet.actor .item-actions-cell {
-    flex: 0 0 30px;
+    flex: 0 0 60px;
     justify-content: center;
     gap: 5px;
     display: flex;
-    flex-shrink: 0;
+    align-items: center; /* Centre verticalement les icônes d'action */
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .akrel.sheet.actor .item-control {
     color: var(--akrel-color-interactive);
     text-decoration: none;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 1.3em;
     transition: color 0.2s ease-in-out;
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    align-items: right;
+    justify-content: right;
 }
 
 .akrel.sheet.actor .item-control:hover {
@@ -699,13 +788,19 @@ html {
 .akrel.sheet.actor .tab.identity table {
     width: calc(100% - 20px);
     margin: 10px;
-    border-collapse: collapse;
+    border: none;
     table-layout: fixed;
+    font-size: 1.3em;
+    background-color: transparent;
+}
+
+.akrel.sheet.actor .tab.identity tr {
+    background-color: transparent;
 }
 
 .akrel.sheet.actor .tab.identity td {
+    border: none;
     padding: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .akrel.sheet.actor .tab.identity td:first-child {
@@ -714,20 +809,35 @@ html {
     width: 120px;
     text-align: right;
 }
+.akrel.sheet.actor .tab.identity td:nth-child(odd) {
+    font-weight: bold;
+    color: var(--akrel-color-text-primary);
+    width: 100px;
+    text-align: left;
+}
+
+.akrel.sheet.actor .tab.identity td:nth-child(2) {
+    padding-right: 20px; 
+}
+
+.akrel.sheet.actor .tab.identity td:nth-child(even) { /* Sélectionne les 2ème et 4ème td */
+    width: auto; /* Laisse l'input prendre l'espace restant */
+}
 
 .akrel.sheet.actor .tab.identity input[type="text"] {
-    width: 100%;
+    width: calc(100% - 10px); /* Ajustez si le padding du td est différent, pour qu'il ne déborde pas */
+    box-sizing: border-box; /* Important pour inclure padding et border dans la largeur */
     background-color: var(--akrel-color-input-background);
-    border: none;
+    border: 1px solid var(--akrel-color-border); /* Une bordure légère pour les inputs */
     color: var(--akrel-color-text-primary);
-    padding: 3px 5px;
-    box-shadow: none;
-    outline: none;
+    padding: 5px;
+    height: 24px; /* Ajustez la hauteur des inputs si nécessaire */
+    text-align: center; /* Comme sur l'image */
 }
 
 .akrel.sheet.actor .tab.identity input[type="text"]:focus {
     background-color: var(--akrel-color-interactive);
-    color: var(--akrel-color-background);
+    color: var(--akrel-color-text-primary);
 }
 
 /* --- Group Members Section --- */
@@ -735,7 +845,7 @@ html {
     background: transparent;
     border: none;
     color: var(--akrel-color-text-primary);
-    font-size: 1em;
+    font-size: 1.3em;
     padding: 0;
     margin: 0;
     box-shadow: none;
@@ -749,9 +859,14 @@ html {
     box-shadow: none;
 }
 
-.akrel.sheet.actor .item-section.group-section .item-detail--large textarea {
+.akrel.sheet.actor .item-section.group-section textarea{
+    font-size: 1em;
+}
+
+.akrel.sheet.actor textarea {
     width: 100%;
     height: 30px;
+    font-size: 1.3em;
     background-color: var(--akrel-color-input-background);
     border: none;
     color: var(--akrel-color-text-primary);
@@ -759,12 +874,6 @@ html {
     resize: vertical;
     box-shadow: none;
     outline: none;
-    font-size: 0.9em;
-}
-
-.akrel.sheet.actor .item-section.group-section .item-detail--large textarea:focus {
-    background-color: var(--akrel-color-interactive);
-    color: var(--akrel-color-background);
 }
 
 .akrel.sheet.actor .group-member-delete {
@@ -782,6 +891,7 @@ html {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 1.5em;
     margin-top: 10px;
     width: fit-content;
     margin-left: auto;

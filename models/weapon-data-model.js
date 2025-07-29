@@ -7,7 +7,7 @@ export class WeaponDataModel extends foundry.abstract.TypeDataModel {
             weaponType: new StringField({initial: ""}),
             durability: new StringField({initial: ""}), 
             attackAttribute: new StringField({initial: ""}),
-            damageDice: new StringField({initial: ""}),
+            dice: new StringField({initial: ""}),
             price: new NumberField({initial: 1}),
             nature: new StringField({initial: ""}),
             enchantment: new StringField({initial: ""}),

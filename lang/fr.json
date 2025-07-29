@@ -1,27 +1,27 @@
 {
     "TYPES": {
-            "Actor": {
-                "character": "Personnage",
-                "npc": "Personnage Non-Joueur"
-            },
-            "Item": {
-                "weapon": "Arme",
-                "armor": "Armure",
-                "loot": "Butin",
-                "spell": "Sort",
-                "passive": "Passive"
-            }
+        "Actor": {
+            "character": "Personnage",
+            "npc": "Personnage Non-Joueur"
         },
+        "Item": {
+            "weapon": "Arme",
+            "armor": "Armure",
+            "loot": "Butin",
+            "spell": "Sort",
+            "passive": "Passive"
+        }
+    },
     "AKREL": {
-        "ATTRIBUTES": { 
-            "SOC": "Social",
-            "PHY": "Physique",
-            "INT": "Intelligence",
-            "ADR": "Adresse",
-            "INI": "Initiative",
-            "BLO": "Blocage", 
-            "ESQ": "Esquive",
-            "VIG": "Vigilance"
+        "ATTRIBUTES": {
+            "SOCIAL": "Social",
+            "PHYSICAL": "Physique",
+            "INTELLIGENCE": "Intelligence",
+            "DEXTERITY": "Dextérité",
+            "INITIATIVE": "Initiative",
+            "BLOCK": "Blocage",
+            "DODGE": "Esquive",
+            "VIGILANCE": "Vigilance"
         },
         "WEAPON": {
             "ATTACK_ATTRIBUTE": "Attaque avec :",
@@ -41,11 +41,11 @@
             "DEFENSE_POINTS": "Points de défense",
             "ENCHANTMENT": "Enchantement"
         },
-        "LOOT": { 
+        "LOOT": {
             "PRICE": "Prix",
             "QUANTITY": "Quantité"
         },
-        "CHARACTER": { 
+        "CHARACTER": {
             "AGE": "Âge",
             "ORIGIN": "Origine",
             "GENDER": "Genre",
@@ -57,7 +57,8 @@
             "EXPERIENCE": "Expérience",
             "IDENTITY": "Identité",
             "STORY": "Histoire",
-            "YOURGROUP": "Vos avis"
+            "YOURGROUP": "Vos avis",
+            "XP": "XP"
         },
         "NPC": {
             "LEVEL": "Niveau"
@@ -68,7 +69,8 @@
             "NATURE": "Nature du sort",
             "LEVEL": "Niveau du sort",
             "DAMAGE_DICE": "Dés de dégâts",
-            "IS_QUICK_SPELL": "Sort rapide"
+            "IS_QUICK_SPELL": "Sort rapide",
+            "HEALING": "Soins"
         },
         "PASSIVE": {
             "LEVEL": "Niveau",
@@ -99,21 +101,25 @@
             "CONFIGURATION_TAB": "Configuration",
             "ARMEMENTS": "Armements",
             "ARMORS": "Armures",
-            "BAG": "Saccoche",
-            "BAG_TITLE" : "Saccoche",
+            "BAG": "Sacoche",
+            "BAG_TITLE": "Sacoche",
             "ITEM_NAME": "Nom",
             "DAMAGE": "Dégâts",
             "RANGE": "Distance",
             "YOURGROUP": "Vos avis",
             "GROUP_MEMBER_NAME": "Nom",
-            "GROUP_MEMBER_OPINION": "Opinion"
+            "GROUP_MEMBER_OPINION": "Opinion",
+            "QUICK_TRUE": "Oui",
+            "QUICK_FALSE": "Non"
         },
         "ACTIONS": {
             "CAST_SPELL": "Lancer le sort",
             "MOVE_UP": "Monter",
             "MOVE_DOWN": "Descendre",
             "DELETE": "Supprimer",
-            "ADD_GROUP_MEMBER": "Ajouter un membre"
+            "ADD_GROUP_MEMBER": "Ajouter un membre",
+            "ROLL_ATTACK": "Lancer l'Attaque",
+            "SEND_TO_CHAT": "Envoyer au Chat"
         },
         "ITEM": {
             "DESCRIPTION": "DESCRIPTION",
@@ -123,10 +129,63 @@
             "LEGS": "Jambes",
             "FEETS": "Pieds"
         },
-        "DIALOG" : {
-            "DELETE_CONFIRM_TITLE": "Suppression",
-            "DELETE_MEMBER_CONFIRM_CONTENT": "Voulez-vous le supprimer",
-            "DELETE_CONFIRM_CONTENT": "Voulez-vous vraiment supprimer ?"
+        "DIALOG": {
+            "DELETE_CONFIRM_TITLE": "Confirmer la suppression",
+            "DELETE_MEMBER_CONFIRM_CONTENT": "Êtes-vous sûr de vouloir supprimer ce membre du groupe ?",
+            "DELETE_ITEM_CONFIRM_CONTENT": "Êtes-vous sûr de vouloir supprimer l'objet {itemName} ?",
+            "PERFORM_ITEM_ROLL": "Effectuer un Jet d'Objet",
+            "PERFORM_STAT_ROLL": "Effectuer un Jet de Statistique",
+            "ROLL_FOR_ITEM": "Jet pour {itemName} ({type})",
+            "ROLL_FOR_STAT": "Jet pour {statName}",
+            "BASE_ATTRIBUTE": "Attribut de Base",
+            "BASE_STAT_VALUE": "Valeur de la Statistique",
+            "IN_COMBAT_BONUS": "Bonus En Combat",
+            "APPLY": "Appliquer",
+            "BONUS_MALUS": "Bonus/Malus Additionnel",
+            "ADDITIONAL_DAMAGE_DICE": "Dégâts/Soins Add. (Dés)",
+            "ADDITIONAL_DAMAGE_BONUS": "Dégâts/Soins Add. (Fixe)",
+            "ROLL": "Lancer",
+            "CANCEL": "Annuler"
+        },
+        "NOTIFICATIONS": {
+            "MEMBER_DELETED": "Membre du groupe supprimé avec succès.",
+            "MEMBER_DELETE_ERROR": "Erreur lors de la suppression du membre : {error}",
+            "ITEM_DELETED": "Objet {itemName} supprimé avec succès.",
+            "ITEM_DELETE_ERROR": "Erreur lors de la suppression de l'objet : {error}"
+        },
+        "ROLL": {
+            "ATTACK_ROLL_ITEM": "Attaque d'Arme",
+            "SPELL_CAST_ITEM": "Lancement de Sort",
+            "STAT_ROLL": "Jet de Statistique",
+            "CHECK": "Jet",
+            "IN_FIGHT_BONUS": "Bonus En Combat",
+            "TOTAL_TARGET": "Cible Finale",
+            "RESULT_1D100": "Résultat 1d100",
+            "OUTCOME": "Résultat",
+            "SUCCESS": "RÉUSSI",
+            "FAILURE": "RATÉ",
+            "DAMAGES": "Dégâts",
+            "HEALING": "Soins",
+            "EFFECT": "Effet",
+            "ATTACKING_WITH": "Attaque avec",
+            "CASTING_WITH": "Lance avec",
+            "ATTACK_ROLL": "Jet de l'attaque"
+        },
+        "WARNING": {
+            "NO_ACTOR_FOR_WEAPON_ROLL": "Impossible de lancer un jet d'arme sans un acteur possédant cette arme.",
+            "NO_ACTOR_FOR_SPELL_ROLL": "Impossible de lancer un sort sans un acteur possédant ce sort."
+        },
+        "ERROR": {
+            "ITEM_NOT_FOUND_FOR_ACTION": "Objet non trouvé pour l'action.",
+            "INVALID_MEMBER_INDEX": "Index de membre invalide.",
+            "ITEM_NOT_FOUND_TO_OPEN_SHEET": "Impossible de trouver l'objet pour ouvrir la fiche.",
+            "NOT_A_WEAPON": "Ceci n'est pas une arme.",
+            "NOT_A_SPELL": "Ceci n'est pas un sort.",
+            "UNKNOWN_ITEM_ROLL_TYPE": "Type de jet d'objet inconnu.",
+            "STAT_NOT_FOUND_FOR_ROLL": "Statistique '{statKey}' non trouvée ou valeur indéfinie pour le jet.",
+            "INVALID_EFFECT_FORMULA": "Formule d'effet invalide : {formula}",
+            "EFFECT_CALC_ERROR": "Erreur de calcul des effets.",
+            "ITEM_NO_CHAT_FUNCTION": "Cet objet ne peut pas être envoyé au chat directement."
         }
     }
 }

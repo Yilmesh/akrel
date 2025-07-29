@@ -1,0 +1,42 @@
+<form class="akrel-roll-dialog akrel-item-roll-dialog">
+    <p>{{localize "AKREL.DIALOG.ROLL_FOR_ITEM" itemName=itemName type=(localize dialogType)}}</p>
+
+    <div class="form-group">
+        <label>{{localize "AKREL.DIALOG.BASE_ATTRIBUTE"}}:</label>
+        <div class="form-fields">
+            <span>{{attributeName}} ({{baseAttributeValue}})</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "AKREL.DIALOG.IN_COMBAT_BONUS"}}:</label>
+        <div class="form-fields">
+            <label class="checkbox">
+                <input type="checkbox" name="inCombat" {{checked inCombat}} data-dtype="Boolean"/>
+                {{localize "AKREL.DIALOG.APPLY"}} (+20)
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "AKREL.DIALOG.BONUS_MALUS"}}:</label>
+        <div class="form-fields">
+            <input type="number" name="modifier" value="0" data-dtype="Number"/>
+        </div>
+    </div>
+
+    {{#if showDamageFields}}
+    <div class="form-group">
+        <label>{{localize "AKREL.DIALOG.ADDITIONAL_DAMAGE_DICE"}}:</label>
+        <div class="form-fields">
+            <input type="text" name="damageDiceModifier" value="" placeholder="ex: +1d4" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>{{localize "AKREL.DIALOG.ADDITIONAL_DAMAGE_BONUS"}}:</label>
+        <div class="form-fields">
+            <input type="number" name="damageBonusModifier" value="0" data-dtype="Number"/>
+        </div>
+    </div>
+    {{/if}}
+</form>
