@@ -130,9 +130,10 @@
             "FEETS": "Pieds"
         },
         "DIALOG": {
-            "DELETE_CONFIRM_TITLE": "Confirmer la suppression",
-            "DELETE_MEMBER_CONFIRM_CONTENT": "Êtes-vous sûr de vouloir supprimer ce membre du groupe ?",
-            "DELETE_ITEM_CONFIRM_CONTENT": "Êtes-vous sûr de vouloir supprimer l'objet {itemName} ?",
+            "CONFIRM_DELETE_TITLE": "Confirmer la suppression",
+            "CONFIRM_DELETE_CONTENT": "Êtes-vous sûr de vouloir supprimer ?",
+            "CONFIRM_DELETE_GROUP_MEMBER_TITLE": "Confirmer la suppression",
+            "CONFIRM_DELETE_GROUP_MEMBER_CONTENT": "Êtes-vous sûr de vouloir supprimer cette avis ?",
             "PERFORM_ITEM_ROLL": "Effectuer un Jet d'Objet",
             "PERFORM_STAT_ROLL": "Effectuer un Jet de Statistique",
             "ROLL_FOR_ITEM": "Jet pour {itemName} ({type})",

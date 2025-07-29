@@ -16,7 +16,10 @@ export default class akrelActorSheet extends ActorSheet {
             height: 800,
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "identity" }],
             scrollY: [".attributes", ".item-section"], // Permet le défilement dans les sections des attributs et des items
-            dragDrop: [{ dragSelector: ".draggable", dropSelector: null }], // Permet le glisser-déposer pour les éléments avec la classe .draggable
+            dragDrop: [
+                { dragSelector: ".draggable", dropSelector: ".sheet-body" }, // For internal reordering & external drops
+                { dragSelector: ".item-list .item", dropSelector: null } // This line is for dragging items OUT of the sheet, if needed
+            ],
         });
     }
 
@@ -106,6 +109,15 @@ export default class akrelActorSheet extends ActorSheet {
             loots: loots.length
         });
     }
+    
+    // In systems/akrel/sheets/akrelActorSheet.js
+    /** @inheritdoc */
+    _onSortItem(event, itemData) {
+        // This calls Foundry's default item sorting logic.
+        // It will calculate new 'sort' values based on where the item is dropped
+        // within the list and update the item's data in the database.
+        super._onSortItem(event, itemData);
+    }
 
     /** @inheritdoc */
     activateListeners(html) {
@@ -115,49 +127,24 @@ export default class akrelActorSheet extends ActorSheet {
         // Gérer les boutons d'ajout/suppression de membre de groupe.
         // Ils ne sont pas gérés par le _updateObject car ils déclenchent un update direct.
 
+
+        // Bouton de suppression des items dans les listes d'objets.
+        html.find('.item-delete').click(this._onItemDelete.bind(this));
+
         // Écouteur pour le bouton d'ajout de membre de groupe
         html.find(".add-group-member").click(async ev => {
             const currentMembers = this.actor.system.groupMembers || [];
             const newMember = { name: "", opinion: "" };
             
-            // Crée une copie complète des données du système actuelles pour s'assurer
-            // que toutes les statistiques de base sont incluses dans la mise à jour.
-            const systemUpdate = foundry.utils.deepClone(this.actor.system);
-            systemUpdate.groupMembers = [...currentMembers, newMember];
-
             await this.actor.update({
-                system: systemUpdate // Mettez à jour l'objet system complet
+                "system.groupMembers": [...currentMembers, newMember]
             });
 
-            console.log("AKREL | After adding group member (button click), actor.system.baseStats.initiative:", this.actor.system.baseStats.initiative);
+            console.log("AKREL | After adding group member (button click), actor.system.caracs.initiative:", this.actor.system.caracs.initiative);
         });
 
-        // Écouteur pour le bouton de suppression de membre de groupe
-        html.find(".group-member-delete").click(async ev => {
-            // IMPORTANT : Pour que cette ligne fonctionne, vous devez ajouter data-index="{{i}}"
-            // à la balise <a> du bouton de suppression dans votre template character-sheet.hbs.
-            // Exemple : <a class="item-control group-member-delete" ... data-index="{{i}}">
-            const index = Number(ev.currentTarget.dataset.index); 
-            
-            // Ajout d'une vérification robuste au cas où l'index ne serait pas valide
-            if (isNaN(index)) {
-                console.error("AKREL | Erreur: Index invalide pour la suppression de membre de groupe (récupéré du bouton).", ev.currentTarget.dataset.index);
-                ui.notifications.error("Impossible de supprimer le membre de groupe : index invalide.");
-                return; // Arrête l'exécution si l'index n'est pas un nombre
-            }
-
-            const newMembers = [...this.actor.system.groupMembers];
-            newMembers.splice(index, 1);
-
-            const systemUpdate = foundry.utils.deepClone(this.actor.system);
-            systemUpdate.groupMembers = newMembers;
-            
-            await this.actor.update({
-                system: systemUpdate // Mettez à jour l'objet system complet
-            });
-
-            console.log("AKREL | After deleting group member (button click), actor.system.baseStats.initiative:", this.actor.system.baseStats.initiative);
-        });
+        // Supprimer un membre du groupe
+        html.find('.group-member-delete').click(this._onGroupMemberDelete.bind(this)); // Premier écouteur, correct
         
         // Listeners pour les jets d'items (ex: jet de dés d'une arme)
         html.find('.item-roll').click(ev => {
@@ -205,6 +192,55 @@ export default class akrelActorSheet extends ActorSheet {
         });
     }
 
+    async _onItemDelete(event) {
+        event.preventDefault(); // Empêche le comportement par défaut du lien
+        const li = $(event.currentTarget).parents(".item-row"); // Trouve l'élément <li> parent de l'item
+        const itemId = li.data("item-id"); // Récupère l'ID de l'item à partir de l'attribut data-item-id
+
+        // Demander confirmation avant de supprimer (bonne pratique)
+        const confirmed = await Dialog.confirm({
+            title: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_TITLE"), // Titre du dialogue (à traduire dans vos locales)
+            content: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_CONTENT") // Contenu du dialogue (à traduire)
+        });
+
+        if (confirmed) {
+            await this.actor.deleteEmbeddedDocuments("Item", [itemId]); // Supprime l'item de l'acteur
+            li.slideUp(200, () => this.render(false)); // Animation de disparition et rafraîchissement doux de la feuille
+        }
+    }
+
+    async _onGroupMemberDelete(event) {
+        event.preventDefault();
+        const li = $(event.currentTarget).parents(".group-member-row"); // Remonte au conteneur du membre
+        const index = li.data("member-index"); // Récupère l'index du membre à partir du HTML
+
+        if (index === undefined || index === null) {
+            console.warn("AKREL | Impossible de déterminer l'index du membre du groupe à supprimer.");
+            return;
+        }
+
+        // Demander confirmation avant de supprimer
+        const confirmed = await Dialog.confirm({
+            title: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_GROUP_MEMBER_TITLE"),
+            content: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_GROUP_MEMBER_CONTENT")
+        });
+
+        if (confirmed) {
+            // Crée une copie mutable du tableau des membres du groupe
+            const groupMembers = [...this.actor.system.groupMembers];
+            
+            // Supprime le membre à l'index donné
+            groupMembers.splice(index, 1);
+
+            // Met à jour l'acteur avec le nouveau tableau de membres
+            // Foundry gérera le rafraîchissement de la feuille
+            await this.actor.update({ "system.groupMembers": groupMembers });
+
+            // Optionnel : Animation de disparition, Foundry rafraîchira la feuille automatiquement.
+            // li.slideUp(200, () => this.render(false)); 
+        }
+    }
+
     /**
      * Gère la soumission du formulaire de la feuille d'acteur.
      * Cette méthode est appelée automatiquement lorsque le formulaire est soumis (ex: on change ou on blur des champs de formulaire).
@@ -224,6 +260,6 @@ export default class akrelActorSheet extends ActorSheet {
         // Log les données de l'acteur après la mise à jour de la classe parente.
         // Cela permet de voir l'état des données APRES que Foundry ait traité les changements.
         console.log("AKREL | _updateObject: actor.system.groupMembers AFTER super.update:", this.actor.system.groupMembers);
-        console.log("AKREL | _updateObject: Base Stats de l'acteur après super.update:", this.actor.system.baseStats);
+        console.log("AKREL | _updateObject: Base Stats de l'acteur après super.update:", this.actor.system.caracs);
     }
 }

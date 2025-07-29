@@ -14,62 +14,62 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
         const { SchemaField, StringField, NumberField, BooleanField, HTMLField, ArrayField, ObjectField } = foundry.data.fields;
 
         // Schéma pour les statistiques de base du personnage (Social, Physique, etc.)
-        const baseStatsSchema = new SchemaField({
-            social: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.ATTRIBUTES.SOCIAL" }),
-            physical: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.ATTRIBUTES.PHYSICAL" }),
-            intelligence: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.ATTRIBUTES.INTELLIGENCE" }),
-            dexterity: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.ATTRIBUTES.DEXTERITY" }),
-            initiative: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.ATTRIBUTES.INITIATIVE" }),
-            block: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.ATTRIBUTES.BLOCK" }),
-            dodge: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.ATTRIBUTES.DODGE" }),
-            vigilance: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.ATTRIBUTES.VIGILANCE" })
+        const caracsSchema = new SchemaField({
+            social: new NumberField({ initial: 0}),
+            physical: new NumberField({ initial: 0}),
+            intelligence: new NumberField({ initial: 0 }),
+            dexterity: new NumberField({ initial: 0}),
+            initiative: new NumberField({ initial: 0}),
+            block: new NumberField({ initial: 0}),
+            dodge: new NumberField({ initial: 0}),
+            vigilance: new NumberField({ initial: 0 })
         });
 
 
         // Définition du schéma global des données de l'acteur de type "character"
         let data = {
             // Stats de base
-            baseStats: baseStatsSchema,
+            caracs: caracsSchema,
 
             // Champs généraux descriptifs du personnage
-            job: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.JOB" }),
-            experience: new NumberField({ initial: 0, min: 0, integer: true, label: "AKREL.CHARACTER.XP" }),
-            level: new NumberField({ initial: 1, min: 1, integer: true, label: "AKREL.CHARACTER.LEVEL" }),
-            age: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.AGE" }),
-            morphology: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.MORPHOLOGY" }),
-            origin: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.ORIGIN" }),
-            caste: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.CASTE" }),
-            gender: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.GENDER" }),
-            divinity: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.DIVINITY" }),
-            size: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.SIZE" }),
-            alignment: new StringField({ initial: "", blank: true, label: "AKREL.CHARACTER.ALIGNMENT" }),
-            story: new HTMLField({ initial: "", blank: true, label: "AKREL.CHARACTER.STORY" }),
+            job: new StringField({ initial: ""}),
+            experience: new NumberField({ initial: 0}),
+            level: new NumberField({ initial: 1}),
+            age: new StringField({ initial: ""}),
+            morphology: new StringField({ initial: ""}),
+            origin: new StringField({ initial: ""}),
+            caste: new StringField({ initial: ""}),
+            gender: new StringField({ initial: ""}),
+            divinity: new StringField({ initial: ""}),
+            size: new StringField({ initial: ""}),
+            alignment: new StringField({ initial: ""}),
+            story: new HTMLField({ initial: ""}),
 
             // Ressources du personnage - DÉFINITION CORRIGÉE DU LABEL
             resources: new SchemaField({
                 health: new SchemaField({
-                    value: new NumberField({ initial: 10, min: 0, integer: true }),
-                    max: new NumberField({ initial: 10, min: 0, integer: true })
+                    value: new NumberField({ initial: 10}),
+                    max: new NumberField({ initial: 10 })
                 }, { label: "AKREL.RESOURCES.HEALTH" }), // Label correctement placé en option de SchemaField
                 mana: new SchemaField({
-                    value: new NumberField({ initial: 5, min: 0, integer: true }),
-                    max: new NumberField({ initial: 5, min: 0, integer: true })
+                    value: new NumberField({ initial: 5}),
+                    max: new NumberField({ initial: 5 })
                 }, { label: "AKREL.RESOURCES.MANA" }), // Label correctement placé en option de SchemaField
                 armor: new SchemaField({
-                    value: new NumberField({ initial: 0, min: 0, integer: true }),
-                    max: new NumberField({ initial: 0, min: 0, integer: true })
+                    value: new NumberField({ initial: 0 }),
+                    max: new NumberField({ initial: 0 })
                 }, { label: "AKREL.RESOURCES.ARMOR" }), // Label correctement placé en option de SchemaField
                 barrier: new SchemaField({
-                    value: new NumberField({ initial: 0, min: 0, integer: true }),
-                    max: new NumberField({ initial: 0, min: 0, integer: true })
+                    value: new NumberField({ initial: 0 }),
+                    max: new NumberField({ initial: 0 })
                 }, { label: "AKREL.RESOURCES.BARRIER" }) // Label correctement placé en option de SchemaField
             }),
 
             // Membres du groupe (pour le suivi des PNJ ou alliés du personnage)
             groupMembers: new ArrayField(new SchemaField({
-                name: new StringField({ initial: "", blank: true, label: "AKREL.SHEET.GROUP_MEMBER_NAME" }),
-                opinion: new HTMLField({ initial: "", blank: true, label: "AKREL.SHEET.GROUP_MEMBER_OPINION" })
-            }), { initial: [], label: "AKREL.SHEET.GROUP_MEMBERS" })
+                name: new StringField({ initial: "" }),
+                opinion: new HTMLField({ initial: "" })
+            }), { initial: []})
         };
 
         return data;
@@ -90,33 +90,20 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
      * Ajoutez votre propre logique de calcul ici.
      */
     prepareDerivedData() {
-        // --- Votre logique de calcul des données dérivées pour les personnages Akrel ici ---
-        // Exemple: Calcul de l'initiative finale basée sur la Dextérité et l'Intelligence
-        // this.baseStats.initiative = this.baseStats.dexterity + this.baseStats.intelligence;
+        // Assurez-vous que la valeur actuelle de la santé ne dépasse pas son maximum
+        this.resources.health.value = Math.min(this.resources.health.value , this.resources.health.max);
 
-        // Exemple: Calcul du total de points de vie maximum basé sur la Physique et le Niveau
-        // this.resources.health.max = this.baseStats.physical * 2 + (this.level * 5);
-        // Assurez-vous que la valeur actuelle ne dépasse pas le nouveau maximum
-        // this.resources.health.value = Math.min(this.resources.health.value, this.resources.health.max);
+        // same for mana
+        this.resources.mana.value = Math.min(this.resources.mana.value, this.resources.mana.max);
+
+        // Armor
+        this.resources.armor.value = Math.min(this.resources.armor.value, this.resources.armor.max);
+
+        // Barrier
+        this.resources.barrier.value = Math.min(this.resources.barrier.value, this.resources.barrier.max);
     }
 
-    /**
-     * Effectue des migrations de données à partir d'un schéma source vers le schéma actuel.
-     * Cette version s'appuie entièrement sur la logique de migration par défaut de Foundry VTT.
-     * @param {object} source Les données brutes de l'acteur avant la migration.
-     * @param {object} migration Les champs de migration à appliquer.
-     * @protected
-     * @override
-     */
-    _onMigrateSchema(source, migration) {
-        // Appelle la méthode de migration par défaut de la classe parente.
-        // C'est elle qui gère l'ajout des nouveaux champs définis dans defineSchema()
-        // avec leurs valeurs initiales, si elles n'existent pas dans les données source.
-        super._onMigrateSchema(source, migration);
-
-        // Aucune logique de migration personnalisée n'est ajoutée ici,
-        // s'appuyant uniquement sur les fonctionnalités de base de Foundry.
-
-        return source;
+    static migrateData(source){
+        return super.migrateData(source);
     }
 }
