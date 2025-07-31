@@ -1,0 +1,44 @@
+<div class="akrel-chat-card akrel-roll-chat-card">
+    <header class="card-header flexrow">
+        <img class="item-img" src="{{itemImg}}" data-edit="img" title="{{itemName}}" />
+        <h3 class="item-name">{{itemName}}</h3>
+    </header>
+
+    <div class="card-content">
+        <div class="roll-details">
+            <p><strong>{{localize "AKREL.ATTRIBUTES.ATTACKING_WITH"}} {{attackAttributeTitle}}:</strong> {{baseAttributeValue}}</p>
+            {{#if inFightBonus}}
+                <p><strong>{{localize "AKREL.CHAT.CombatBonus"}}:</strong> {{inFightBonus}}</p>
+            {{/if}}
+            {{#if modifier}}
+                <p><strong>{{localize "AKREL.DIALOG.BONUS_MALUS"}}:</strong> {{modifier}}</p>
+            {{/if}}
+            <p><strong>{{localize "AKREL.ROLL.TOTAL_TARGET"}}:</strong> {{totalTarget}}</p>
+        </div>
+
+        <div class="separator-line"></div>
+
+        <div class="dice-roll">
+            <div class="dice-result {{#if isSuccess}}success{{else}}failure{{/if}} {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}}">
+                <span class="roll-outcome {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}}">{{successText}}</span>
+                <span class="roll-total">{{rollResult}}</span>
+            </div>
+        </div>
+
+        {{#if effectResult}}
+            <div class="separator-line"></div>
+            <div class="roll-effect">
+                <div class="damage-result {{#if isSuccess}}success{{else}}failure{{/if}} {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}}">
+                    {{{effectResult}}}
+                </div>
+            </div>
+        {{/if}}
+        
+        {{!-- La description de l'item est maintenant affichée ici --}}
+        {{#if flavorText}}
+            <div class="flavor-text">
+                {{{flavorText}}}
+            </div>
+        {{/if}}
+    </div>
+</div>

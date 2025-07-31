@@ -1,27 +1,23 @@
-<form class="akrel-roll-dialog akrel-stat-roll-dialog">
-    <p>{{localize "AKREL.DIALOG.ROLL_FOR_STAT" statName=statName}}</p>
-
+<form class="akrel-dialog-form flexcol">
     <div class="form-group">
-        <label>{{localize "AKREL.DIALOG.BASE_STAT_VALUE"}}:</label>
-        <div class="form-fields">
-            <span>{{statValue}}</span>
-        </div>
+        <label>{{localize "AKREL.DIALOG.BASE_STAT_VALUE"}} ({{statName}})</label>
+        <input type="number" name="baseStatValue" value="{{baseStatValue}}" data-dtype="Number" disabled/>
     </div>
 
     <div class="form-group">
-        <label>{{localize "AKREL.DIALOG.IN_COMBAT_BONUS"}}:</label>
+        <label>{{localize "AKREL.DIALOG.MODIFIER"}}</label>
+        <input type="number" name="modifier" value="" data-dtype="Number"/>
+    </div>
+
+    {{#if showCombatOption}}
+    <div class="form-group">
+        <label>{{localize "AKREL.CHAT.IN_COMBAT"}}</label>
         <div class="form-fields">
             <label class="checkbox">
                 <input type="checkbox" name="inCombat" {{checked inCombat}} data-dtype="Boolean"/>
-                {{localize "AKREL.DIALOG.APPLY"}} (+20)
+                {{localize "AKREL.DIALOG.APPLY"}}
             </label>
         </div>
     </div>
-
-    <div class="form-group">
-        <label>{{localize "AKREL.DIALOG.BONUS_MALUS"}}:</label>
-        <div class="form-fields">
-            <input type="number" name="modifier" value="0" data-dtype="Number"/>
-        </div>
-    </div>
+    {{/if}}
 </form>

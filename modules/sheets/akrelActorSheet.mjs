@@ -18,7 +18,6 @@ export default class akrelActorSheet extends ActorSheet {
             scrollY: [".attributes", ".item-section"], // Permet le défilement dans les sections des attributs et des items
             dragDrop: [
                 { dragSelector: ".draggable", dropSelector: ".sheet-body" }, // For internal reordering & external drops
-                { dragSelector: ".item-list .item", dropSelector: null } // This line is for dragging items OUT of the sheet, if needed
             ],
         });
     }
@@ -128,6 +127,9 @@ export default class akrelActorSheet extends ActorSheet {
         // Ils ne sont pas gérés par le _updateObject car ils déclenchent un update direct.
 
 
+        // Bouton roll stat
+        html.find('.stat-roll').on('click', this._onStatRoll.bind(this));
+
         // Bouton de suppression des items dans les listes d'objets.
         html.find('.item-delete').click(this._onItemDelete.bind(this));
 
@@ -139,33 +141,34 @@ export default class akrelActorSheet extends ActorSheet {
             await this.actor.update({
                 "system.groupMembers": [...currentMembers, newMember]
             });
-
-            console.log("AKREL | After adding group member (button click), actor.system.caracs.initiative:", this.actor.system.caracs.initiative);
         });
 
         // Supprimer un membre du groupe
         html.find('.group-member-delete').click(this._onGroupMemberDelete.bind(this)); // Premier écouteur, correct
         
-        // Listeners pour les jets d'items (ex: jet de dés d'une arme)
+         // Listener pour lancer un jet d'item (déclenche item.roll())
         html.find('.item-roll').click(ev => {
-            const li = $(ev.currentTarget).parents(".item");
+            const li = $(ev.currentTarget).parents(".item-row"); // Assurez-vous que ".item-row" est le bon sélecteur
             const item = this.actor.items.get(li.data("itemId"));
             if (item) {
-                // Si l'item a une méthode 'roll' (comme les armes ou sorts avec jet de dégâts)
+                // C'est cette ligne qui appelle la méthode roll() de l'item
                 if (typeof item.roll === 'function') {
-                    item.roll();
+                    item.roll(); 
                 } else {
-                    // Sinon, affiche simplement l'item
-                    item.sheet.render(true);
+                    console.warn(`AKREL | L'item ${item.name} n'a pas de méthode 'roll()' définie.`);
+                    ui.notifications.warn(`L'item ${item.name} ne peut pas être lancé.`);
                 }
+            } else {
+                console.error("AKREL | Item non trouvé pour le jet.", li.data("itemId"));
             }
         });
 
-        // Listener pour ouvrir la feuille d'item
-        html.find('.item-edit').click(ev => {
-            const li = $(ev.currentTarget).parents(".item");
+        html.find('.item-name-cell .item-img, .item-name-cell p').click(ev => {
+            const li = $(ev.currentTarget).parents(".item-row"); // Assurez-vous que .item-row est le bon sélecteur parent
             const item = this.actor.items.get(li.data("itemId"));
-            item.sheet.render(true);
+            if (item) {
+                item.sheet.render(true);
+            }
         });
 
         // Listener pour supprimer un item
@@ -190,6 +193,15 @@ export default class akrelActorSheet extends ActorSheet {
                 }
             }
         });
+    }
+
+    _onStatRoll(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        const statKey = element.dataset.statKey;
+        const statValue = parseInt(element.dataset.statValue, 10);
+
+        this.actor.rollStat(statKey, statValue);
     }
 
     async _onItemDelete(event) {

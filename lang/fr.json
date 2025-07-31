@@ -17,11 +17,13 @@
             "SOCIAL": "Social",
             "PHYSICAL": "Physique",
             "INTELLIGENCE": "Intelligence",
-            "DEXTERITY": "Dextérité",
+            "DEXTERITY": "Adresse",
             "INITIATIVE": "Initiative",
             "BLOCK": "Blocage",
             "DODGE": "Esquive",
-            "VIGILANCE": "Vigilance"
+            "VIGILANCE": "Vigilance",
+            "ATTACKING_WITH" : "Utilise ",
+            "CURRENT_VALUE" : "Valeur initial"
         },
         "WEAPON": {
             "ATTACK_ATTRIBUTE": "Attaque avec :",
@@ -112,14 +114,37 @@
             "QUICK_TRUE": "Oui",
             "QUICK_FALSE": "Non"
         },
+        "CHAT": {
+            "DAMAGE": "Résultat",
+            "DAMAGE_DEALT": "Dégâts",
+            "HEALING_DONE": "Soins",
+            "EFFECT_OUTCOME": "Effet",
+            "WEAPON_ATTACK": "Attaque d'Arme",
+            "IN_COMBAT": "Êtes-vous en combat ?",
+            "CombatBonus" : "Modificateur d'en combat",
+            "SKILL_USE_OFFENSIVE": "Utilisation de Compétence Offensive",
+            "SKILL_USE_HEALING": "Utilisation de Compétence de Soin",
+            "SKILL_USE_UTILITY": "Utilisation de Compétence Utilitaire",
+            "SKILL_USE_GENERIC": "Utilisation de Compétence",
+            "NO_SPECIFIC_EFFECT": "Pas d'effet spécifique défini.",
+            "EFFECT_ERROR": "Erreur lors du calcul de l'effet.",
+            "NO_EFFECT_ON_FAILURE": "Aucun effet en cas d'échec.",
+            "TEST_DE": "Test de ",
+            "TEST_D_APOSTROPHE": "Test d'",
+            "CombatMalus": "Malus de combat",
+            "LE" : "le",
+            "L_APOSTROPHE" : "l'"
+        },
         "ACTIONS": {
             "CAST_SPELL": "Lancer le sort",
             "MOVE_UP": "Monter",
             "MOVE_DOWN": "Descendre",
-            "DELETE": "Supprimer",
             "ADD_GROUP_MEMBER": "Ajouter un membre",
             "ROLL_ATTACK": "Lancer l'Attaque",
-            "SEND_TO_CHAT": "Envoyer au Chat"
+            "SEND_TO_CHAT": "Envoyer au Chat",
+            "ROLL": "Lancer",
+            "EDIT": "Éditer",
+            "DELETE": "Supprimer"
         },
         "ITEM": {
             "DESCRIPTION": "DESCRIPTION",
@@ -127,7 +152,26 @@
             "CHEST": "Torse",
             "ARMS": "Mains",
             "LEGS": "Jambes",
-            "FEETS": "Pieds"
+            "FEETS": "Pieds",
+            "SpellType": "Type de Compétence",
+            "SpellTypeOffensive": "Compétence Offensive",
+            "SpellTypeHealing": "Compétence de Soin",
+            "SpellTypeUtility": "Compétence Utilitaire"
+        },
+        "ITEM_TYPES" : {
+            "SPELL_OFFENSIVE": "Compétence Offensive",
+            "SPELL_HEALING": "Compétence de Soin",
+            "SPELL_UTILITY": "Compétence Utilitaire",
+            "SPELL_GENERIC": "Compétence",
+            "WEAPON": "Arme",
+            "ARMOR": "Armure",
+            "LOOT": "Butin"
+        },
+        "SPELL_TYPES": {
+            "UTILITY": "Utilitaire",
+            "OFFENSIVE": "Offensive",
+            "HEALING": "Soutien",
+            "PASSIVE": "Passive"
         },
         "DIALOG": {
             "CONFIRM_DELETE_TITLE": "Confirmer la suppression",
@@ -139,20 +183,29 @@
             "ROLL_FOR_ITEM": "Jet pour {itemName} ({type})",
             "ROLL_FOR_STAT": "Jet pour {statName}",
             "BASE_ATTRIBUTE": "Attribut de Base",
-            "BASE_STAT_VALUE": "Valeur de la Statistique",
-            "IN_COMBAT_BONUS": "Bonus En Combat",
-            "APPLY": "Appliquer",
-            "BONUS_MALUS": "Bonus/Malus Additionnel",
+            "BASE_STAT_VALUE": "Valeur initial",
+            "IN_COMBAT_BONUS": "Êtes-vous en combat ?",
+            "APPLY": "",
             "ADDITIONAL_DAMAGE_DICE": "Dégâts/Soins Add. (Dés)",
             "ADDITIONAL_DAMAGE_BONUS": "Dégâts/Soins Add. (Fixe)",
             "ROLL": "Lancer",
-            "CANCEL": "Annuler"
+            "CANCEL": "Annuler",
+            "MODIFIER": "Modificateur du test",
+            "DAMAGE_DICE_MODIFIER": "Modificateur du dé",
+            "ROLL_BUTTON": "Lancer les dés",
+            "BONUS_MALUS": "Modificateur du test",
+            "ROLL_TITLE": "{dialogType} {itemName}"
         },
         "NOTIFICATIONS": {
             "MEMBER_DELETED": "Membre du groupe supprimé avec succès.",
             "MEMBER_DELETE_ERROR": "Erreur lors de la suppression du membre : {error}",
             "ITEM_DELETED": "Objet {itemName} supprimé avec succès.",
-            "ITEM_DELETE_ERROR": "Erreur lors de la suppression de l'objet : {error}"
+            "ITEM_DELETE_ERROR": "Erreur lors de la suppression de l'objet : {error}",
+            "NO_ACTOR_OWNER": "Cet item doit être possédé par un acteur pour pouvoir être utilisé.",
+            "INVALID_DICE_FORMULA": "La formule de dés est invalide.",
+            "NO_ATTACK_ATTRIBUTE": "L'item '{itemName}' n'a pas d'attribut d'attaque défini. Veuillez éditer l'item.",
+            "PASSIVE_SKILL_ROLL": "Les compétences passives ne peuvent généralement pas être lancées activement.",
+            "DIALOG_ERROR": "Une erreur est survenue lors de l'ouverture du dialogue de jet."
         },
         "ROLL": {
             "ATTACK_ROLL_ITEM": "Attaque d'Arme",
@@ -160,17 +213,19 @@
             "STAT_ROLL": "Jet de Statistique",
             "CHECK": "Jet",
             "IN_FIGHT_BONUS": "Bonus En Combat",
-            "TOTAL_TARGET": "Cible Finale",
+            "TOTAL_TARGET": "Valeur final",
             "RESULT_1D100": "Résultat 1d100",
             "OUTCOME": "Résultat",
-            "SUCCESS": "RÉUSSI",
-            "FAILURE": "RATÉ",
             "DAMAGES": "Dégâts",
             "HEALING": "Soins",
             "EFFECT": "Effet",
             "ATTACKING_WITH": "Attaque avec",
             "CASTING_WITH": "Lance avec",
-            "ATTACK_ROLL": "Jet de l'attaque"
+            "ATTACK_ROLL": "Jet de l'attaque",
+            "SUCCESS": "Succès",
+            "FAILURE": "Échec",
+            "CRITICAL_SUCCESS": "Succès critique",
+            "CRITICAL_FAILURE": "Échec critique"
         },
         "WARNING": {
             "NO_ACTOR_FOR_WEAPON_ROLL": "Impossible de lancer un jet d'arme sans un acteur possédant cette arme.",

@@ -20,6 +20,16 @@
         {{!-- Contenu de l'onglet Détails --}}
         <div class="tab details" data-group="primary" data-tab="details">
             <div class="form-group">
+    <label>{{localize "AKREL.ITEM.SpellType"}}</label>
+    <select name="system.spellType">
+        {{#select system.spellType}}
+        <option value="offensive">{{localize "AKREL.ITEM.SpellTypeOffensive"}}</option>
+        <option value="healing">{{localize "AKREL.ITEM.SpellTypeHealing"}}</option>
+        <option value="utility">{{localize "AKREL.ITEM.SpellTypeUtility"}}</option>
+        {{/select}}
+    </select>
+</div>
+            <div class="form-group">
                 <label>{{localize "AKREL.SPELL.LEVEL"}}</label>
                 <input type="number" name="system.spellLevel" value="{{system.spellLevel}}" data-dtype="Number"/>
             </div>

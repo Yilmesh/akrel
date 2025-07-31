@@ -15,7 +15,7 @@
     "name": "Permentier Maxim",
     "discord": "Liziba"
   }],
-  "esmodules": ["akrel.js"],
+  "esmodules": ["akrel.mjs"],
   "styles": ["css/akrel.css"],
   "packs": [],
   "documentTypes": {

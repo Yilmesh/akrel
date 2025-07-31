@@ -47,6 +47,7 @@ html {
 
 .akrel.sheet.actor {
     font-family: "Modesto Condensed";
+    font-size: 1.2em;
 }
 
 /* --- Scrollbar Styles (WebKit - Chrome, Edge, Safari, Brave) --- */
@@ -106,13 +107,11 @@ html {
 
 .akrel.sheet.actor .window-header h4 {
     margin-left: 5px;
-    font-size: 1.2em;
     font-family: "Modesto Condensed";
 }
 
 .akrel.sheet.actor .window-header a {
     margin-right: 5px;
-    font-size: 1.2em;
 }
 
 .akrel.sheet.actor .window-header i {
@@ -162,7 +161,6 @@ html {
 }
 
 .akrel.sheet.actor .title {
-    font-size: 30px;
     font-family: "Modesto Condensed";
     display: block;
     text-align: center;
@@ -203,7 +201,7 @@ html {
 }
 
 .akrel.sheet.actor .character-name {
-    font-size: 4em;
+    font-size: 3em;
     padding: 0;
     margin: 0;
 }
@@ -213,7 +211,7 @@ html {
 }
 
 .akrel.sheet.actor .job {
-    font-size: 2.5em;
+    font-size: 2em;
     padding: 0;
     margin: 0;
 }
@@ -251,6 +249,7 @@ html {
     -webkit-appearance: none;
     -moz-appearance: textfield;
     margin-right: 5px;
+    margin-top: 4px;
 }
 
 .akrel.sheet.actor .experience-text:focus {
@@ -313,7 +312,7 @@ html {
     outline: none;
     box-shadow: none;
     color: var(--akrel-color-text-primary);
-    font-size: 3.6em;
+    font-size: 2.1em;
     font-weight: bold;
     text-align: center;
     width: 100%;
@@ -473,7 +472,7 @@ html {
     box-shadow: none;
     text-align: center;
     font-weight: bold;
-    font-size: 2.5em;
+    font-size: 2em;
     width: 60px;
     height: 40px;
     padding: 0;
@@ -500,7 +499,7 @@ html {
 }
 
 .akrel.sheet.actor .stat-icon {
-    font-size: 3em;
+    font-size: 2.5em;
     color: var(--akrel-color-header-background);
     opacity: 0.8;
     line-height: 1;
@@ -513,9 +512,13 @@ html {
 
 .akrel.sheet.actor .stat-li label {
     font-weight: bold;
-    font-size: 1.7em;
+    font-size: 1.5em;
     text-align: center;
     color: var(--akrel-color-interactive);
+}
+
+.akrel.sheet.actor .stat-li a {
+    text-align: center;
     border: none;
     margin-top: 40px;
     padding-bottom: 0px;
@@ -586,8 +589,8 @@ html {
     text-align: center;
     margin-top: 0;
     margin-bottom: 10px;
+    font-size: 1.5em;
     text-transform: uppercase;
-    font-size: 2em;
     font-family: "Modesto Condensed";
     padding-top: 5px;
     margin-bottom: -17px;
@@ -623,7 +626,6 @@ html {
     padding: 5px 0; /* Padding vertical, l'horizontal est géré par les largeurs des enfants */
     margin-bottom: 5px;
     text-transform: uppercase;
-    font-size: 1.3em;
     flex-wrap: nowrap;
     box-sizing: border-box;
     min-height: 30px; /* Hauteur minimale pour les en-têtes */
@@ -688,7 +690,6 @@ html {
     display: flex;
     align-items: center;
     color: var(--akrel-color-interactive);
-    font-size: 1.3em;
     gap: 8px;
     flex-grow: 1; /* Permet au nom de prendre l'espace restant, comme son header */
     min-width: 150px; /* Correspond à item-name-header */
@@ -722,7 +723,6 @@ html {
 
 .akrel.sheet.actor .item-detail {
     text-align: center;
-    font-size: 1.3em;
     padding: 0 5px; /* Petit padding pour le contenu interne */
     box-sizing: border-box;
     /* Pour gérer le texte qui dépasse */
@@ -764,7 +764,6 @@ html {
     color: var(--akrel-color-interactive);
     text-decoration: none;
     cursor: pointer;
-    font-size: 1.3em;
     transition: color 0.2s ease-in-out;
     display: inline-flex;
     align-items: right;
@@ -790,7 +789,6 @@ html {
     margin: 10px;
     border: none;
     table-layout: fixed;
-    font-size: 1.3em;
     background-color: transparent;
 }
 
@@ -845,7 +843,6 @@ html {
     background: transparent;
     border: none;
     color: var(--akrel-color-text-primary);
-    font-size: 1.3em;
     padding: 0;
     margin: 0;
     box-shadow: none;
@@ -860,13 +857,12 @@ html {
 }
 
 .akrel.sheet.actor .item-section.group-section textarea{
-    font-size: 1em;
 }
 
 .akrel.sheet.actor textarea {
     width: 100%;
     height: 30px;
-    font-size: 1.3em;
+    font-size: 1em;
     background-color: var(--akrel-color-input-background);
     border: none;
     color: var(--akrel-color-text-primary);
@@ -876,9 +872,6 @@ html {
     outline: none;
 }
 
-.akrel.sheet.actor .group-member-delete {
-    font-size: 1.1em;
-}
 
 .akrel.sheet.actor .add-group-member {
     display: flex;
@@ -891,7 +884,6 @@ html {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.5em;
     margin-top: 10px;
     width: fit-content;
     margin-left: auto;
@@ -939,4 +931,246 @@ html {
     color: var(--akrel-color-interactive);
     min-width: 80px;
     text-align: right;
+}
+
+
+
+
+
+
+
+/* Styling for the Item Roll Chat Card */
+.akrel-chat-card.akrel-roll-chat-card {
+    border: 1px solid #7a7971;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.05);
+    font-family: "Modesto Condensed", serif; /* Mise à jour de la police */
+    font-size: 1.5em;
+}
+
+/* Header styling */
+.akrel-chat-card .card-header {
+    padding: 5px;
+    border-bottom: 1px solid #7a7971;
+    background: rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.akrel-chat-card .card-header .item-img {
+    flex: 0 0 50px;
+    height: 50px;
+    border: 1px solid #7a7971;
+    margin-right: 5px;
+}
+
+.akrel-chat-card .card-header h3 {
+    margin: 0;
+    font-family: "Modesto Condensed", serif; /* Mise à jour de la police */
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Content section */
+.akrel-chat-card .card-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Roll details section */
+.akrel-chat-card .roll-details p {
+    margin: 2px 0;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.akrel-chat-card .roll-details strong {
+    color: #222;
+}
+
+/* Séparateur en pointillés */
+.akrel-chat-card .separator-line {
+    border-top: 1px dashed #7a7971;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Dice roll section */
+.akrel-chat-card .dice-roll {
+    text-align: center;
+}
+
+.akrel-chat-card .dice-result {
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.damage-result.failure {
+    display: none;
+}
+
+/* Styles pour les succès */
+.akrel-chat-card .dice-result.success .roll-total,
+.akrel-chat-card .dice-result.success .roll-outcome,
+.akrel-chat-card .damage-result.success {
+    color: green;
+}
+
+/* Styles pour les échecs */
+.akrel-chat-card .dice-result.failure .roll-total,
+.akrel-chat-card .dice-result.failure .roll-outcome,
+.akrel-chat-card .damage-result.failure {
+    color: red;
+}
+
+/* Styles pour les succès critiques */
+.akrel-chat-card .dice-result.critical-success .roll-total,
+.akrel-chat-card .dice-result.critical-success .roll-outcome,
+.akrel-chat-card .damage-result.critical-success {
+    color: var(--akrel-color-interactive, purple);
+}
+
+/* Styles pour les échecs critiques */
+.akrel-chat-card .dice-result.critical-failure .roll-total,
+.akrel-chat-card .dice-result.critical-failure .roll-outcome,
+.akrel-chat-card .damage-result.critical-failure {
+    color: var(--akrel-color-interactive, purple);
+}
+
+
+/* Styling pour le résultat de l'effet/dégâts */
+.akrel-chat-card .roll-effect {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.akrel-chat-card .damage-result .dice-roll {
+    font-family: "Modesto Condensed", serif;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Mise en forme de la description */
+.akrel-chat-card .card-content .flavor-text {
+    margin-top: 10px;
+    padding-top: 10px;
+    /* Correction de la taille de la police pour qu'elle s'affiche correctement */
+    font-size: 1em; 
+    line-height: 1.5;
+}
+
+
+
+
+
+
+
+/* Styling for the Stat Roll Chat Card */
+.akrel-chat-card.akrel-stat-roll-chat-card {
+    border: 1px solid #7a7971;
+    background: rgba(0, 0, 0, 0.05);
+    font-family: "Modesto Condensed";
+    font-size: 1.5em;
+}
+
+/* Header styling */
+.akrel-stat-roll-chat-card .card-header {
+    padding: 5px;
+    border-bottom: 1px solid #7a7971;
+    background: rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.akrel-stat-roll-chat-card .card-header .actor-img {
+    flex: 0 0 50px;
+    height: 50px;
+    border: 1px solid #7a7971;
+    margin-right: 5px;
+}
+
+.akrel-stat-roll-chat-card .card-header h3 {
+    margin: 0;
+    font-family: "Modesto Condensed";
+    font-weight: bold;
+    color: #444;
+
+}
+
+
+/* Content section */
+.akrel-stat-roll-chat-card .card-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Roll details section */
+.akrel-stat-roll-chat-card .roll-details p {
+    margin: 2px 0;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+.akrel-stat-roll-chat-card .roll-details strong {
+    color: #222;
+}
+
+/* Dice roll section */
+.akrel-stat-roll-chat-card .dice-roll {
+    border-top: 1px dashed #7a7971;
+    padding-top: 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.akrel-stat-roll-chat-card .dice-result-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.akrel-stat-roll-chat-card .dice-roll-label {
+    margin: 0 0 5px;
+}
+
+/* Dice result and outcome styling */
+.akrel-stat-roll-chat-card .dice-result {
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.akrel-stat-roll-chat-card .roll-total {
+    margin-right: 5px;
+}
+
+.akrel-stat-roll-chat-card .roll-outcome {
+    font-size: 12px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.akrel-stat-roll-chat-card .dice-roll.success {
+    color: green;
+    font-size: 1.5em;
+}
+
+.akrel-stat-roll-chat-card .dice-roll.failure {
+    color: red;
+    font-size: 1.5em;
+}
+
+.akrel-stat-roll-chat-card .dice-roll.critical-success {
+    color: var(--akrel-color-interactive);
+    font-size: 2em;
+}
+
+.akrel-stat-roll-chat-card .dice-roll.critical-failure {
+    color: var(--akrel-color-interactive);
+    font-size: 2em;
 }

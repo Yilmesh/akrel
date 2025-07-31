@@ -1,21 +1,21 @@
-import { AKREL } from "./modules/config.js";
+import { AKREL } from "./modules/config.mjs";
 
-import akrelItemSheet from "./modules/sheets/akrelItemSheet.js";
-import akrelActorSheet from "./modules/sheets/akrelActorSheet.js";
+import akrelItemSheet from "./modules/sheets/akrelItemSheet.mjs";
+import akrelActorSheet from "./modules/sheets/akrelActorSheet.mjs";
 
-import { SpellDataModel } from "./models/spell-data-model.js";
-import { CharacterDataModel } from "./models/character-data-model.js";
-import { NPCDataModel } from "./models/npc-data-model.js";
-import { WeaponDataModel } from "./models/weapon-data-model.js";
-import { ArmorDataModel } from "./models/armor-data-model.js";
-import { LootDataModel } from "./models/loot-data-model.js";
-import { PassiveDataModel } from "./models/passive-data-model.js";
+import { SpellDataModel } from "./models/spell-data-model.mjs";
+import { CharacterDataModel } from "./models/character-data-model.mjs";
+import { NPCDataModel } from "./models/npc-data-model.mjs";
+import { WeaponDataModel } from "./models/weapon-data-model.mjs";
+import { ArmorDataModel } from "./models/armor-data-model.mjs";
+import { LootDataModel } from "./models/loot-data-model.mjs";
+import { PassiveDataModel } from "./models/passive-data-model.mjs";
 
-import { AKRELActor } from "./modules/documents/actor.js";
-import { AKRELItem } from "./modules/documents/item.js";
+import { AKRELActor } from "./modules/documents/actor.mjs";
+import { AKRELItem } from "./modules/documents/item.mjs";
 
-import { registerHandlebarsHelpers } from "./modules/helpers/registerHandlebarsHelper.js";
-import { preloadHandlebarsTemplates } from "./modules/helpers/templates.js";
+import { registerHandlebarsHelpers } from "./modules/helpers/registerHandlebarsHelper.mjs";
+import { preloadHandlebarsTemplates } from "./modules/helpers/templates.mjs";
 
 Hooks.once("init", async function () {
     game.akrel = {

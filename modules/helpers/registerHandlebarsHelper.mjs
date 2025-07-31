@@ -1,5 +1,3 @@
-// systems/akrel/modules/helpers/handlebars-helper.js
-
 export function registerHandlebarsHelpers() {
     /**
      * Helper pour calculer un pourcentage (value / max * 100).

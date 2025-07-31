@@ -1,8 +1,5 @@
-// systems/akrel/module/sheets/akrelItemSheet.js
-
-import { AKREL } from "../config.js"; 
-import akrelActorSheet from "./akrelActorSheet.js"; // Ce n'est pas directement utilisé dans cette feuille, mais peut-être ailleurs.
-
+import { AKREL } from "../config.mjs"; 
+import akrelActorSheet from "./akrelActorSheet.mjs";
 export default class akrelItemSheet extends ItemSheet {
 
     /** @inheritdoc */
@@ -32,11 +29,10 @@ export default class akrelItemSheet extends ItemSheet {
         // Assurez-vous que les types d'attributs d'attaque sont disponibles pour les listes déroulantes des templates
         // C'est important pour le selectOptions de votre spell-sheet.hbs
         data.config.attackTypes = {
-            "PHYSICAL": "AKREL.ATTRIBUTES.PHYSICAL",
-            "AGILITY": "AKREL.ATTRIBUTES.AGILITY",
-            "INTELLECT": "AKREL.ATTRIBUTES.INTELLECT",
-            "SPIRIT": "AKREL.ATTRIBUTES.SPIRIT",
-            "PRESENCE": "AKREL.ATTRIBUTES.PRESENCE"
+            "physical": "AKREL.ATTRIBUTES.PHYSICAL",
+            "dexterity": "AKREL.ATTRIBUTES.DEXTERITY",
+            "intelligence": "AKREL.ATTRIBUTES.INTELLIGENCE",
+            "social": "AKREL.ATTRIBUTES.SOCIAL"
         };
         
         return data;

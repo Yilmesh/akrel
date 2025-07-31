@@ -1,0 +1,29 @@
+<div class="akrel-chat-card akrel-stat-roll-chat-card">
+    <header class="card-header flexrow">
+        <img class="actor-img" src="{{actorImg}}" data-edit="img" title="{{actorName}}"/>
+        <h3>{{rollTitle}}</h3>
+    </header>
+
+    <div class="card-content">
+        <div class="roll-details">
+            <p><strong>{{localize "AKREL.ATTRIBUTES.CURRENT_VALUE"}}:</strong> {{baseStatValue}}</p>
+            {{#if modifier}}
+                <p><strong>{{localize "AKREL.DIALOG.MODIFIER"}}:</strong> {{modifier}}</p>
+            {{/if}}
+            {{#if inCombatBonus}}
+                <p><strong>{{localize "AKREL.CHAT.CombatBonus"}}:</strong> {{inCombatBonus}}</p>
+            {{/if}}
+            {{#if inCombatMalus}}
+                <p><strong>{{localize "AKREL.CHAT.CombatMalus"}}:</strong> {{inCombatMalus}}</p>
+            {{/if}}
+            <p><strong>{{localize "AKREL.ROLL.TOTAL_TARGET"}}:</strong> {{totalTarget}}</p>
+        </div>
+
+        <div class="dice-roll {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}} {{#if isSuccess}}success{{else}}failure{{/if}}">
+            <div class="dice-result-container">
+                <span class="roll-outcome-text">{{successText}}</span>
+                <span class="roll-total">{{rollResult}}</span>
+            </div>
+        </div>
+    </div>
+</div>
