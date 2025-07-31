@@ -127,6 +127,24 @@ export default class akrelActorSheet extends ActorSheet {
         // Ils ne sont pas gérés par le _updateObject car ils déclenchent un update direct.
 
 
+        const textareas = html[0].querySelectorAll('textarea');
+        
+        // On parcourt chaque textarea pour appliquer le redimensionnement automatique
+        textareas.forEach(textarea => {
+            
+            // On définit une fonction qui ajuste la hauteur
+            const autoResize = () => {
+                textarea.style.height = 'auto';
+                textarea.style.height = `${textarea.scrollHeight}px`;
+            };
+
+            // On appelle la fonction au premier affichage pour ajuster la taille initiale
+            autoResize();
+
+            // On ajoute un écouteur sur l'événement 'input' pour ajuster la taille en temps réel
+            textarea.addEventListener('input', autoResize);
+        });
+
         // Bouton roll stat
         html.find('.stat-roll').on('click', this._onStatRoll.bind(this));
 

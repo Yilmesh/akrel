@@ -183,7 +183,7 @@
                 </table>
                 <h3 class="section-header">{{localize "AKREL.CHARACTER.STORY"}}</h3>
                 <div class="section-separator"></div>
-                <textarea name="system.story">{{system.story}}</textarea>
+                <textarea class="story" name="system.story">{{system.story}}</textarea>
             </div>
 
             {{!-- Competencies Tab Content --}}
@@ -251,7 +251,7 @@
                                 <div class="item-detail">{{item.system.Level}}</div>
                                 <div class="item-detail">{{item.system.Nature}}</div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_PASSIVE"}}" data-item-type="passive" data-action="chat">
+                                    <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.USE_PASSIVE"}}" data-item-type="passive" data-action="roll">
                                         <i class="fas fa-hand-sparkles"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
@@ -324,7 +324,7 @@
                                 <div class="item-detail">{{item.system.defensePoints}}</div>
                                 <div class="item-detail">{{item.system.durability}}</div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_WEAPON"}}" data-item-type="weapon" data-action="chat">
+                                    <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.USE_WEAPON"}}" data-item-type="weapon" data-action="roll">
                                         <i class="fas fa-gavel"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
@@ -358,7 +358,7 @@
                                 <div class="item-detail">{{item.system.quantity}}</div>
                                 <div class="item-detail">{{item.system.price}}</div>
                                 <div class="item-actions-cell flexrow">
-                                    <a class="item-control item-chat" title="{{localize "AKREL.ACTIONS.USE_LOOT"}}" data-item-type="loot" data-action="chat">
+                                    <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.USE_LOOT"}}" data-item-type="loot" data-action="roll">
                                         <i class="fas fa-flask"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
@@ -399,6 +399,7 @@
                                     </a>
                                 </div>
                             </li>
+                            <div class="separator-line"></div>
                         {{/each}}
                         
                         {{#unless system.groupMembers.length}}

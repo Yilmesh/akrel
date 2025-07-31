@@ -61,8 +61,7 @@ export class AKRELItem extends Item {
     }
 
     /**
-     * Exécute un jet d'item (attaque, compétence, etc.).
-     * Ouvre un dialogue de jet et publie le résultat dans le chat.
+     * Exécute un jet d'item (attaque, compétence, etc.) ou envoie la description de l'item dans le chat.
      * @param {object} options Options supplémentaires pour le jet.
      */
     async roll(options = {}) {
@@ -72,6 +71,34 @@ export class AKRELItem extends Item {
             return;
         }
 
+        console.log("AKREL | roll() called for item:", this.name, "of type:", this.type);
+
+        // Pour les items qui ne nécessitent pas de jet (armor, loot, passive),
+        // on envoie directement leur description dans le chat.
+        if (['armor', 'loot', 'passive'].includes(this.type)) {
+            console.log("AKREL | This is a passive/armor/loot item. Creating simple chat card.");
+            const cardData = {
+                itemName: this.name,
+                itemImg: this.img,
+                flavorText: this.system.description || "",
+            };
+            console.log("AKREL | cardData for simple chat card:", cardData);
+            
+            const chatTemplate = "systems/akrel/templates/chat/roll-chat-card.hbs";
+            const content = await foundry.applications.handlebars.renderTemplate(chatTemplate, cardData);
+            console.log("AKREL | Rendered content for simple chat card:", content);
+            
+            await ChatMessage.create({
+                speaker: ChatMessage.getSpeaker({ actor: actor }),
+                content: content,
+                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            });
+            console.log("AKREL | Chat message for simple chat card created.");
+            return;
+        }
+
+        // Logique pour les items nécessitant un jet (weapon, spell)
+        console.log("AKREL | This is a weapon/spell item. Proceeding with roll dialog.");
         let attributeName = "";
         let baseAttributeValue = 0;
         let dialogType = "";
@@ -203,11 +230,9 @@ export class AKRELItem extends Item {
                 }
 
                 if (showDamageFields) {
-                    // CHANGEMENT: Nous utilisons uniquement le champ damageDiceModifier ici
                     const damageDiceModifier = data.damageDiceModifier || "";
 
                     if (damageDiceModifier) {
-                        // S'assure que le modificateur est ajouté correctement
                         formulaParts.push(damageDiceModifier);
                     }
                 }
@@ -242,7 +267,7 @@ export class AKRELItem extends Item {
                 itemName: item.name,
                 itemImg: item.img, 
                 itemDescription: item.system.description,
-                attackAttributeTitle: attackAttributeTitle, // Ajout du nouveau titre d'attribut
+                attackAttributeTitle: attackAttributeTitle,
                 attackAttribute: attributeName,
                 baseAttributeValue: baseAttributeValue,
                 inFightBonus: inCombatBonus > 0 ? inCombatBonus : null,

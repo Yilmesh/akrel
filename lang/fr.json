@@ -133,7 +133,11 @@
             "TEST_D_APOSTROPHE": "Test d'",
             "CombatMalus": "Malus de combat",
             "LE" : "le",
-            "L_APOSTROPHE" : "l'"
+            "L_APOSTROPHE" : "l'",
+            "MODIFICATOR" : "Modificateur",
+            "YOU_ARE_IN_FIGHT" : "Vous êtes en combat",
+            "END_VALUE" : "Valeur final",
+            "ATTACKING_WITH" : "Utilise"
         },
         "ACTIONS": {
             "CAST_SPELL": "Lancer le sort",

@@ -575,6 +575,10 @@ html {
 }
 
 /* --- Item Lists (Skills, Spells, etc.) --- */
+.akrel.sheet.actor .story {
+    width: 98%;
+}
+
 .akrel.sheet.actor .item-section {
     margin-top: 15px;
     border: 1px solid var(--akrel-color-text-primary);
@@ -607,6 +611,13 @@ html {
     margin-bottom: 15px;
     margin-top: 18px;
     display: block; /* Assure que c'est un bloc pour la marge auto */
+}
+
+/* Séparateur en pointillés */
+.akrel.akrel.sheet.actor .separator-line {
+    border-top: 1px dashed var(--akrel-color-text-primary);
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .akrel.sheet.actor .items-list {
@@ -700,6 +711,7 @@ html {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 1.2em;
 }
 
 .akrel.sheet.actor .item-img {
@@ -790,6 +802,7 @@ html {
     border: none;
     table-layout: fixed;
     background-color: transparent;
+    font-size: 1.2em;
 }
 
 .akrel.sheet.actor .tab.identity tr {
@@ -1003,6 +1016,10 @@ html {
 
 .akrel-chat-card .dice-result {
     font-size: 1.5em;
+}
+
+.akrel-chat-card .dice-roll-summary {
+    font-size: 1.2em;
     display: flex;
     flex-direction: column;
 }
@@ -1012,31 +1029,28 @@ html {
 }
 
 /* Styles pour les succès */
-.akrel-chat-card .dice-result.success .roll-total,
-.akrel-chat-card .dice-result.success .roll-outcome,
+.akrel-chat-card .dice-roll-summary.success,
+.akrel-chat-card .dice-roll-summary.success,
 .akrel-chat-card .damage-result.success {
     color: green;
 }
 
 /* Styles pour les échecs */
-.akrel-chat-card .dice-result.failure .roll-total,
-.akrel-chat-card .dice-result.failure .roll-outcome,
+.akrel-chat-card .dice-roll-summary.failure,
 .akrel-chat-card .damage-result.failure {
-    color: red;
+    color: darkred;
 }
 
 /* Styles pour les succès critiques */
-.akrel-chat-card .dice-result.critical-success .roll-total,
-.akrel-chat-card .dice-result.critical-success .roll-outcome,
+.akrel-chat-card .dice-roll-summary.critical-success,
 .akrel-chat-card .damage-result.critical-success {
-    color: var(--akrel-color-interactive, purple);
+    color: var(--akrel-color-header-background, purple);
 }
 
 /* Styles pour les échecs critiques */
-.akrel-chat-card .dice-result.critical-failure .roll-total,
-.akrel-chat-card .dice-result.critical-failure .roll-outcome,
+.akrel-chat-card .dice-roll-summary.critical-failure,
 .akrel-chat-card .damage-result.critical-failure {
-    color: var(--akrel-color-interactive, purple);
+    color: var(--akrel-color-header-background, purple);
 }
 
 
@@ -1050,6 +1064,10 @@ html {
     font-family: "Modesto Condensed", serif;
     font-size: 1em;
     font-weight: bold;
+}
+
+.akrel-chat-card .damage-result p {
+    font-size: 2em;
 }
 
 /* Mise en forme de la description */

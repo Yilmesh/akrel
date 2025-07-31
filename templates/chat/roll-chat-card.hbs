@@ -1,44 +1,56 @@
-<div class="akrel-chat-card akrel-roll-chat-card">
+<div class="akrel-chat-card akrel-roll-chat-card" data-actor-id="{{actor._id}}" data-item-id="{{item._id}}">
     <header class="card-header flexrow">
-        <img class="item-img" src="{{itemImg}}" data-edit="img" title="{{itemName}}" />
+        <img class="item-img" src="{{itemImg}}" data-edit="img" title="{{itemName}}" width="50" height="50"/>
         <h3 class="item-name">{{itemName}}</h3>
     </header>
-
+    
     <div class="card-content">
+        {{#if totalTarget}}
         <div class="roll-details">
-            <p><strong>{{localize "AKREL.ATTRIBUTES.ATTACKING_WITH"}} {{attackAttributeTitle}}:</strong> {{baseAttributeValue}}</p>
+            <p class="roll-summary">
+                <span class="roll-value">{{actor.name}}</span>
+            </p>
+            <p class="roll-summary">
+                <span class="roll-label">{{localize "AKREL.CHAT.ATTACKING_WITH"}} {{attackAttributeTitle}}</span>
+                <span class="roll-value">+{{baseAttributeValue}}</span>
+            </p>
             {{#if inFightBonus}}
-                <p><strong>{{localize "AKREL.CHAT.CombatBonus"}}:</strong> {{inFightBonus}}</p>
+            <p class="roll-summary">
+                <span class="roll-label">{{localize "AKREL.CHAT.YOU_ARE_IN_FIGHT"}}</span>
+                <span class="roll-value">+{{inFightBonus}}</span>
+            </p>
             {{/if}}
             {{#if modifier}}
-                <p><strong>{{localize "AKREL.DIALOG.BONUS_MALUS"}}:</strong> {{modifier}}</p>
+            <p class="roll-summary">
+                <span class="roll-label">{{localize "AKREL.CHAT.MODIFICATOR"}}</span>
+                <span class="roll-value">+{{modifier}}</span>
+            </p>
             {{/if}}
-            <p><strong>{{localize "AKREL.ROLL.TOTAL_TARGET"}}:</strong> {{totalTarget}}</p>
-        </div>
-
-        <div class="separator-line"></div>
-
-        <div class="dice-roll">
-            <div class="dice-result {{#if isSuccess}}success{{else}}failure{{/if}} {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}}">
-                <span class="roll-outcome {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}}">{{successText}}</span>
-                <span class="roll-total">{{rollResult}}</span>
-            </div>
-        </div>
-
-        {{#if effectResult}}
             <div class="separator-line"></div>
-            <div class="roll-effect">
-                <div class="damage-result {{#if isSuccess}}success{{else}}failure{{/if}} {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}}">
-                    {{{effectResult}}}
+            <p class="roll-summary final-value">
+                <span class="roll-label">{{localize "AKREL.CHAT.END_VALUE"}}</span>
+                <span class="roll-value">{{totalTarget}}</span>
+            </p>
+        </div>
+        <div class="separator-line"></div>
+        <div class="dice-roll">
+            <div class="dice-result">
+                <div class="dice-roll-summary {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}} {{#if isSuccess}}success{{else}}failure{{/if}}">
+                    <span class="roll-label">{{successText}}</span>
+                    <span class="roll-label">{{rollResult}}</span>
                 </div>
             </div>
-        {{/if}}
-        
-        {{!-- La description de l'item est maintenant affichée ici --}}
-        {{#if flavorText}}
-            <div class="flavor-text">
-                {{{flavorText}}}
+        </div>
+        <div class="separator-line"></div>
+        <div class="roll-effect">
+            <div class="damage-result {{#if isCriticalSuccess}}critical-success{{/if}} {{#if isCriticalFailure}}critical-failure{{/if}} {{#if isSuccess}}success{{else}}failure{{/if}}">
+                <p class="effect-label">{{effectLabel}}</p>
+                <span class="effect-value">{{{effectResult}}}</span>
             </div>
+        </div>
         {{/if}}
+        <div class="flavor-text">
+            {{{flavorText}}}
+        </div>
     </div>
 </div>
