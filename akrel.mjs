@@ -15,7 +15,6 @@ import { AKRELActor } from "./modules/documents/actor.mjs";
 import { AKRELItem } from "./modules/documents/item.mjs";
 
 import { registerHandlebarsHelpers } from "./modules/helpers/registerHandlebarsHelper.mjs";
-import { preloadHandlebarsTemplates } from "./modules/helpers/templates.mjs";
 
 Hooks.once("init", async function () {
     game.akrel = {
@@ -43,25 +42,9 @@ Hooks.once("init", async function () {
     CONFIG.Actor.documentClass = AKRELActor;
     CONFIG.Item.documentClass = AKRELItem;
 
-    Actors.unregisterSheet("core", ActorSheet);
-    Items.unregisterSheet("core", ItemSheet);
-
-    CONFIG.Actor.dataModels = {
-        character:CharacterDataModel,
-        npc:NPCDataModel,
-    }
-
-    CONFIG.Item.dataModels = {
-        weapon:WeaponDataModel,
-        armor:ArmorDataModel,
-        loot:LootDataModel,
-        spell:SpellDataModel,
-        passive:PassiveDataModel
-    }
-
-    Actors.registerSheet("akrel", akrelActorSheet, { makeDefault: true });
-    Items.registerSheet("akrel", akrelItemSheet, { makeDefault: true });
-   
+    foundry.documents.collections.Actors.registerSheet("akrel", akrelActorSheet, { makeDefault: true });
+    foundry.documents.collections.Items.registerSheet("akrel", akrelItemSheet, { makeDefault: true });
+    
     Handlebars.registerHelper('isType', function(type, compare) {
         const result = type === compare ? true : false;
         return result;
@@ -82,5 +65,20 @@ Hooks.once("init", async function () {
     registerHandlebarsHelpers();
 
     console.log("AKREL | Initialising Akrel System");
-    return preloadHandlebarsTemplates();
+    
+    // Fournit le tableau de chemins de modèles à loadTemplates.
+    // Tous les modèles de feuilles de personnages, d'objets, de cartes de chat et de dialogues sont maintenant inclus.
+    return foundry.applications.handlebars.loadTemplates([
+        "systems/akrel/templates/sheets/actors/character-sheet.hbs",
+        "systems/akrel/templates/sheets/actors/npc-sheet.hbs",
+        "systems/akrel/templates/sheets/items/weapon-sheet.hbs",
+        "systems/akrel/templates/sheets/items/loot-sheet.hbs",
+        "systems/akrel/templates/sheets/items/passive-sheet.hbs",
+        "systems/akrel/templates/sheets/items/armor-sheet.hbs",
+        "systems/akrel/templates/sheets/items/spell-sheet.hbs",
+        "systems/akrel/templates/chat/roll-chat-card.hbs",
+        "systems/akrel/templates/chat/stat-roll-chat-card.hbs",
+        "systems/akrel/templates/dialogs/item-roll-dialog.hbs",
+        "systems/akrel/templates/dialogs/stat-roll-dialog.hbs"
+    ]);
 });

@@ -60,6 +60,32 @@ export class AKRELActor extends Actor {
     }
 
     /**
+     * Hook before an actor is updated.
+     * This is used to validate data, such as ensuring resources do not exceed their maximums.
+     * @param {object} changes The changes to the actor's data.
+     * @param {object} options Options for the update.
+     * @param {string} userId The ID of the user performing the update.
+     * @override
+     */
+    _preUpdate(changes, options, userId) {
+        super._preUpdate(changes, options, userId);
+
+        // Check for resource updates and validate values against their maximums.
+        if (changes.system?.resources) {
+            for (const [key, resourceChange] of Object.entries(changes.system.resources)) {
+                // If the change includes a new value for the resource and a max exists on the actor's current data.
+                if (resourceChange.value !== undefined && this.system.resources[key]?.max !== undefined) {
+                    const maxValue = this.system.resources[key].max;
+                    if (resourceChange.value > maxValue) {
+                        changes.system.resources[key].value = maxValue;
+                        ui.notifications.warn(`${key.toUpperCase()} ne peut pas dépasser sa valeur maximale (${maxValue}). La valeur a été ajustée.`);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * Rolls a stat for the given actor.
      * Opens a dialog and displays the result in the chat.
      * @param {string} statKey The stat key (e.g., 'social').
@@ -68,34 +94,22 @@ export class AKRELActor extends Actor {
     async rollStat(statKey, baseStatValue) {
         // Handle the special case for initiative roll first.
         if (statKey === 'initiative') {
-            console.log(`AKREL | Début du jet d'initiative pour ${this.name} avec la valeur de base : ${baseStatValue}`);
-
-            // Formula for the initiative roll: 1d20 + the stat value.
             const formula = `1d20 + ${baseStatValue}`;
             
-            // Create and evaluate the roll manually
             const roll = new Roll(formula, this.getRollData());
             await roll.evaluate();
 
-            console.log(`AKREL | Résultat du jet d'initiative : ${roll.total}`);
-
-            // Find or create a combatant for the actor
             let combatant = game.combat?.getCombatantByActor(this.id);
             if (!combatant) {
-                // If there's no combatant, we need to add one to the combat tracker
                 if (game.combat) {
                     await game.combat.createCombatant({ actorId: this.id, initiative: roll.total });
                 } else {
-                    // If no combat is active, just log the result and do nothing else
                     ui.notifications.warn(game.i18n.localize("AKREL.NOTIFICATIONS.NO_ACTIVE_COMBAT"));
                 }
             } else {
-                // If a combatant exists, update its initiative value
                 await combatant.update({ initiative: roll.total });
             }
             
-            // Render the roll to the chat for the user to see the result.
-            // Note: You should add "AKREL.CHAT.INITIATIVE_ROLL" to your i18n JSON file.
             const chatData = {
                 speaker: ChatMessage.getSpeaker({ actor: this }),
                 roll: roll,
@@ -104,7 +118,7 @@ export class AKRELActor extends Actor {
                     rollResult: roll.total,
                     formula: roll.formula
                 }),
-                rolls: [roll] // Le style est maintenant déduit de la présence de la propriété rolls
+                rolls: [roll]
             };
             await ChatMessage.create(chatData);
 
@@ -115,10 +129,8 @@ export class AKRELActor extends Actor {
         const statName = game.i18n.localize(`AKREL.ATTRIBUTES.${statKey.toUpperCase()}`);
         const template = "systems/akrel/templates/dialogs/stat-roll-dialog.hbs";
 
-        // Determine if the combat option should be displayed.
         const showCombatOption = statKey !== 'initiative';
 
-        // Determine the combat modifier for the dialog (for dynamic display if necessary).
         let inCombatModifierValue = AKREL.combatBonus || 20;
         if (statKey === 'vigilance') {
             inCombatModifierValue = -20;
@@ -142,7 +154,6 @@ export class AKRELActor extends Actor {
             const modifier = parseInt(data.modifier || 0);
             
             let inCombatModifier = 0;
-            // The combat logic applies if the stat is not initiative AND the box is checked.
             if (showCombatOption && data.inCombat) {
                 if (statKey === 'vigilance') {
                     inCombatModifier = -20;
@@ -154,16 +165,17 @@ export class AKRELActor extends Actor {
             const totalTarget = baseStatValue + modifier + inCombatModifier;
             const rollFormula = "1d100";
             const roll = new Roll(rollFormula, this.getRollData());
-            await roll.evaluate({ async: true });
+            
+            // Correction ici : retirer l'option { async: true } pour la compatibilité
+            await roll.evaluate(); 
+            
             const rollResult = roll.total;
-
             let isSuccess = rollResult <= totalTarget;
             let successText = isSuccess ? game.i18n.localize("AKREL.ROLL.SUCCESS") : game.i18n.localize("AKREL.ROLL.FAILURE");
             
             let isCriticalSuccess = false;
             let isCriticalFailure = false;
             
-            // Critical hits do not apply to initiative rolls.
             if (rollResult >= 1 && rollResult <= 10) {
                 isCriticalSuccess = true;
                 successText = game.i18n.localize("AKREL.ROLL.CRITICAL_SUCCESS");
@@ -174,7 +186,6 @@ export class AKRELActor extends Actor {
                 isSuccess = false;
             }
             
-            // Grammar logic for the title.
             const vowels = ['A', 'E', 'I', 'O', 'U', 'Y'];
             const firstLetter = statName.charAt(0).toUpperCase();
             const rollTitlePrefix = vowels.includes(firstLetter) ? game.i18n.localize("AKREL.CHAT.TEST_D_APOSTROPHE") : game.i18n.localize("AKREL.CHAT.TEST_DE");
@@ -202,7 +213,7 @@ export class AKRELActor extends Actor {
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor: this }),
                 content: content,
-                rolls: [roll], // Le style est maintenant déduit de la présence de la propriété rolls
+                rolls: [roll],
             });
         };
 

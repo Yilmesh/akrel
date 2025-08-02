@@ -91,7 +91,8 @@ export class AKRELItem extends Item {
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor: actor }),
                 content: content,
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                // Correction ici : Utilisation de la nouvelle constante
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER, 
             });
             console.log("AKREL | Chat message for simple chat card created.");
             return;
@@ -278,7 +279,7 @@ export class AKRELItem extends Item {
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor: actor }),
                 content: content,
-                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                // Correction ici : Retrait de 'type' car 'rolls' est présent.
                 rolls: rollsToDisplay,
             });
         };
