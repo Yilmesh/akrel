@@ -1,6 +1,5 @@
 import { AKREL } from "../config.mjs"; 
-import akrelActorSheet from "./akrelActorSheet.mjs";
-export default class akrelItemSheet extends ItemSheet {
+export default class akrelItemSheet extends foundry.appv1.sheets.ItemSheet {
 
     /** @inheritdoc */
     static get defaultOptions() {

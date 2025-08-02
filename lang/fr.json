@@ -61,7 +61,8 @@
             "STORY": "Histoire",
             "YOURGROUP": "Vos avis",
             "XP": "XP",
-            "JOB_PLACEHOLDER": "Métier"
+            "JOB_PLACEHOLDER": "Métier",
+            "NAME_PLACEHOLDER": "Nom"
         },
         "NPC": {
             "LEVEL": "Niveau"

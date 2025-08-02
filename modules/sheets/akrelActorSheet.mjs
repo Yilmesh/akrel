@@ -3,7 +3,7 @@
  * Représente la feuille de personnage pour l'acteur Akrel, gérant l'affichage
  * et les interactions pour les personnages joueurs et PNJ du système.
  */
-export default class akrelActorSheet extends ActorSheet {
+export default class akrelActorSheet extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Retourne les options par défaut pour la feuille d'acteur.
@@ -34,22 +34,10 @@ export default class akrelActorSheet extends ActorSheet {
 
     /** @inheritdoc */
     getData() {
-        // Appelle la méthode getData de la classe parente (ActorSheet) pour obtenir les données de base.
         const data = super.getData();
-
-        // Récupère les données brutes du système de l'acteur et les ajoute à l'objet 'data' sous 'system'.
-        // C'est la source de vérité pour toutes les données de l'acteur.
         data.system = data.actor.system;
-
-        // Ajoute l'objet de configuration global (CONFIG.AKREL) à l'objet de données de la feuille.
-        // Cela rend les traductions, les listes de types (comme les types d'attaque), etc., disponibles dans le template Handlebars.
         data.config = CONFIG.AKREL;
-
-        // Prépare et organise les items de l'acteur en fonction de leur type (sorts, passifs, etc.).
-        // Les items sont ensuite ajoutés à 'data' pour être facilement accessibles dans le template.
         this._prepareCharacterItems(data);
-
-        // Retourne l'objet de données complet, qui sera fusionné avec le contexte du template Handlebars.
         return data;
     }
 
@@ -60,16 +48,13 @@ export default class akrelActorSheet extends ActorSheet {
      * @private
      */
     _prepareCharacterItems(actorData) {
-        // Initialise des tableaux vides pour chaque type d'item.
         const spells = [];
         const passives = [];
         const weapons = [];
         const armors = [];
         const loots = [];
 
-        // Itère sur tous les items de l'acteur.
         for (let i of actorData.actor.items) {
-            // Utilise une instruction switch pour catégoriser chaque item en fonction de son type.
             switch (i.type) {
                 case 'spell':
                     spells.push(i);
@@ -92,14 +77,12 @@ export default class akrelActorSheet extends ActorSheet {
             }
         }
 
-        // Assigne les listes d'items filtrées et triées par la propriété 'sort' à l'objet acteur.
         actorData.spells = spells.sort((a, b) => (a.sort || 0) - (b.sort || 0));
         actorData.passives = passives.sort((a, b) => (a.sort || 0) - (b.sort || 0));
         actorData.weapons = weapons.sort((a, b) => (a.sort || 0) - (b.sort || 0));
         actorData.armors = armors.sort((a, b) => (a.sort || 0) - (b.sort || 0));
         actorData.loots = loots.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
-        // Logs de vérification des items préparés (à retirer en production ou à mettre sous un drapeau de débogage).
         console.log("AKREL | _prepareCharacterItems: Résumé des items préparés :", {
             spells: spells.length,
             passives: passives.length,
@@ -108,13 +91,9 @@ export default class akrelActorSheet extends ActorSheet {
             loots: loots.length
         });
     }
-    
-    // In systems/akrel/sheets/akrelActorSheet.js
+
     /** @inheritdoc */
     _onSortItem(event, itemData) {
-        // This calls Foundry's default item sorting logic.
-        // It will calculate new 'sort' values based on where the item is dropped
-        // within the list and update the item's data in the database.
         super._onSortItem(event, itemData);
     }
 
@@ -122,36 +101,26 @@ export default class akrelActorSheet extends ActorSheet {
     activateListeners(html) {
         super.activateListeners(html);
 
-        // Tout ce qui suit est géré par le formulaire natif ou un gestionnaire d'événements personnalisé.
-        // Gérer les boutons d'ajout/suppression de membre de groupe.
-        // Ils ne sont pas gérés par le _updateObject car ils déclenchent un update direct.
-
+        if (!this.options.editable) return;
 
         const textareas = html[0].querySelectorAll('textarea');
         
-        // On parcourt chaque textarea pour appliquer le redimensionnement automatique
         textareas.forEach(textarea => {
-            
-            // On définit une fonction qui ajuste la hauteur
             const autoResize = () => {
                 textarea.style.height = 'auto';
                 textarea.style.height = `${textarea.scrollHeight}px`;
             };
-
-            // On appelle la fonction au premier affichage pour ajuster la taille initiale
             autoResize();
-
-            // On ajoute un écouteur sur l'événement 'input' pour ajuster la taille en temps réel
             textarea.addEventListener('input', autoResize);
         });
 
-        // Bouton roll stat
+        // Bouton pour le jet de stat (y compris l'initiative)
         html.find('.stat-roll').on('click', this._onStatRoll.bind(this));
 
-        // Bouton de suppression des items dans les listes d'objets.
+        // Bouton de suppression des items
         html.find('.item-delete').click(this._onItemDelete.bind(this));
 
-        // Écouteur pour le bouton d'ajout de membre de groupe
+        // Bouton d'ajout de membre de groupe
         html.find(".add-group-member").click(async ev => {
             const currentMembers = this.actor.system.groupMembers || [];
             const newMember = { name: "", opinion: "" };
@@ -161,15 +130,14 @@ export default class akrelActorSheet extends ActorSheet {
             });
         });
 
-        // Supprimer un membre du groupe
-        html.find('.group-member-delete').click(this._onGroupMemberDelete.bind(this)); // Premier écouteur, correct
+        // Bouton de suppression de membre de groupe
+        html.find('.group-member-delete').click(this._onGroupMemberDelete.bind(this));
         
-         // Listener pour lancer un jet d'item (déclenche item.roll())
+         // Listener pour lancer un jet d'item
         html.find('.item-roll').click(ev => {
-            const li = $(ev.currentTarget).parents(".item-row"); // Assurez-vous que ".item-row" est le bon sélecteur
+            const li = $(ev.currentTarget).parents(".item-row");
             const item = this.actor.items.get(li.data("itemId"));
             if (item) {
-                // C'est cette ligne qui appelle la méthode roll() de l'item
                 if (typeof item.roll === 'function') {
                     item.roll(); 
                 } else {
@@ -181,15 +149,16 @@ export default class akrelActorSheet extends ActorSheet {
             }
         });
 
+        // Listener pour ouvrir la feuille d'un item
         html.find('.item-name-cell .item-img, .item-name-cell p').click(ev => {
-            const li = $(ev.currentTarget).parents(".item-row"); // Assurez-vous que .item-row est le bon sélecteur parent
+            const li = $(ev.currentTarget).parents(".item-row");
             const item = this.actor.items.get(li.data("itemId"));
             if (item) {
                 item.sheet.render(true);
             }
         });
 
-        // Listener pour supprimer un item
+        // Listener pour supprimer un item (avec confirmation)
         html.find('.item-delete').click(async ev => {
             const li = $(ev.currentTarget).parents(".item");
             const itemId = li.data("itemId");
@@ -206,13 +175,19 @@ export default class akrelActorSheet extends ActorSheet {
 
                     if (confirmDelete) {
                         await item.delete();
-                        li.slideUp(200, () => this.render(false)); // Retire visuellement l'item et rafraîchit
+                        li.slideUp(200, () => this.render(false));
                     }
                 }
             }
         });
     }
 
+    /**
+     * Gère les jets de statistiques, y compris l'initiative.
+     * Déclenche la méthode rollStat de l'acteur.
+     * @param {Event} event L'événement de clic du bouton.
+     * @private
+     */
     _onStatRoll(event) {
         event.preventDefault();
         const element = event.currentTarget;
@@ -223,73 +198,67 @@ export default class akrelActorSheet extends ActorSheet {
     }
 
     async _onItemDelete(event) {
-        event.preventDefault(); // Empêche le comportement par défaut du lien
-        const li = $(event.currentTarget).parents(".item-row"); // Trouve l'élément <li> parent de l'item
-        const itemId = li.data("item-id"); // Récupère l'ID de l'item à partir de l'attribut data-item-id
+        event.preventDefault();
+        const li = $(event.currentTarget).parents(".item-row");
+        const itemId = li.data("item-id");
 
-        // Demander confirmation avant de supprimer (bonne pratique)
         const confirmed = await Dialog.confirm({
-            title: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_TITLE"), // Titre du dialogue (à traduire dans vos locales)
-            content: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_CONTENT") // Contenu du dialogue (à traduire)
+            title: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_TITLE"),
+            content: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_CONTENT")
         });
 
         if (confirmed) {
-            await this.actor.deleteEmbeddedDocuments("Item", [itemId]); // Supprime l'item de l'acteur
-            li.slideUp(200, () => this.render(false)); // Animation de disparition et rafraîchissement doux de la feuille
+            await this.actor.deleteEmbeddedDocuments("Item", [itemId]);
+            li.slideUp(200, () => this.render(false));
         }
     }
 
     async _onGroupMemberDelete(event) {
         event.preventDefault();
-        const li = $(event.currentTarget).parents(".group-member-row"); // Remonte au conteneur du membre
-        const index = li.data("member-index"); // Récupère l'index du membre à partir du HTML
+        const li = $(event.currentTarget).parents(".group-member-row");
+        const index = li.data("member-index");
 
         if (index === undefined || index === null) {
             console.warn("AKREL | Impossible de déterminer l'index du membre du groupe à supprimer.");
             return;
         }
 
-        // Demander confirmation avant de supprimer
         const confirmed = await Dialog.confirm({
             title: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_GROUP_MEMBER_TITLE"),
             content: game.i18n.localize("AKREL.DIALOG.CONFIRM_DELETE_GROUP_MEMBER_CONTENT")
         });
 
         if (confirmed) {
-            // Crée une copie mutable du tableau des membres du groupe
             const groupMembers = [...this.actor.system.groupMembers];
-            
-            // Supprime le membre à l'index donné
             groupMembers.splice(index, 1);
 
-            // Met à jour l'acteur avec le nouveau tableau de membres
-            // Foundry gérera le rafraîchissement de la feuille
             await this.actor.update({ "system.groupMembers": groupMembers });
-
-            // Optionnel : Animation de disparition, Foundry rafraîchira la feuille automatiquement.
-            // li.slideUp(200, () => this.render(false)); 
         }
     }
 
     /**
-     * Gère la soumission du formulaire de la feuille d'acteur.
-     * Cette méthode est appelée automatiquement lorsque le formulaire est soumis (ex: on change ou on blur des champs de formulaire).
-     * @param {Event} event L'événement de soumission du formulaire.
-     * @param {Object} formData Les données du formulaire mises à jour.
-     * @protected
-     * @override
+     * @inheritdoc
+     * Méthode de Foundry VTT qui se déclenche lorsque le formulaire est soumis.
      */
     async _updateObject(event, formData) {
-        // Log les données initiales du formulaire pour le débogage.
-        console.log("AKREL | _updateObject: formData initial (full):", formData);
-
-        // Appelle la méthode _updateObject de la classe parente (ActorSheet).
-        // C'est cette ligne qui prend les `formData` et les applique à l'acteur.
         await super._updateObject(event, formData);
-
-        // Log les données de l'acteur après la mise à jour de la classe parente.
-        // Cela permet de voir l'état des données APRES que Foundry ait traité les changements.
-        console.log("AKREL | _updateObject: actor.system.groupMembers AFTER super.update:", this.actor.system.groupMembers);
-        console.log("AKREL | _updateObject: Base Stats de l'acteur après super.update:", this.actor.system.caracs);
     }
 }
+
+/**
+ * Hook Foundry VTT pour la mise à jour des tokens lors de la modification du nom de l'acteur.
+ * Cette fonction est appelée chaque fois qu'un acteur est mis à jour.
+ */
+Hooks.on("updateActor", async (actor, changes, options, userId) => {
+    if (!changes.name) {
+        return;
+    }
+
+    for (const scene of game.scenes) {
+        const token = scene.tokens.find(t => t.actorId === actor.id);
+        if (token && token.name !== actor.name) {
+            await scene.updateEmbeddedDocuments("Token", [{ _id: token.id, name: actor.name }]);
+            console.log(`AKREL | Le nom du token ${token.id} a été mis à jour avec le nouveau nom de l'acteur : ${actor.name}`);
+        }
+    }
+});

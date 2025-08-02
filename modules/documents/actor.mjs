@@ -1,15 +1,15 @@
 import { AKREL } from "../config.mjs";
 
 /**
- * Étend le document Actor de base pour gérer les comportements au niveau du document.
- * La logique de données (structure et données dérivées) est gérée par les DataModels.
+ * Extends the base Actor document to handle document-level behaviors.
+ * Data logic (structure and derived data) is handled by DataModels.
  * @extends {Actor}
  */
 export class AKRELActor extends Actor {
     /**
      * @override
-     * Définit les images par défaut pour les nouveaux acteurs en fonction de leur type.
-     * Il est recommandé de définir ces chemins dans votre fichier `config.js` pour une meilleure gestion.
+     * Sets default images for new actors based on their type.
+     * It is recommended to define these paths in your `config.js` file for better management.
      */
     static async create(data, options = {}) {
         await super.create(data, options);
@@ -60,19 +60,65 @@ export class AKRELActor extends Actor {
     }
 
     /**
-     * Lance un jet pour une statistique donnée.
-     * Ouvre un dialogue et affiche le résultat dans le chat.
-     * @param {string} statKey La clé de la statistique (ex: 'social').
-     * @param {number} baseStatValue La valeur de base de la statistique.
+     * Rolls a stat for the given actor.
+     * Opens a dialog and displays the result in the chat.
+     * @param {string} statKey The stat key (e.g., 'social').
+     * @param {number} baseStatValue The base value of the stat.
      */
     async rollStat(statKey, baseStatValue) {
+        // Handle the special case for initiative roll first.
+        if (statKey === 'initiative') {
+            console.log(`AKREL | Début du jet d'initiative pour ${this.name} avec la valeur de base : ${baseStatValue}`);
+
+            // Formula for the initiative roll: 1d20 + the stat value.
+            const formula = `1d20 + ${baseStatValue}`;
+            
+            // Create and evaluate the roll manually
+            const roll = new Roll(formula, this.getRollData());
+            await roll.evaluate();
+
+            console.log(`AKREL | Résultat du jet d'initiative : ${roll.total}`);
+
+            // Find or create a combatant for the actor
+            let combatant = game.combat?.getCombatantByActor(this.id);
+            if (!combatant) {
+                // If there's no combatant, we need to add one to the combat tracker
+                if (game.combat) {
+                    await game.combat.createCombatant({ actorId: this.id, initiative: roll.total });
+                } else {
+                    // If no combat is active, just log the result and do nothing else
+                    ui.notifications.warn(game.i18n.localize("AKREL.NOTIFICATIONS.NO_ACTIVE_COMBAT"));
+                }
+            } else {
+                // If a combatant exists, update its initiative value
+                await combatant.update({ initiative: roll.total });
+            }
+            
+            // Render the roll to the chat for the user to see the result.
+            // Note: You should add "AKREL.CHAT.INITIATIVE_ROLL" to your i18n JSON file.
+            const chatData = {
+                speaker: ChatMessage.getSpeaker({ actor: this }),
+                roll: roll,
+                content: game.i18n.format("AKREL.CHAT.INITIATIVE_ROLL", {
+                    actorName: this.name,
+                    rollResult: roll.total,
+                    formula: roll.formula
+                }),
+                rolls: [roll] // Le style est maintenant déduit de la présence de la propriété rolls
+            };
+            await ChatMessage.create(chatData);
+
+            return;
+        }
+
+        // The rest of the function handles the standard stat rolls (1d100)
         const statName = game.i18n.localize(`AKREL.ATTRIBUTES.${statKey.toUpperCase()}`);
         const template = "systems/akrel/templates/dialogs/stat-roll-dialog.hbs";
 
-        // Déterminez si l'option de combat doit être affichée
+        // Determine if the combat option should be displayed.
         const showCombatOption = statKey !== 'initiative';
 
-        // Déterminez le modificateur de combat pour le dialogue (pour un affichage dynamique si nécessaire)
+        // Determine the combat modifier for the dialog (for dynamic display if necessary).
         let inCombatModifierValue = AKREL.combatBonus || 20;
         if (statKey === 'vigilance') {
             inCombatModifierValue = -20;
@@ -96,7 +142,7 @@ export class AKRELActor extends Actor {
             const modifier = parseInt(data.modifier || 0);
             
             let inCombatModifier = 0;
-            // La logique de combat s'applique si la stat n'est pas l'initiative ET que la case est cochée
+            // The combat logic applies if the stat is not initiative AND the box is checked.
             if (showCombatOption && data.inCombat) {
                 if (statKey === 'vigilance') {
                     inCombatModifier = -20;
@@ -106,75 +152,49 @@ export class AKRELActor extends Actor {
             }
             
             const totalTarget = baseStatValue + modifier + inCombatModifier;
+            const rollFormula = "1d100";
+            const roll = new Roll(rollFormula, this.getRollData());
+            await roll.evaluate({ async: true });
+            const rollResult = roll.total;
 
-            let rollFormula;
-            let roll;
-            let rollResult;
-            let cardData;
+            let isSuccess = rollResult <= totalTarget;
+            let successText = isSuccess ? game.i18n.localize("AKREL.ROLL.SUCCESS") : game.i18n.localize("AKREL.ROLL.FAILURE");
             
-            // Logique de grammaire pour le titre
+            let isCriticalSuccess = false;
+            let isCriticalFailure = false;
+            
+            // Critical hits do not apply to initiative rolls.
+            if (rollResult >= 1 && rollResult <= 10) {
+                isCriticalSuccess = true;
+                successText = game.i18n.localize("AKREL.ROLL.CRITICAL_SUCCESS");
+                isSuccess = true;
+            } else if (rollResult >= 91 && rollResult <= 100) {
+                isCriticalFailure = true;
+                successText = game.i18n.localize("AKREL.ROLL.CRITICAL_FAILURE");
+                isSuccess = false;
+            }
+            
+            // Grammar logic for the title.
             const vowels = ['A', 'E', 'I', 'O', 'U', 'Y'];
             const firstLetter = statName.charAt(0).toUpperCase();
             const rollTitlePrefix = vowels.includes(firstLetter) ? game.i18n.localize("AKREL.CHAT.TEST_D_APOSTROPHE") : game.i18n.localize("AKREL.CHAT.TEST_DE");
             const rollTitle = `${rollTitlePrefix} ${statName.toLowerCase()}`;
-
-            // Logique spécifique pour le jet d'initiative (1d20, pas de réussite/échec)
-            if (statKey === 'initiative') {
-                rollFormula = "1d20";
-                roll = new Roll(rollFormula, this.getRollData());
-                await roll.evaluate({ async: true });
-                rollResult = roll.total;
-
-                // Création des données pour la carte de chat, sans les variables de succès/échec
-                cardData = {
-                    actorName: this.name,
-                    actorImg: this.img,
-                    rollTitle: rollTitle,
-                    rollResult: rollResult,
-                    // Les variables suivantes sont omises pour que le template Handlebars ne les affiche pas
-                    baseStatValue: baseStatValue,
-                    totalTarget: baseStatValue,
-                };
-
-            } else { // Logique pour les autres jets de stats (1d100 avec succès/échec)
-                rollFormula = "1d100";
-                roll = new Roll(rollFormula, this.getRollData());
-                await roll.evaluate({ async: true });
-                rollResult = roll.total;
-
-                let isSuccess = rollResult <= totalTarget;
-                let successText = isSuccess ? game.i18n.localize("AKREL.ROLL.SUCCESS") : game.i18n.localize("AKREL.ROLL.FAILURE");
-                
-                let isCriticalSuccess = false;
-                let isCriticalFailure = false;
-                
-                // Les critiques ne s'appliquent pas aux jets d'initiative
-                if (rollResult >= 1 && rollResult <= 10) {
-                    isCriticalSuccess = true;
-                    successText = game.i18n.localize("AKREL.ROLL.CRITICAL_SUCCESS");
-                    isSuccess = true;
-                } else if (rollResult >= 91 && rollResult <= 100) {
-                    isCriticalFailure = true;
-                    successText = game.i18n.localize("AKREL.ROLL.CRITICAL_FAILURE");
-                    isSuccess = false;
-                }
-                
-                cardData = {
-                    actorName: this.name,
-                    actorImg: this.img,
-                    rollTitle: rollTitle,
-                    baseStatValue: baseStatValue,
-                    modifier: modifier !== 0 ? modifier : null,
-                    inCombatBonus: inCombatModifier > 0 ? inCombatModifier : null,
-                    inCombatMalus: inCombatModifier < 0 ? inCombatModifier : null,
-                    totalTarget: totalTarget,
-                    rollResult: rollResult,
-                    isSuccess: isSuccess,
-                    successText: successText,
-                    isCriticalSuccess: isCriticalSuccess,
-                    isCriticalFailure: isCriticalFailure
-                };
-            }
+            
+            const cardData = {
+                actorName: this.name,
+                actorImg: this.img,
+                rollTitle: rollTitle,
+                baseStatValue: baseStatValue,
+                modifier: modifier !== 0 ? modifier : null,
+                inCombatBonus: inCombatModifier > 0 ? inCombatModifier : null,
+                inCombatMalus: inCombatModifier < 0 ? inCombatModifier : null,
+                totalTarget: totalTarget,
+                rollResult: rollResult,
+                isSuccess: isSuccess,
+                successText: successText,
+                isCriticalSuccess: isCriticalSuccess,
+                isCriticalFailure: isCriticalFailure
+            };
             
             const chatTemplate = "systems/akrel/templates/chat/stat-roll-chat-card.hbs";
             const content = await foundry.applications.handlebars.renderTemplate(chatTemplate, cardData); 
@@ -182,8 +202,7 @@ export class AKRELActor extends Actor {
             await ChatMessage.create({
                 speaker: ChatMessage.getSpeaker({ actor: this }),
                 content: content,
-                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-                rolls: [roll],
+                rolls: [roll], // Le style est maintenant déduit de la présence de la propriété rolls
             });
         };
 

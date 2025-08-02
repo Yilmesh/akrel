@@ -44,6 +44,9 @@ html {
     --input-focus-outline-color: transparent !important;
 }
 
+.tab {
+    padding-left: 10px;
+}
 
 .akrel-character-sheet {
     font-family: "Modesto Condensed";
