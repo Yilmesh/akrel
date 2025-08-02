@@ -116,8 +116,7 @@
         },
         "CHAT": {
             "DAMAGE": "Résultat",
-            "DAMAGE_DEALT": "Dégâts",
-            "HEALING_DONE": "Soins",
+            "EFFECT": "Effets",
             "EFFECT_OUTCOME": "Effet",
             "WEAPON_ATTACK": "Attaque d'Arme",
             "IN_COMBAT": "Êtes-vous en combat ?",

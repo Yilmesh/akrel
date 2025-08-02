@@ -104,7 +104,6 @@ export class AKRELItem extends Item {
         let dialogType = "";
         let showDamageFields = false;
         let actionTypeLabel = ""; 
-        let effectLabel = "";
         let baseDiceFormula = this.system.dice || "";
 
         const itemAttackAttribute = this.system.attackAttribute;
@@ -125,22 +124,18 @@ export class AKRELItem extends Item {
                 
                 switch (spellType) { 
                     case 'offensive':
-                        effectLabel = game.i18n.localize("AKREL.CHAT.DAMAGE_DEALT");
                         showDamageFields = true;
                         break;
                     case 'healing':
-                        effectLabel = game.i18n.localize("AKREL.CHAT.HEALING_DONE");
                         showDamageFields = true;
                         break;
                     case 'utility':
-                        effectLabel = game.i18n.localize("AKREL.CHAT.EFFECT_OUTCOME");
                         showDamageFields = false;
                         baseDiceFormula = "";
                         break;
                     default: 
                         dialogType = game.i18n.localize("AKREL.ITEM_TYPES.SPELL_GENERIC");
                         actionTypeLabel = game.i18n.localize("AKREL.CHAT.SKILL_USE_GENERIC");
-                        effectLabel = game.i18n.localize("AKREL.CHAT.EFFECT_OUTCOME");
                         showDamageFields = false;
                         baseDiceFormula = "";
                 }
@@ -149,7 +144,6 @@ export class AKRELItem extends Item {
             case 'weapon':
                 dialogType = game.i18n.localize("AKREL.ITEM_TYPES.WEAPON");
                 actionTypeLabel = game.i18n.localize("AKREL.CHAT.WEAPON_ATTACK");
-                effectLabel = game.i18n.localize("AKREL.CHAT.DAMAGE_DEALT");
                 showDamageFields = true;
                 break;
 
@@ -166,7 +160,6 @@ export class AKRELItem extends Item {
             dialogType,
             showDamageFields,
             actionTypeLabel,
-            effectLabel,
             baseDiceFormula,
             options
         );
@@ -175,7 +168,7 @@ export class AKRELItem extends Item {
     /**
      * Affiche le dialogue de jet et gère l'envoi des résultats au chat.
      */
-    async _showItemRollDialog(actor, item, attributeName, baseAttributeValue, dialogType, showDamageFields, actionTypeLabel, effectLabel, baseDiceFormula, options = {}) {
+    async _showItemRollDialog(actor, item, attributeName, baseAttributeValue, dialogType, showDamageFields, actionTypeLabel, baseDiceFormula, options = {}) {
         const template = "systems/akrel/templates/dialogs/item-roll-dialog.hbs";
 
         const dialogData = {
@@ -276,7 +269,6 @@ export class AKRELItem extends Item {
                 rollResult: rollResult,
                 isSuccess: isSuccess,
                 successText: successText,
-                effectLabel: effectLabel,
                 effectResult: effectResult,
                 flavorText: item.system.description || "",
                 spellType: item.system.spellType,
