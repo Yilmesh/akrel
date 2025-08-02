@@ -242,10 +242,6 @@ export class AKRELItem extends Item {
                         ui.notifications.error(game.i18n.localize("AKREL.NOTIFICATIONS.INVALID_DICE_FORMULA"));
                         effectResult = game.i18n.localize("AKREL.CHAT.EFFECT_ERROR");
                     }
-                } else if (item.system.spellType === "utility") { 
-                    effectResult = item.system.description || game.i18n.localize("AKREL.CHAT.NO_SPECIFIC_EFFECT");
-                } else {
-                    effectResult = item.system.description || game.i18n.localize("AKREL.CHAT.NO_SPECIFIC_EFFECT");
                 }
             } else if (!isSuccess) {
                 effectResult = game.i18n.localize("AKREL.CHAT.NO_EFFECT_ON_FAILURE");

@@ -1,11 +1,11 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="akrel-sheet akrel-character-sheet" autocomplete="off">
     <header class="sheet-header">
         <div class="header-info">
             <input class="header-item character-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize "AKREL.CHARACTER.NAME_PLACEHOLDER"}}"/>
             <input class="header-item job" name="system.job" type="text" value="{{system.job}}" placeholder="{{localize "AKREL.CHARACTER.JOB_PLACEHOLDER"}}"/>
         </div>
         <div class="experience">
-            <input class="experience-text" type="number" name="system.experience" value="{{system.experience}}"/>
+            <input class="experience-text" type="number" name="system.experience" value="{{system.experience}}" placeholder="0"/>
             <p>{{localize "AKREL.CHARACTER.XP"}}</p>
         </div>
     </header>
@@ -28,7 +28,7 @@
                 <section class="resource-layout-container">
                     {{!-- Level Input --}}
                     <div class="level-input-container">
-                        <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" class="level-input"/>
+                        <input type="number" name="system.level" value="{{system.level}}" data-dtype="Number" class="level-input" placeholder="0"/>
                     </div>
 
                     {{!-- Resource Row 1: Health & Mana --}}
@@ -38,9 +38,9 @@
                                 <div class="bar-fill" style="width: {{max 0 (percent system.resources.health.value system.resources.health.max)}}%;"></div>
                             </div>
                             <div class="bar-label">
-                                <input type="number" name="system.resources.health.value" value="{{system.resources.health.value}}" data-dtype="Number" class="resource-input current-value"/>
+                                <input type="number" name="system.resources.health.value" value="{{system.resources.health.value}}" data-dtype="Number" class="resource-input current-value" placeholder="0"/>
                                 <span class="separator">&sol;</span>
-                                <input type="number" name="system.resources.health.max" value="{{system.resources.health.max}}" data-dtype="Number" class="resource-input max-value"/>
+                                <input type="number" name="system.resources.health.max" value="{{system.resources.health.max}}" data-dtype="Number" class="resource-input max-value" placeholder="0"/>
                             </div>
                         </div>
                         <div class="level-placeholder"></div>
@@ -49,9 +49,9 @@
                                 <div class="bar-fill" style="width: {{max 0 (percent system.resources.mana.value system.resources.mana.max)}}%;"></div>
                             </div>
                             <div class="bar-label">
-                                <input type="number" name="system.resources.mana.value" value="{{system.resources.mana.value}}" data-dtype="Number" class="resource-input current-value"/>
+                                <input type="number" name="system.resources.mana.value" value="{{system.resources.mana.value}}" data-dtype="Number" class="resource-input current-value" placeholder="0"/>
                                 <span class="separator">&sol;</span>
-                                <input type="number" name="system.resources.mana.max" value="{{system.resources.mana.max}}" data-dtype="Number" class="resource-input max-value"/>
+                                <input type="number" name="system.resources.mana.max" value="{{system.resources.mana.max}}" data-dtype="Number" class="resource-input max-value" placeholder="0"/>
                             </div>
                         </div>
                     </div>
@@ -74,9 +74,9 @@
                                 <div class="bar-fill" style="width: {{max 0 (percent system.resources.barrier.value system.resources.barrier.max)}}%;"></div>
                             </div>
                             <div class="bar-label">
-                                <input type="number" name="system.resources.barrier.value" value="{{system.resources.barrier.value}}" data-dtype="Number" class="resource-input current-value"/>
+                                <input type="number" name="system.resources.barrier.value" value="{{system.resources.barrier.value}}" data-dtype="Number" class="resource-input current-value" placeholder="0"/>
                                 <span class="separator">&sol;</span>
-                                <input type="number" name="system.resources.barrier.max" value="{{system.resources.barrier.max}}" data-dtype="Number" class="resource-input max-value"/>
+                                <input type="number" name="system.resources.barrier.max" value="{{system.resources.barrier.max}}" data-dtype="Number" class="resource-input max-value" placeholder="0"/>
                             </div>
                         </div>
                     </div>

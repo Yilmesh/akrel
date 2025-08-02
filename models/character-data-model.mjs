@@ -32,9 +32,9 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
             caracs: caracsSchema,
 
             // Champs généraux descriptifs du personnage
-            job: new StringField({ initial: ""}),
             experience: new NumberField({ initial: 0}),
             level: new NumberField({ initial: 1}),
+            job: new StringField({ initial: ""}),
             age: new StringField({ initial: ""}),
             morphology: new StringField({ initial: ""}),
             origin: new StringField({ initial: ""}),
@@ -75,10 +75,6 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
         return data;
     }
 
-    /**
-     * Accesseur pratique pour l'acteur parent de ce modèle de données.
-     * @returns {Actor} L'acteur parent.
-     */
     get actor() {
         return this.parent;
     }

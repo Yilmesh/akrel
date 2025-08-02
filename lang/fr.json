@@ -8,8 +8,8 @@
             "weapon": "Arme",
             "armor": "Armure",
             "loot": "Butin",
-            "spell": "Sort",
-            "passive": "Passive"
+            "spell": "Compétence",
+            "passive": "Compétence passive"
         }
     },
     "AKREL": {
@@ -60,7 +60,8 @@
             "IDENTITY": "Identité",
             "STORY": "Histoire",
             "YOURGROUP": "Vos avis",
-            "XP": "XP"
+            "XP": "XP",
+            "JOB_PLACEHOLDER": "Métier"
         },
         "NPC": {
             "LEVEL": "Niveau"

@@ -1,12 +1,11 @@
 /* --- Global Reset & Box-Sizing --- */
 html {
     box-sizing: border-box;
+    font-size: 1em !important;
 }
 
 *, *:before, *:after {
     box-sizing: inherit;
-    margin: 0;
-    padding: 0;
 }
 
 /* --- CSS Variables (Theme & Layout) --- */
@@ -37,7 +36,7 @@ html {
     --total-resources-height: calc(var(--bar-height) * 2 + var(--grid-gap));
 
     /* Typography */
-    --font-primary: 'Arial', sans-serif;
+    --font-primary: "Modesto Condensed";
 
     /* Foundry VTT Input Overrides */
     --input-box-shadow: none !important;
@@ -45,90 +44,101 @@ html {
     --input-focus-outline-color: transparent !important;
 }
 
-.akrel.sheet.actor {
+
+.akrel-character-sheet {
     font-family: "Modesto Condensed";
-    font-size: 1.2em;
 }
 
 /* --- Scrollbar Styles (WebKit - Chrome, Edge, Safari, Brave) --- */
-.akrel.sheet.actor .window-content::-webkit-scrollbar,
-.akrel.sheet.actor .sheet-body::-webkit-scrollbar,
-.akrel.sheet.actor .tab::-webkit-scrollbar,
-.akrel.sheet.actor .item-section::-webkit-scrollbar {
+ .window-content::-webkit-scrollbar,
+ .sheet-body::-webkit-scrollbar,
+ .tab::-webkit-scrollbar,
+ .item-section::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
 
-.akrel.sheet.actor .window-content::-webkit-scrollbar-track,
-.akrel.sheet.actor .sheet-body::-webkit-scrollbar-track,
-.akrel.sheet.actor .tab::-webkit-scrollbar-track,
-.akrel.sheet.actor .item-section::-webkit-scrollbar-track {
+ .window-content::-webkit-scrollbar-track,
+ .sheet-body::-webkit-scrollbar-track,
+ .tab::-webkit-scrollbar-track,
+ .item-section::-webkit-scrollbar-track {
     background: var(--akrel-color-panel-background);
     border-radius: 5px;
 }
 
-.akrel.sheet.actor .window-content::-webkit-scrollbar-thumb,
-.akrel.sheet.actor .sheet-body::-webkit-scrollbar-thumb,
-.akrel.sheet.actor .tab::-webkit-scrollbar-thumb,
-.akrel.sheet.actor .item-section::-webkit-scrollbar-thumb {
+ .window-content::-webkit-scrollbar-thumb,
+ .sheet-body::-webkit-scrollbar-thumb,
+ .tab::-webkit-scrollbar-thumb,
+ .item-section::-webkit-scrollbar-thumb {
     background: var(--akrel-color-interactive);
     border-radius: 5px;
     border: 1px solid var(--akrel-color-text-primary);
 }
 
-.akrel.sheet.actor .window-content::-webkit-scrollbar-thumb:hover,
-.akrel.sheet.actor .sheet-body::-webkit-scrollbar-thumb:hover,
-.akrel.sheet.actor .tab::-webkit-scrollbar-thumb:hover,
-.akrel.sheet.actor .item-section::-webkit-scrollbar-thumb:hover {
+ .window-content::-webkit-scrollbar-thumb:hover,
+ .sheet-body::-webkit-scrollbar-thumb:hover,
+ .tab::-webkit-scrollbar-thumb:hover,
+ .item-section::-webkit-scrollbar-thumb:hover {
     background: #c9a4d8;
 }
 
 /* --- Scrollbar Styles (Firefox) --- */
-.akrel.sheet.actor .window-content,
-.akrel.sheet.actor .sheet-body,
-.akrel.sheet.actor .tab,
-.akrel.sheet.actor .item-section {
+ .window-content,
+ .sheet-body,
+ .tab,
+ .item-section {
     scrollbar-width: thin;
     scrollbar-color: var(--akrel-color-interactive) var(--akrel-color-panel-background);
 }
 
+.window-content {
+    padding: 0;
+    margin: 0;
+}
+
 /* --- General Sheet Scoping --- */
-.akrel.sheet.actor .window-resizable-handle {
+ .window-resizable-handle {
     z-index: 150;
     background-color: var(--akrel-color-background);
     color: var(--akrel-color-text-primary);
     border: none;
 }
 
-.akrel.sheet.actor .window-header {
+.window-title {
+    font-size: 1.3em;
+    font-family: "Modesto Condensed";
+    margin-left: 5px;
+}
+
+ .window-header {
     background-color: var(--akrel-color-background);
     color: var(--akrel-color-text-primary);
 }
 
-.akrel.sheet.actor .window-header h4 {
+ .window-header h4 {
     margin-left: 5px;
     font-family: "Modesto Condensed";
 }
 
-.akrel.sheet.actor .window-header a {
+ .window-header a {
     margin-right: 5px;
 }
 
-.akrel.sheet.actor .window-header i {
+ .window-header i {
     margin-right: 5px;
     margin-left: 5px;
 }
 
-.akrel.sheet.actor .editable {
+.akrel-character-sheet .editable {
     background-color: var(--akrel-color-background);
     color: var(--akrel-color-text-primary);
 }
 
-.akrel.sheet.actor .editable input {
+.akrel-character-sheet .editable input {
     color: var(--akrel-color-text-primary);
 }
 
-.akrel.sheet.actor .sheet-body {
+.akrel-character-sheet .sheet-body {
     background-color: var(--akrel-color-background);
     padding: 0;
     margin: 0;
@@ -137,7 +147,7 @@ html {
     height: 100%;
 }
 
-.akrel.sheet.actor .left-panel {
+.akrel-character-sheet .left-panel {
     background-color: var(--akrel-color-panel-background);
     width: 248px;
     position: absolute;
@@ -149,7 +159,7 @@ html {
     height: auto;
 }
 
-.akrel.sheet.actor .right-panel {
+.akrel-character-sheet .right-panel {
     background-color: var(--akrel-color-background);
     width: var(--right-panel-size);
     position: relative;
@@ -160,17 +170,16 @@ html {
     margin: 0;
 }
 
-.akrel.sheet.actor .title {
+.akrel-character-sheet .title {
     font-family: "Modesto Condensed";
     display: block;
     text-align: center;
 }
 
-.akrel.sheet.actor .sheet-header {
+.akrel-character-sheet .sheet-header {
     background-color: var(--akrel-color-header-background);
-    background-image: url('../assets/image1.png');
-    background-position: 50% 40%;
-    background-blend-mode: multiply;
+    background-image: url('../assets/vitrail.png');
+    background-position: 50% 63%;
     height: 170px;
     padding: 0;
     margin: 0;
@@ -181,7 +190,7 @@ html {
     z-index: 12;
 }
 
-.akrel.sheet.actor .header-info {
+.akrel-character-sheet .header-info {
     width: var(--right-panel-size);
     left: 288px;
     position: relative;
@@ -189,7 +198,7 @@ html {
     margin: 0;
 }
 
-.akrel.sheet.actor .header-item {
+.akrel-character-sheet .header-item {
     width: 80%;
     color: var(--akrel-color-text-primary);
     height: auto;
@@ -200,28 +209,28 @@ html {
     margin: 0;
 }
 
-.akrel.sheet.actor .character-name {
+.akrel-character-sheet .character-name {
     font-size: 3em;
     padding: 0;
     margin: 0;
 }
 
-.akrel.sheet.actor .character-name:placeholder-shown {
+.akrel-character-sheet .character-name:placeholder-shown {
     border: 1px solid var(--akrel-color-text-primary);
 }
 
-.akrel.sheet.actor .job {
+.akrel-character-sheet .job {
     font-size: 2em;
     padding: 0;
     margin: 0;
 }
 
-.akrel.sheet.actor .job:placeholder-shown {
+.akrel-character-sheet .job:placeholder-shown {
     border: 1px solid var(--akrel-color-text-primary);
 }
 
 /* --- Experience Input --- */
-.akrel.sheet.actor .experience {
+.akrel-character-sheet .experience {
     position: absolute;
     display: flex;
     bottom: 10px;
@@ -240,7 +249,7 @@ html {
     -moz-appearance: textfield;
 }
 
-.akrel.sheet.actor .experience-text {
+.akrel-character-sheet .experience-text {
     background-color: transparent;
     border: none;
     color: var(--akrel-color-text-primary);
@@ -252,12 +261,12 @@ html {
     margin-top: 4px;
 }
 
-.akrel.sheet.actor .experience-text:focus {
+.akrel-character-sheet .experience-text:focus {
     background-color: var(--akrel-color-input-background) !important;
 }
 
 /* --- Character Image --- */
-.akrel.sheet.actor .character-img {
+.akrel-character-sheet .character-img {
     margin-bottom: var(--grid-gap);
     border: 1px solid var(--akrel-color-text-primary);
     box-sizing: border-box;
@@ -266,16 +275,16 @@ html {
     margin-right: auto;
     width: var(--total-width);
     height: 248px;
+    padding: 0;
     max-width: 100%;
     max-height: 100%;
-    padding: 0;
     object-fit: cover;
     object-position: 50% 0%;
 }
 
 
 /* --- Resource Layout Container --- */
-.akrel.sheet.actor .resource-layout-container {
+.akrel-character-sheet .resource-layout-container {
     display: flex;
     flex-direction: column;
     gap: var(--grid-gap);
@@ -287,7 +296,7 @@ html {
 }
 
 /* --- Level Input --- */
-.akrel.sheet.actor .level-input-container {
+.akrel-character-sheet .level-input-container {
     position: absolute;
     left: 50%;
     top: 0;
@@ -306,7 +315,7 @@ html {
     margin: 0;
 }
 
-.akrel.sheet.actor .level-input-container .level-input {
+.akrel-character-sheet .level-input-container .level-input {
     background: transparent;
     border: none;
     outline: none;
@@ -326,7 +335,7 @@ html {
 }
 
 /* --- Resource Row --- */
-.akrel.sheet.actor .resource-row {
+.akrel-character-sheet .resource-row {
     display: flex;
     align-items: center;
     width: 100%;
@@ -336,16 +345,17 @@ html {
 }
 
 /* --- Level Placeholder --- */
-.akrel.sheet.actor .level-placeholder {
+.akrel-character-sheet .level-placeholder {
     width: var(--level-size);
     height: var(--level-placeholder-height);
+    opacity: 50%;
     flex-shrink: 0;
     padding: 0;
     margin: 0;
 }
 
 /* --- Resource Bars --- */
-.akrel.sheet.actor .akrel-resource-bar {
+.akrel-character-sheet .akrel-resource-bar {
     position: relative;
     width: var(--bar-width);
     height: var(--bar-height);
@@ -361,7 +371,7 @@ html {
     margin: 0;
 }
 
-.akrel.sheet.actor .akrel-resource-bar .bar-background {
+.akrel-character-sheet .akrel-resource-bar .bar-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -370,18 +380,18 @@ html {
     background-color: transparent;
 }
 
-.akrel.sheet.actor .akrel-resource-bar .bar-fill {
+.akrel-character-sheet .akrel-resource-bar .bar-fill {
     height: 100%;
     width: var(--bar-percentage);
     transition: width 0.3s ease-in-out;
 }
 
-.akrel.sheet.actor .health-bar .bar-fill { background-color: var(--color-bar-health); }
-.akrel.sheet.actor .mana-bar .bar-fill { background-color: var(--color-bar-mana); }
-.akrel.sheet.actor .armor-bar .bar-fill { background-color: var(--color-bar-armor); }
-.akrel.sheet.actor .barrier-bar .bar-fill { background-color: var(--color-bar-barrier); }
+.akrel-character-sheet .health-bar .bar-fill { background-color: var(--color-bar-health); }
+.akrel-character-sheet .mana-bar .bar-fill { background-color: var(--color-bar-mana); }
+.akrel-character-sheet .armor-bar .bar-fill { background-color: var(--color-bar-armor); }
+.akrel-character-sheet .barrier-bar .bar-fill { background-color: var(--color-bar-barrier); }
 
-.akrel.sheet.actor .akrel-resource-bar .bar-label {
+.akrel-character-sheet .akrel-resource-bar .bar-label {
     position: absolute;
     z-index: 2;
     width: 100%;
@@ -398,7 +408,7 @@ html {
     margin: 0;
 }
 
-.akrel.sheet.actor .akrel-resource-bar .resource-input {
+.akrel-character-sheet .akrel-resource-bar .resource-input {
     background: transparent;
     border: none;
     outline: none;
@@ -414,23 +424,23 @@ html {
     -moz-appearance: textfield;
 }
 
-.akrel.sheet.actor .akrel-resource-bar .resource-input.current-value {
+.akrel-character-sheet .akrel-resource-bar .resource-input.current-value {
     text-align: right;
 }
 
-.akrel.sheet.actor .akrel-resource-bar .resource-input.max-value {
+.akrel-character-sheet .akrel-resource-bar .resource-input.max-value {
     text-align: left;
 }
 
-.akrel.sheet.actor .akrel-resource-bar .separator {
+.akrel-character-sheet .akrel-resource-bar .separator {
     font-size: 1em;
     margin: 0 1px;
     padding: 0;
 }
 
 /* --- Input Focus Styles --- */
-.akrel.sheet.actor input:focus,
-.akrel.sheet.actor textarea:focus {
+.akrel-character-sheet input:focus,
+.akrel-character-sheet textarea:focus {
     outline: none !important;
     box-shadow: none !important;
     border-color: var(--akrel-color-interactive) !important;
@@ -438,7 +448,7 @@ html {
 }
 
 /* --- Statistics Panel --- */
-.akrel.sheet.actor .stat-ul {
+.akrel-character-sheet .stat-ul {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px 10px;
@@ -448,7 +458,7 @@ html {
     width: var(--total-width);
 }
 
-.akrel.sheet.actor .stat-li {
+.akrel-character-sheet .stat-li {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -464,7 +474,7 @@ html {
     overflow: hidden;
 }
 
-.akrel.sheet.actor .stat-item {
+.akrel-character-sheet .stat-item {
     color: var(--akrel-color-text-primary) !important;
     border: none;
     background-color: transparent;
@@ -486,19 +496,19 @@ html {
     z-index: 2;
 }
 
-.akrel.sheet.actor .stat-item::-webkit-outer-spin-button,
-.akrel.sheet.actor .stat-item::-webkit-inner-spin-button {
+.akrel-character-sheet .stat-item::-webkit-outer-spin-button,
+.akrel-character-sheet .stat-item::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-.akrel.sheet.actor .stat-container {
+.akrel-character-sheet .stat-container {
     border: 1px solid var(--akrel-color-text-primary);
     box-sizing: border-box;
     padding-bottom: 15px;
 }
 
-.akrel.sheet.actor .stat-icon {
+.akrel-character-sheet .stat-icon {
     font-size: 2.5em;
     color: var(--akrel-color-header-background);
     opacity: 0.8;
@@ -510,14 +520,14 @@ html {
     z-index: 1;
 }
 
-.akrel.sheet.actor .stat-li label {
+.akrel-character-sheet .stat-li label {
     font-weight: bold;
     font-size: 1.5em;
     text-align: center;
     color: var(--akrel-color-interactive);
 }
 
-.akrel.sheet.actor .stat-li a {
+.akrel-character-sheet .stat-li a {
     text-align: center;
     border: none;
     margin-top: 40px;
@@ -526,7 +536,7 @@ html {
 }
 
 /* --- Sheet Tabs (Navigation) --- */
-.akrel.sheet.actor .sheet-tabs {
+.akrel-character-sheet .sheet-tabs {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -541,7 +551,7 @@ html {
     height: fit-content;
 }
 
-.akrel.sheet.actor .item-tab {
+.akrel-character-sheet .item-tab {
     width: 60px;
     height: 60px;
     font-size: 2em;
@@ -557,77 +567,75 @@ html {
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.akrel.sheet.actor .item-tab:hover {
+.akrel-character-sheet .item-tab:hover {
     background-color: var(--akrel-color-interactive);
     color: var(--akrel-color-background);
 }
 
-.akrel.sheet.actor .item-tab.active {
+.akrel-character-sheet .item-tab.active {
     background-color: var(--akrel-color-interactive);
     color: var(--akrel-color-background);
     border-right: none;
 }
 
 /* --- Flex Utilities --- */
-.akrel.sheet.actor .flexrow {
+.akrel-character-sheet .flexrow {
     display: flex;
     align-items: center;
 }
 
 /* --- Item Lists (Skills, Spells, etc.) --- */
-.akrel.sheet.actor .story {
-    width: 98%;
+.akrel-character-sheet .story {
+    width: 470px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
-.akrel.sheet.actor .item-section {
-    margin-top: 15px;
+.item-section {
+    margin-top: 10px;
     border: 1px solid var(--akrel-color-text-primary);
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     overflow-y: auto;
     background-color: var(--akrel-color-input-background);
 }
 
-.akrel.sheet.actor .section-header {
+.akrel-character-sheet .section-header {
     color: var(--akrel-color-text-primary);
     text-align: center;
-    margin-top: 0;
-    margin-bottom: 10px;
     font-size: 1.5em;
     text-transform: uppercase;
     font-family: "Modesto Condensed";
-    padding-top: 5px;
-    margin-bottom: -17px;
     width: 100%;
     box-sizing: border-box;
     border: none;
+    margin-bottom: -11px;
 }
 
-.akrel.sheet.actor .section-separator {
+.akrel-character-sheet .section-separator {
     width: 80%; /* Largeur du séparateur, ajustez si besoin */
     height: 1px; /* Épaisseur du séparateur */
     background-color: var(--akrel-color-text-primary); /* Couleur du séparateur */
     margin: 10px auto 10px auto; /* Centre le séparateur et ajoute une marge verticale */
     margin-bottom: 15px;
-    margin-top: 18px;
     display: block; /* Assure que c'est un bloc pour la marge auto */
 }
 
 /* Séparateur en pointillés */
-.akrel.akrel.sheet.actor .separator-line {
+.akrel-character-sheet .separator-line {
     border-top: 1px dashed var(--akrel-color-text-primary);
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-.akrel.sheet.actor .items-list {
+.akrel-character-sheet .items-list {
     list-style: none;
     padding: 0;
     margin: 0;
     width: 100%;
 }
 
-.akrel.sheet.actor .items-header {
+.akrel-character-sheet .items-header {
     display: flex;
     align-items: center; /* Centre verticalement le contenu de l'en-tête */
     text-align: center;
@@ -643,7 +651,7 @@ html {
 }
 
 /* --- Largeurs des En-têtes (Headers) --- */
-.akrel.sheet.actor .item-name-header {
+.akrel-character-sheet .item-name-header {
     flex-grow: 1; /* Permet au nom de prendre l'espace restant */
     min-width: 150px; /* Largeur minimale pour "Nom", ajustez si besoin */
     max-width: 150px;
@@ -651,37 +659,37 @@ html {
     text-align: center;
 }
 
-.akrel.sheet.actor .item-level-header {
+.akrel-character-sheet .item-level-header {
     width: 60px; /* Largeur fixe pour "Niveau", ajustez si besoin */
     text-align: center;
     flex-shrink: 0; /* Empêche de rétrécir */
 }
 
-.akrel.sheet.actor .item-speed-header {
+.akrel-character-sheet .item-speed-header {
     width: 70px; /* Largeur fixe pour "Vitesse", ajustez si besoin */
     text-align: center;
     flex-shrink: 0;
 }
 
-.akrel.sheet.actor .item-nature-header {
+.akrel-character-sheet .item-nature-header {
     width: 80px; /* Largeur fixe pour "Nature", ajustez si besoin */
     text-align: center;
     flex-shrink: 0;
 }
 
-.akrel.sheet.actor .item-cost-header {
+.akrel-character-sheet .item-cost-header {
     width: 50px; /* Largeur fixe pour "Coût", ajustez si besoin */
     text-align: center;
     flex-shrink: 0;
 }
 
-.akrel.sheet.actor .item-actions-header {
+.akrel-character-sheet .item-actions-header {
     flex: 0 0 60px;
     text-align: center;
 }
 
 
-.akrel.sheet.actor .item-row {
+.akrel-character-sheet .item-row {
     display: flex;
     align-items: center;
     padding: 5px 0; /* Padding vertical, l'horizontal est géré par les largeurs des enfants */
@@ -692,12 +700,12 @@ html {
     min-height: 40px; /* Hauteur minimale pour chaque ligne d'item */
 }
 
-.akrel.sheet.actor .item-row:last-child {
+.akrel-character-sheet .item-row:last-child {
     border-bottom: none;
 }
 
 /* --- Largeurs des Cellules d'Items --- */
-.akrel.sheet.actor .item-name-cell {
+.akrel-character-sheet .item-name-cell {
     display: flex;
     align-items: center;
     color: var(--akrel-color-interactive);
@@ -714,7 +722,7 @@ html {
     font-size: 1.2em;
 }
 
-.akrel.sheet.actor .item-img {
+.akrel-character-sheet .item-img {
     width: 30px !important;
     height: 30px !important;
     flex-shrink: 0; /* Empêche l'image de rétrécir */
@@ -723,7 +731,7 @@ html {
     min-width: 30px;
 }
 
-.akrel.sheet.actor .item-name-cell p {
+.akrel-character-sheet .item-name-cell p {
     margin: 0;
     flex-grow: 1; /* Permet au texte de prendre l'espace restant dans sa cellule */
     white-space: nowrap;
@@ -733,7 +741,7 @@ html {
     line-height: 1.2;
 }
 
-.akrel.sheet.actor .item-detail {
+.akrel-character-sheet .item-detail {
     text-align: center;
     padding: 0 5px; /* Petit padding pour le contenu interne */
     box-sizing: border-box;
@@ -745,24 +753,24 @@ html {
 }
 
 /* Appliquez les largeurs fixes aux cellules individuelles */
-.akrel.sheet.actor .item-level-value {
+.akrel-character-sheet .item-level-value {
     width: 60px; /* Correspond à item-level-header */
     flex-shrink: 0;
 }
-.akrel.sheet.actor .item-speed-value {
+.akrel-character-sheet .item-speed-value {
     width: 70px; /* Correspond à item-speed-header */
     flex-shrink: 0;
 }
-.akrel.sheet.actor .item-nature-value {
+.akrel-character-sheet .item-nature-value {
     width: 80px; /* Correspond à item-nature-header */
     flex-shrink: 0;
 }
-.akrel.sheet.actor .item-cost-value {
+.akrel-character-sheet .item-cost-value {
     width: 50px; /* Correspond à item-cost-header */
     flex-shrink: 0;
 }
 
-.akrel.sheet.actor .item-actions-cell {
+.akrel-character-sheet .item-actions-cell {
     flex: 0 0 60px;
     justify-content: center;
     gap: 5px;
@@ -772,7 +780,7 @@ html {
     overflow: hidden;
 }
 
-.akrel.sheet.actor .item-control {
+.akrel-character-sheet .item-control {
     color: var(--akrel-color-interactive);
     text-decoration: none;
     cursor: pointer;
@@ -782,11 +790,11 @@ html {
     justify-content: right;
 }
 
-.akrel.sheet.actor .item-control:hover {
+.akrel-character-sheet .item-control:hover {
     color: var(--akrel-color-text-primary);
 }
 
-.akrel.sheet.actor .item-list .notes {
+.akrel-character-sheet .item-list .notes {
     font-style: italic;
     color: rgba(255, 255, 255, 0.5);
     padding: 10px;
@@ -796,46 +804,47 @@ html {
 }
 
 /* --- Identity Tab (Table/Grid) --- */
-.akrel.sheet.actor .tab.identity table {
+.akrel-character-sheet .tab.identity table {
     width: calc(100% - 20px);
     margin: 10px;
+    margin-bottom: 2em;
     border: none;
     table-layout: fixed;
     background-color: transparent;
     font-size: 1.2em;
 }
 
-.akrel.sheet.actor .tab.identity tr {
+.akrel-character-sheet .tab.identity tr {
     background-color: transparent;
 }
 
-.akrel.sheet.actor .tab.identity td {
+.akrel-character-sheet .tab.identity td {
     border: none;
     padding: 5px;
 }
 
-.akrel.sheet.actor .tab.identity td:first-child {
+.akrel-character-sheet .tab.identity td:first-child {
     font-weight: bold;
     color: var(--akrel-color-interactive);
     width: 120px;
     text-align: right;
 }
-.akrel.sheet.actor .tab.identity td:nth-child(odd) {
+.akrel-character-sheet .tab.identity td:nth-child(odd) {
     font-weight: bold;
     color: var(--akrel-color-text-primary);
     width: 100px;
     text-align: left;
 }
 
-.akrel.sheet.actor .tab.identity td:nth-child(2) {
+.akrel-character-sheet .tab.identity td:nth-child(2) {
     padding-right: 20px; 
 }
 
-.akrel.sheet.actor .tab.identity td:nth-child(even) { /* Sélectionne les 2ème et 4ème td */
+.akrel-character-sheet .tab.identity td:nth-child(even) { /* Sélectionne les 2ème et 4ème td */
     width: auto; /* Laisse l'input prendre l'espace restant */
 }
 
-.akrel.sheet.actor .tab.identity input[type="text"] {
+.akrel-character-sheet .tab.identity input[type="text"] {
     width: calc(100% - 10px); /* Ajustez si le padding du td est différent, pour qu'il ne déborde pas */
     box-sizing: border-box; /* Important pour inclure padding et border dans la largeur */
     background-color: var(--akrel-color-input-background);
@@ -846,13 +855,13 @@ html {
     text-align: center; /* Comme sur l'image */
 }
 
-.akrel.sheet.actor .tab.identity input[type="text"]:focus {
+.akrel-character-sheet .tab.identity input[type="text"]:focus {
     background-color: var(--akrel-color-interactive);
     color: var(--akrel-color-text-primary);
 }
 
 /* --- Group Members Section --- */
-.akrel.sheet.actor .item-section.group-section .item-name-cell input[type="text"] {
+.item-section.group-section .item-name-cell input[type="text"] {
     background: transparent;
     border: none;
     color: var(--akrel-color-text-primary);
@@ -863,30 +872,30 @@ html {
     flex-grow: 1;
 }
 
-.akrel.sheet.actor .item-section.group-section .item-name-cell input[type="text"]:focus {
+ .item-section.group-section .item-name-cell input[type="text"]:focus {
     background-color: var(--akrel-color-input-background);
     border-color: var(--akrel-color-interactive);
     box-shadow: none;
 }
 
-.akrel.sheet.actor .item-section.group-section textarea{
-}
-
-.akrel.sheet.actor textarea {
+.akrel-character-sheet textarea {
     width: 100%;
-    height: 30px;
-    font-size: 1em;
+    font-size: 1.5em;
+    font-family: "Modesto Condensed";
     background-color: var(--akrel-color-input-background);
-    border: none;
     color: var(--akrel-color-text-primary);
-    padding: 5px;
+    border: none;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
     resize: vertical;
     box-shadow: none;
     outline: none;
 }
 
 
-.akrel.sheet.actor .add-group-member {
+.akrel-character-sheet .add-group-member {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -904,20 +913,20 @@ html {
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
-.akrel.sheet.actor .add-group-member:hover {
+.akrel-character-sheet .add-group-member:hover {
     background-color: var(--akrel-color-text-primary);
     color: var(--akrel-color-background);
 }
 
 /* --- Header Actions (e.g., Add Item button) --- */
-.akrel.sheet.actor .header-actions {
+.akrel-character-sheet .header-actions {
     display: flex;
     justify-content: flex-end;
     padding: 5px 0;
 }
 
 /* --- Tab Content --- */
-.akrel.sheet.actor .tab {
+.akrel-character-sheet .tab {
     padding: 10px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -925,7 +934,7 @@ html {
 }
 
 /* --- Identity Grid --- */
-.akrel.sheet.actor .identity-grid {
+.akrel-character-sheet .identity-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px 10px;
@@ -933,26 +942,638 @@ html {
     color: var(--akrel-color-text-primary);
 }
 
-.akrel.sheet.actor .identity-grid div {
+.akrel-character-sheet .identity-grid div {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.akrel.sheet.actor .identity-grid label {
+.akrel-character-sheet .identity-grid label {
     font-weight: bold;
     color: var(--akrel-color-interactive);
     min-width: 80px;
     text-align: right;
 }
 
+/* ----------------------------------- */
+/* Styling for the Actor npc  */
+/* ----------------------------------- */
+.akrel-npc-sheet {
+    font-family: "Modesto Condensed" !important;
+    font-size: 1em !important;
+    background-color: var(--akrel-color-background);
+}
+
+.akrel-npc-sheet .sheet-header {
+    position: fixed;
+    z-index: 150;
+    background-color: var(--akrel-color-header-background);
+    background-image: url('../assets/vitrail.png');
+    background-position: 50% 25%;
+    height: 300px;
+    width: 800px;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.akrel-npc-sheet .info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+}
+
+.akrel-npc-sheet .character-name {
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    font-size: 3em;
+    text-align: center;
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-npc-sheet .character-img {
+    width: 180px;
+    height: 180px;
+    border: 3px solid var(--akrel-color-text-primary);
+    border-radius: 100%;
+    margin-top: 1em;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: 50% 0%;
+}
+
+.akrel-npc-sheet .job {
+    margin-top: 0.6em;
+    border: none;
+    background-color: transparent;
+    box-shadow: none;
+    font-size: 2em;
+    text-align: center;
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-npc-sheet .job::placeholder {
+    color: var(--akrel-color-text-primary);
+    opacity: 50%;
+}
+
+.akrel-npc-sheet .stat-ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 10px;
+    list-style: none;
+    padding: 0;
+    margin: 15px auto 0 auto;
+    width: var(--total-width);
+}
+
+.akrel-npc-sheet .stat-li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: var(--akrel-color-text-primary);
+    text-align: center;
+    height: 60px;
+    overflow: hidden;
+}
+
+.akrel-npc-sheet .stat-item {
+    color: var(--akrel-color-text-primary) !important;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    width: 60px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.akrel-npc-sheet .stat-item::-webkit-outer-spin-button,
+.akrel-npc-sheet .stat-item::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.akrel-npc-sheet .stat-container {
+    padding-bottom: 15px;
+}
+
+.akrel-npc-sheet .stat-icon {
+    font-size: 2.5em;
+    opacity: 0.6;
+    line-height: 1;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.akrel-npc-sheet .stat-li label {
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-npc-sheet .stat-li a {
+    text-align: center;
+    border: none;
+    margin-top: 40px;
+    padding-bottom: 0px;
+    z-index: 3;
+}
+
+.akrel-npc-sheet .stat-item::placeholder {
+    color: var(--akrel-color-text-primary);
+    opacity: 50%;
+}
+
+/* sheet-body */
+
+.akrel-npc-sheet .sheet-body {
+    margin-top: 300px;
+}
+.akrel-npc-sheet .sheet-tabs {
+    font-size: 1.5em;   
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Resource Layout Container --- */
+.akrel-npc-sheet .resource-layout-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+/* --- Level Input --- */
+.akrel-npc-sheet .level-input-container {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--akrel-color-text-primary);
+    border-bottom: 1px solid var(--akrel-color-text-primary);
+    box-sizing: border-box;
+    background-color: var(--akrel-color-background);
+    box-shadow: none;
+    z-index: 10;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel-npc-sheet .level-input-container .level-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: var(--akrel-color-text-primary);
+    font-size: 2.1em;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    box-sizing: border-box;
+}
+
+.akrel-npc-sheet .level-input::placeholder {
+    color: var(--akrel-color-text-primary);
+    opacity: 50%;
+}
+
+/* --- Resource Row --- */
+.akrel-npc-sheet .resource-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: var(--grid-gap);
+    padding: 0;
+    margin: 0;
+}
+
+/* --- Resource Bars --- */
+.akrel-npc-sheet .akrel-resource-bar {
+    position: relative;
+    width: 375px;
+    height: 50px;
+    border: 1px solid var(--akrel-color-text-primary);
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: none;
+    background-color: var(--akrel-color-background);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.akrel-npc-sheet .akrel-resource-bar .bar-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+
+.akrel-npc-sheet .akrel-resource-bar .bar-fill {
+    height: 100%;
+    width: var(--bar-percentage);
+    transition: width 0.3s ease-in-out;
+}
+
+.akrel-npc-sheet .health-bar .bar-fill { background-color: var(--color-bar-health); }
+.akrel-npc-sheet .mana-bar .bar-fill { background-color: var(--color-bar-mana); }
+
+.akrel-npc-sheet .akrel-resource-bar .bar-label {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--akrel-color-text-primary);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    padding: 0 5px;
+    margin: 0;
+}
+
+.akrel-npc-sheet .akrel-resource-bar .resource-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    color: inherit;
+    font-weight: inherit;
+    font-size: 1em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    width: 35px;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+
+.akrel-npc-sheet .akrel-resource-bar .resource-input.current-value {
+    text-align: right;
+}
+
+.akrel-npc-sheet .akrel-resource-bar .resource-input.max-value {
+    text-align: left;
+}
+
+.akrel-npc-sheet .akrel-resource-bar .separator {
+    font-size: 1em;
+    margin: 0 1px;
+    padding: 0;
+}
+
+.akrel-npc-sheet .item-tab {
+    color: var(--akrel-color-text-primary);
+    border-left: 1px solid var(--akrel-color-text-primary);
+    border-right: 1px solid var(--akrel-color-text-primary);
+    border-bottom: 1px solid var(--akrel-color-text-primary);
+    width: calc(800px /3);
+    height: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.akrel-npc-sheet .item-tab:hover {
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-npc-sheet .item-tab.active{
+    color: var(--akrel-color-interactive);
+    border: none;
+}
+
+/* --- Identity Tab (Table/Grid) --- */
+.akrel-npc-sheet .tab.identity table {
+    width: calc(100% - 60px);
+    margin: 10px;
+    border: none;
+    table-layout: fixed;
+    background-color: transparent;
+    font-size: 1.2em;
+    margin-left: 30px;
+    margin-right: 20px;
+}
+
+.akrel-npc-sheet .tab.identity tr {
+    background-color: transparent;
+}
+
+.akrel-npc-sheet .tab.identity td {
+    border: none;
+    padding: 5px;
+}
+
+.akrel-npc-sheet .tab.identity td:first-child {
+    font-weight: bold;
+    color: var(--akrel-color-interactive);
+    width: 120px;
+    text-align: right;
+}
+.akrel-npc-sheet .tab.identity td:nth-child(odd) {
+    font-weight: bold;
+    color: var(--akrel-color-text-primary);
+    width: 100px;
+    text-align: left;
+}
+
+.akrel-npc-sheet .tab.identity td:nth-child(2) {
+    padding-right: 20px; 
+}
+
+.akrel-npc-sheet .tab.identity td:nth-child(even) { /* Sélectionne les 2ème et 4ème td */
+    width: auto; /* Laisse l'input prendre l'espace restant */
+}
+
+.akrel-npc-sheet .tab.identity input[type="text"] {
+    width: calc(100% - 10px); /* Ajustez si le padding du td est différent, pour qu'il ne déborde pas */
+    box-sizing: border-box; /* Important pour inclure padding et border dans la largeur */
+    background-color: var(--akrel-color-input-background);
+    border: 1px solid var(--akrel-color-border); /* Une bordure légère pour les inputs */
+    color: var(--akrel-color-text-primary);
+    padding: 5px;
+    height: 24px; /* Ajustez la hauteur des inputs si nécessaire */
+    text-align: center; /* Comme sur l'image */
+}
+
+.akrel-npc-sheet .tab.identity input[type="text"]:focus {
+    background-color: var(--akrel-color-interactive);
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-npc-sheet .section-header {
+    color: var(--akrel-color-text-primary);
+    text-align: center;
+    margin-top: 1em;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    font-family: "Modesto Condensed";
+    width: 100%;
+    box-sizing: border-box;
+    border: none;
+    
+    margin-bottom: -11px;
+}
+
+.akrel-npc-sheet textarea {
+    width: calc(100% - 60px);
+    font-size: 1.5em;
+    font-family: "Modesto Condensed";
+    background-color: var(--akrel-color-input-background);
+    border: none;
+    color: var(--akrel-color-text-primary);
+    resize: vertical;
+    box-shadow: none;
+    outline: none;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
 
 
+.akrel-npc-sheet .section-separator {
+    width: 80%; /* Largeur du séparateur, ajustez si besoin */
+    height: 1px; /* Épaisseur du séparateur */
+    background-color: var(--akrel-color-text-primary); /* Couleur du séparateur */
+    margin: 10px auto 10px auto; /* Centre le séparateur et ajoute une marge verticale */
+    margin-bottom: 15px;
+    margin-top: 18px;
+    display: block; /* Assure que c'est un bloc pour la marge auto */
+}
+
+.akrel-npc-sheet .items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.akrel-npc-sheet .items-header {
+    display: flex;
+    align-items: center; /* Centre verticalement le contenu de l'en-tête */
+    text-align: center;
+    font-weight: bold;
+    color: var(--akrel-color-text-primary);
+    border-bottom: 1px solid var(--akrel-color-text-primary);
+    padding: 5px 0; /* Padding vertical, l'horizontal est géré par les largeurs des enfants */
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    min-height: 30px; /* Hauteur minimale pour les en-têtes */
+}
+
+/* --- Largeurs des En-têtes (Headers) --- */
+.akrel-npc-sheet .item-name-header {
+    flex-grow: 1; /* Permet au nom de prendre l'espace restant */
+    min-width: 150px; /* Largeur minimale pour "Nom", ajustez si besoin */
+    max-width: 150px;
+    padding-left: 5px; /* Pour aligner avec l'icône de l'item */
+    text-align: center;
+}
+
+.akrel-npc-sheet .item-level-header {
+    width: 60px; /* Largeur fixe pour "Niveau", ajustez si besoin */
+    text-align: center;
+    flex-shrink: 0; /* Empêche de rétrécir */
+}
+
+.akrel-npc-sheet .item-speed-header {
+    width: 70px; /* Largeur fixe pour "Vitesse", ajustez si besoin */
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.akrel-npc-sheet .item-nature-header {
+    width: 80px; /* Largeur fixe pour "Nature", ajustez si besoin */
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.akrel-npc-sheet .item-cost-header {
+    width: 50px; /* Largeur fixe pour "Coût", ajustez si besoin */
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.akrel-npc-sheet .item-actions-header {
+    flex: 0 0 60px;
+    text-align: center;
+}
 
 
+.akrel-npc-sheet .item-row {
+    display: flex;
+    align-items: center;
+    padding: 5px 0; /* Padding vertical, l'horizontal est géré par les largeurs des enfants */
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    color: var(--akrel-color-text-primary);
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    min-height: 40px; /* Hauteur minimale pour chaque ligne d'item */
+}
+
+.akrel-npc-sheet .item-row:last-child {
+    border-bottom: none;
+}
+
+/* --- Largeurs des Cellules d'Items --- */
+.akrel-npc-sheet .item-name-cell {
+    display: flex;
+    align-items: center;
+    color: var(--akrel-color-interactive);
+    gap: 8px;
+    flex-grow: 1; /* Permet au nom de prendre l'espace restant, comme son header */
+    min-width: 150px; /* Correspond à item-name-header */
+    max-width: 150px;
+    padding-left: 5px; /* Pour aligner l'icône de l'item */
+    box-sizing: border-box;
+    /* Pour gérer le texte qui dépasse si le nom est très long */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.2em;
+}
+
+.akrel-npc-sheet .item-img {
+    width: 30px !important;
+    height: 30px !important;
+    flex-shrink: 0; /* Empêche l'image de rétrécir */
+    object-fit: cover;
+    max-width: 30px;
+    min-width: 30px;
+}
+
+.akrel-npc-sheet .item-name-cell p {
+    margin: 0;
+    flex-grow: 1; /* Permet au texte de prendre l'espace restant dans sa cellule */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.akrel-npc-sheet .item-detail {
+    text-align: center;
+    padding: 0 5px; /* Petit padding pour le contenu interne */
+    box-sizing: border-box;
+    /* Pour gérer le texte qui dépasse */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--akrel-color-text-primary);
+}
+
+/* Appliquez les largeurs fixes aux cellules individuelles */
+.akrel-npc-sheet .item-level-value {
+    width: 60px; /* Correspond à item-level-header */
+    flex-shrink: 0;
+}
+.akrel-npc-sheet .item-speed-value {
+    width: 70px; /* Correspond à item-speed-header */
+    flex-shrink: 0;
+}
+.akrel-npc-sheet .item-nature-value {
+    width: 80px; /* Correspond à item-nature-header */
+    flex-shrink: 0;
+}
+.akrel-npc-sheet .item-cost-value {
+    width: 50px; /* Correspond à item-cost-header */
+    flex-shrink: 0;
+}
+
+.akrel-npc-sheet .item-actions-cell {
+    flex: 0 0 60px;
+    justify-content: center;
+    gap: 5px;
+    display: flex;
+    align-items: center; /* Centre verticalement les icônes d'action */
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.akrel-npc-sheet .item-control {
+    color: var(--akrel-color-interactive);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: right;
+    justify-content: right;
+}
+
+.akrel-npc-sheet .item-control:hover {
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-npc-sheet .item-list .notes {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.akrel-npc-sheet .item-section {
+    margin-left: 60px;
+    margin-right: 60px;
+}
 
 
+/* ----------------------------------- */
 /* Styling for the Item Roll Chat Card */
+/* ----------------------------------- */
+.akrel-chat-card {
+    
+    border-radius: 5px;
+}
 .akrel-chat-card.akrel-roll-chat-card {
     border: 1px solid #7a7971;
     border-radius: 5px;
@@ -974,6 +1595,10 @@ html {
     height: 50px;
     border: 1px solid #7a7971;
     margin-right: 5px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: 50% 0%;
 }
 
 .akrel-chat-card .card-header h3 {
@@ -1072,20 +1697,15 @@ html {
 
 /* Mise en forme de la description */
 .akrel-chat-card .card-content .flavor-text {
-    margin-top: 10px;
-    padding-top: 10px;
     /* Correction de la taille de la police pour qu'elle s'affiche correctement */
     font-size: 1em; 
     line-height: 1.5;
 }
 
 
-
-
-
-
-
+/* ----------------------------------- */
 /* Styling for the Stat Roll Chat Card */
+/* ----------------------------------- */
 .akrel-chat-card.akrel-stat-roll-chat-card {
     border: 1px solid #7a7971;
     background: rgba(0, 0, 0, 0.05);
@@ -1106,6 +1726,10 @@ html {
     height: 50px;
     border: 1px solid #7a7971;
     margin-right: 5px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    object-position: 50% 0%;
 }
 
 .akrel-stat-roll-chat-card .card-header h3 {
