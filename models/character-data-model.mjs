@@ -15,14 +15,14 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
 
         // Schéma pour les statistiques de base du personnage (Social, Physique, etc.)
         const caracsSchema = new SchemaField({
-            social: new NumberField({ initial: 0}),
-            physical: new NumberField({ initial: 0}),
-            intelligence: new NumberField({ initial: 0 }),
-            dexterity: new NumberField({ initial: 0}),
-            initiative: new NumberField({ initial: 0}),
-            block: new NumberField({ initial: 0}),
-            dodge: new NumberField({ initial: 0}),
-            vigilance: new NumberField({ initial: 0 })
+            social: new NumberField({ initial: 1}),
+            physical: new NumberField({ initial: 1}),
+            intelligence: new NumberField({ initial: 1}),
+            dexterity: new NumberField({ initial: 1}),
+            initiative: new NumberField({ initial: 1}),
+            block: new NumberField({ initial: 1}),
+            dodge: new NumberField({ initial: 1}),
+            vigilance: new NumberField({ initial: 1})
         });
 
 
@@ -56,12 +56,12 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
                     max: new NumberField({ initial: 5 })
                 }, { label: "AKREL.RESOURCES.MANA" }), // Label correctement placé en option de SchemaField
                 armor: new SchemaField({
-                    value: new NumberField({ initial: 0 }),
-                    max: new NumberField({ initial: 0 })
+                    value: new NumberField({ initial: 1 }),
+                    max: new NumberField({ initial: 1 })
                 }, { label: "AKREL.RESOURCES.ARMOR" }), // Label correctement placé en option de SchemaField
                 barrier: new SchemaField({
-                    value: new NumberField({ initial: 0 }),
-                    max: new NumberField({ initial: 0 })
+                    value: new NumberField({ initial: 1 }),
+                    max: new NumberField({ initial: 1 })
                 }, { label: "AKREL.RESOURCES.BARRIER" }) // Label correctement placé en option de SchemaField
             }),
 

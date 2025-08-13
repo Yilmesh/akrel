@@ -1,19 +1,27 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="akrel-item-sheet akrel-loot-sheet" autocomplete="off">
     <header class="loot-sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom"/></h1>
+        <div class="header-container">
+            <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+            <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Nom"/>
+        </div>
     </header>
     
-    <section class="loot-sheet-body">
-        <table>
-            <tr>
-                <td>{{localize "AKREL.LOOT.QUANTITY"}}</td>
-                <td><input name="system.quantity" type="number" value="{{system.quantity}}"/></td>
-                <td>{{localize "AKREL.LOOT.PRICE"}}</td>
-                <td><input name="system.price" type="number" value="{{system.price}}"/></td>
-            </tr>
-        </table>
-        {{localize "AKREL.ITEM.DESCRIPTION"}}
-        <textarea name="system.description">{{system.description}}</textarea>
+    <section class="sheet-body">
+        <div class="title-div stacked">
+            <label class="title">{{localize "AKREL.ITEM.DESCRIPTION"}}</label>
+            <textarea name="system.description">{{system.description}}</textarea>
+        </div>
+
+        <div class="form-group-desc">
+            <div class="form-group">
+                <label>{{localize "AKREL.LOOT.QUANTITY"}}</label>
+                <input name="system.quantity" type="number" value="{{system.quantity}}"/>
+            </div>
+
+            <div class="form-group">
+                <label>{{localize "AKREL.LOOT.PRICE"}}</label>
+                <input name="system.price" type="number" value="{{system.price}}"/>
+            </div>
+        </div>
     </section>
 </form>

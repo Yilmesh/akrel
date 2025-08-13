@@ -50,6 +50,13 @@ html {
 
 .akrel-character-sheet {
     font-family: "Modesto Condensed";
+    font-size: 1.1em;
+}
+
+.akrel-sheet input::placeholder {
+    color: var(--akrel-color-text-primary);
+    background-color: var(--akrel-color-header-background);
+    border: var(--akrel-color-interactive) 1px dotted;
 }
 
 /* --- Scrollbar Styles (WebKit - Chrome, Edge, Safari, Brave) --- */
@@ -97,6 +104,14 @@ html {
 .window-content {
     padding: 0;
     margin: 0;
+}
+
+.akrel-item-sheet {
+    padding: 8px;
+}
+
+.akrel-sheet .notes{
+    font-size: 1.5em;
 }
 
 /* --- General Sheet Scoping --- */
@@ -218,19 +233,12 @@ html {
     margin: 0;
 }
 
-.akrel-character-sheet .character-name:placeholder-shown {
-    border: 1px solid var(--akrel-color-text-primary);
-}
-
 .akrel-character-sheet .job {
     font-size: 2em;
     padding: 0;
     margin: 0;
 }
 
-.akrel-character-sheet .job:placeholder-shown {
-    border: 1px solid var(--akrel-color-text-primary);
-}
 
 /* --- Experience Input --- */
 .akrel-character-sheet .experience {
@@ -250,6 +258,8 @@ html {
     outline: none;
     -webkit-appearance: none;
     -moz-appearance: textfield;
+    justify-content: center;
+    align-items: center;
 }
 
 .akrel-character-sheet .experience-text {
@@ -260,8 +270,7 @@ html {
     outline: none;
     -webkit-appearance: none;
     -moz-appearance: textfield;
-    margin-right: 5px;
-    margin-top: 4px;
+    
 }
 
 .akrel-character-sheet .experience-text:focus {
@@ -442,12 +451,12 @@ html {
 }
 
 /* --- Input Focus Styles --- */
-.akrel-character-sheet input:focus,
-.akrel-character-sheet textarea:focus {
+.akrel-sheet input:focus,
+.akrel-sheet textarea:focus {
     outline: none !important;
     box-shadow: none !important;
-    border-color: var(--akrel-color-interactive) !important;
-    background-color: var(--akrel-color-input-background) !important;
+    border-color: var(--akrel-color-header-background) !important;
+    background-color: var(--akrel-color-header-background) !important;
 }
 
 /* --- Statistics Panel --- */
@@ -587,6 +596,7 @@ html {
     align-items: center;
 }
 
+
 /* --- Item Lists (Skills, Spells, etc.) --- */
 .akrel-character-sheet .story {
     width: 470px;
@@ -656,8 +666,8 @@ html {
 /* --- Largeurs des En-têtes (Headers) --- */
 .akrel-character-sheet .item-name-header {
     flex-grow: 1; /* Permet au nom de prendre l'espace restant */
-    min-width: 150px; /* Largeur minimale pour "Nom", ajustez si besoin */
-    max-width: 150px;
+    min-width: 175px; /* Largeur minimale pour "Nom", ajustez si besoin */
+    max-width: 175px;
     padding-left: 5px; /* Pour aligner avec l'icône de l'item */
     text-align: center;
 }
@@ -714,8 +724,8 @@ html {
     color: var(--akrel-color-interactive);
     gap: 8px;
     flex-grow: 1; /* Permet au nom de prendre l'espace restant, comme son header */
-    min-width: 150px; /* Correspond à item-name-header */
-    max-width: 150px;
+    min-width: 175px; /* Correspond à item-name-header */
+    max-width: 175px;
     padding-left: 5px; /* Pour aligner l'icône de l'item */
     box-sizing: border-box;
     /* Pour gérer le texte qui dépasse si le nom est très long */
@@ -742,6 +752,10 @@ html {
     text-overflow: ellipsis;
     font-weight: bold;
     line-height: 1.2;
+}
+
+.group-member-row {
+    text-align: center;
 }
 
 .akrel-character-sheet .item-detail {
@@ -897,6 +911,11 @@ html {
     outline: none;
 }
 
+.akrel-character-sheet textarea::placeholder {
+    color: var(--akrel-color-text-primary);
+    opacity: 0.5;
+}
+
 
 .akrel-character-sheet .add-group-member {
     display: flex;
@@ -934,6 +953,7 @@ html {
     overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
+    margin-right: 10px;
 }
 
 /* --- Identity Grid --- */
@@ -963,7 +983,7 @@ html {
 /* ----------------------------------- */
 .akrel-npc-sheet {
     font-family: "Modesto Condensed" !important;
-    font-size: 1em !important;
+    font-size: 1.2em !important;
     background-color: var(--akrel-color-background);
 }
 
@@ -989,6 +1009,10 @@ html {
     width: 200px;
 }
 
+.akrel-npc-sheet .header-item{
+    height: 75px;
+}
+
 .akrel-npc-sheet .character-name {
     border: none;
     background-color: transparent;
@@ -1003,7 +1027,7 @@ html {
     height: 180px;
     border: 3px solid var(--akrel-color-text-primary);
     border-radius: 100%;
-    margin-top: 1em;
+    margin-top: -0.5em;
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;
@@ -1011,18 +1035,13 @@ html {
 }
 
 .akrel-npc-sheet .job {
-    margin-top: 0.6em;
+    margin-top: -0.5em;
     border: none;
     background-color: transparent;
     box-shadow: none;
     font-size: 2em;
     text-align: center;
     color: var(--akrel-color-text-primary);
-}
-
-.akrel-npc-sheet .job::placeholder {
-    color: var(--akrel-color-text-primary);
-    opacity: 50%;
 }
 
 .akrel-npc-sheet .stat-ul {
@@ -1049,6 +1068,12 @@ html {
     text-align: center;
     height: 60px;
     overflow: hidden;
+}
+
+.akrel-npc-sheet .stat-li input{
+    color: var(--akrel-color-text-primary) !important;
+    font-size: 2.5em;
+    font-weight: bolder;
 }
 
 .akrel-npc-sheet .stat-item {
@@ -1109,11 +1134,6 @@ html {
     z-index: 3;
 }
 
-.akrel-npc-sheet .stat-item::placeholder {
-    color: var(--akrel-color-text-primary);
-    opacity: 50%;
-}
-
 /* sheet-body */
 
 .akrel-npc-sheet .sheet-body {
@@ -1168,11 +1188,6 @@ html {
     -webkit-appearance: none;
     -moz-appearance: textfield;
     box-sizing: border-box;
-}
-
-.akrel-npc-sheet .level-input::placeholder {
-    color: var(--akrel-color-text-primary);
-    opacity: 50%;
 }
 
 /* --- Resource Row --- */
@@ -1295,7 +1310,7 @@ html {
     border: none;
     table-layout: fixed;
     background-color: transparent;
-    font-size: 1.2em;
+    font-size: 1.3em;
     margin-left: 30px;
     margin-right: 20px;
 }
@@ -1331,7 +1346,7 @@ html {
 }
 
 .akrel-npc-sheet .tab.identity input[type="text"] {
-    width: calc(100% - 10px); /* Ajustez si le padding du td est différent, pour qu'il ne déborde pas */
+    width: 200px; /* Ajustez si le padding du td est différent, pour qu'il ne déborde pas */
     box-sizing: border-box; /* Important pour inclure padding et border dans la largeur */
     background-color: var(--akrel-color-input-background);
     border: 1px solid var(--akrel-color-border); /* Une bordure légère pour les inputs */
@@ -1459,6 +1474,7 @@ html {
     flex-wrap: nowrap;
     box-sizing: border-box;
     min-height: 40px; /* Hauteur minimale pour chaque ligne d'item */
+    font-size: 1.2em;
 }
 
 .akrel-npc-sheet .item-row:last-child {
@@ -1819,3 +1835,190 @@ html {
     color: var(--akrel-color-interactive);
     font-size: 2em;
 }
+
+/* ----------------------------------- */
+/*              CSS ITEM               */
+/* ----------------------------------- */
+
+.akrel-item-sheet {
+    background-color: var(--akrel-color-background);
+    color: var(--akrel-color-text-primary);
+    margin: 0;
+    padding: 0;
+}
+
+
+.akrel-item-sheet .header-container {
+    display: flex;
+    gap: 1em;
+    margin-left: 1em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.akrel-item-sheet img {
+    border: none;
+    background-color: var(--akrel-color-input-background);
+}
+
+.akrel-item-sheet .item-name {
+    height: 64px;
+    width: 21em;
+    padding-left: 1em;
+    font-size: 1.7em;
+}
+
+.akrel-item-sheet button {
+    color: var(--akrel-color-text-primary);
+    background-color: var(--akrel-color-input-background);
+    border: none;
+    font-size: 1.2em;
+    height: 2.5em;
+}
+
+.akrel-item-sheet button:hover {
+    color: var(--akrel-color-text-primary);
+    background-color: var(--akrel-color-header-background);
+   
+}
+
+.akrel-item-sheet nav {
+    border: none;
+    font-size: 1.2em;
+    width: 100%;
+    margin-bottom: 1em;
+    margin-top: 0.1em;
+}
+
+.akrel-item-sheet nav a {
+    color: var(--akrel-color-text-primary);
+    width: 50%;
+}
+
+.akrel-item-sheet nav a.active {
+    background-color: var(--akrel-color-header-background);
+}
+
+.akrel-item-sheet .tab {
+    margin-top: -5px;
+    background-color: var(--akrel-color-background);
+    min-height: 200px;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.akrel-item-sheet input {
+    color: var(--akrel-color-text-primary);
+    background-color: var(--akrel-color-input-background);
+    border: none;
+}
+
+.akrel-item-sheet .title-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.akrel-item-sheet .title {
+    width: 50%;
+    font-size: 1.5em;
+    text-align: center;
+    border-bottom: 1px dashed var(--akrel-color-text-primary);
+    margin-bottom: 0.7em;
+}
+
+.akrel-item-sheet textarea {
+    background-color: var(--akrel-color-input-background);
+    color: var(--akrel-color-text-primary);
+    border: none;
+    width: 90%;
+    margin-bottom: 1em;
+}
+
+.akrel-item-sheet label {
+    margin-top: 0.5em;
+}
+
+.akrel-item-sheet .form-group-desc {
+    display: flex;
+    gap: 2em;
+}
+
+.akrel-item-sheet .form-group-desc label{
+    text-align: right;
+    padding-right: 1em;
+}
+
+.akrel-item-sheet .form-group-desc input{
+    width: 200px;
+}
+
+.akrel-item-sheet .tab.configuration {
+    margin-left: 1em;
+    margin-right: 1em;
+    font-size: 1.2em;
+}
+
+.akrel-item-sheet .tab.configuration .title {
+    font-size: 1.2em;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.akrel-item-sheet select {
+    background-color: var(--akrel-color-input-background);
+    color: var(--akrel-color-text-primary);
+    border: none;
+}
+
+.akrel-item-sheet option {
+    background-color: var(--akrel-color-input-background);
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-armor-sheet label {
+    margin-left: 1em;
+}
+
+.akrel-armor-sheet input {
+    margin-right: 1em;
+}
+
+.akrel-armor-sheet select {
+    margin-right: 1em;
+}
+
+.akrel-armor-sheet .title {
+    margin-top: -0.1em;
+}
+
+
+.akrel-spell-sheet select {
+    background-color: var(--akrel-color-input-background);
+    color: var(--akrel-color-text-primary);
+    border: none;
+}
+
+.akrel-spell-sheet option {
+    background-color: var(--akrel-color-input-background);
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-spell-sheet label {
+    margin-left: 1em;
+}
+
+.akrel-spell-sheet input {
+    margin-right: 1em;
+}
+
+.akrel-spell-sheet .tab.details {
+    font-size: 1.2em;
+    margin-left: 0;
+}
+
+.akrel-spell-sheet select {
+    margin-right: 1em;
+}
+

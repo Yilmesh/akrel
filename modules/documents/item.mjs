@@ -8,25 +8,7 @@ export class AKRELItem extends Item {
 
     /** @inheritdoc */
     static async create(data, options = {}) {
-        if (data.img === undefined) {
-            switch(data.type) {
-                case "weapon":
-                    data.img = "systems/akrel/assets/icons/weapon.svg";
-                    break;
-                case "armor":
-                    data.img = "systems/akrel/assets/icons/armor.png";
-                    break;
-                case "loot":
-                    data.img = "systems/akrel/assets/icons/loot.png";
-                    break;
-                case "spell":
-                    data.img = "systems/akrel/assets/icons/spell.svg";
-                    break;
-                case "passive":
-                    data.img = "systems/akrel/assets/icons/passive.svg";
-                    break;
-            }
-        }
+        
         return super.create(data, options);
     }
 

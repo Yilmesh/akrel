@@ -28,6 +28,10 @@ export class AKRELActor extends Actor {
         this._prepareAkrelActorData();
     }
 
+    /**
+     * Prepare data for the Akrel system.
+     * @private
+     */
     _prepareAkrelActorData() {
         const systemData = this.system;
 
@@ -47,15 +51,29 @@ export class AKRELActor extends Actor {
      */
     _prepareCharacterData(characterData) {
         if (this.type !== 'character') return;
+        
+        // Ensure that resources are properly initialized, if they are undefined
+        characterData.resources = characterData.resources || {};
+        characterData.resources.health = characterData.resources.health || { value: 0, max: 0 };
+        characterData.resources.mana = characterData.resources.mana || { value: 0, max: 0 };
+        characterData.resources.stamina = characterData.resources.stamina || { value: 0, max: 0 };
+
         // console.log(`AKREL | Préparation des données dérivées pour le personnage ${this.name}`);
     }
     
     /**
-     * @param {object} npcData  
+     * @param {object} npcData  
      * @private
      */
     _prepareNpcData(npcData) {
         if (this.type !== 'npc') return;
+
+        // Ensure that resources are properly initialized, if they are undefined
+        npcData.resources = npcData.resources || {};
+        npcData.resources.health = npcData.resources.health || { value: 0, max: 0 };
+        npcData.resources.mana = npcData.resources.mana || { value: 0, max: 0 };
+        npcData.resources.stamina = npcData.resources.stamina || { value: 0, max: 0 };
+
         // console.log(`AKREL | Préparation des données dérivées pour le PNJ ${this.name}`);
     }
 
@@ -68,6 +86,8 @@ export class AKRELActor extends Actor {
      * @override
      */
     _preUpdate(changes, options, userId) {
+        // This is called before the update, ensuring that any modifications
+        // to the actor's data are valid.
         super._preUpdate(changes, options, userId);
 
         // Check for resource updates and validate values against their maximums.
@@ -166,7 +186,7 @@ export class AKRELActor extends Actor {
             const rollFormula = "1d100";
             const roll = new Roll(rollFormula, this.getRollData());
             
-            // Correction ici : retirer l'option { async: true } pour la compatibilité
+            // Correction here : remove the { async: true } option for compatibility
             await roll.evaluate(); 
             
             const rollResult = roll.total;

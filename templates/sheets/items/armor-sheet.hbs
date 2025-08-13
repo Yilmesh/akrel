@@ -1,38 +1,42 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="akrel-item-sheet akrel-armor-sheet" autocomplete="off">
     <header class="armor-sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom"/></h1>
+        <div class="header-container">
+            <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+            <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="Nom"/>
+        </div>
     </header>
     
-    <section class="armor-sheet-body">
-        <table>
-            <tr>
-                <td>{{localize "AKREL.ARMOR.WORN_LOCATION"}}</td>
-                <td>
-                    <select name="system.wornLocation">
-                        {{selectOptions config.wornLocations selected=system.wornLocation localize=true}}
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>{{localize "AKREL.ARMOR.TYPE"}}</td>
-                <td><input name="system.armorType" type="text" value="{{system.armorType}}" /></td>
-            </tr>
-            <tr></tr>
-                <td>{{localize "AKREL.ARMOR.DURABILITY"}}</td>
-                <td><input name="system.durability" type="text" value="{{system.durability}}"/></td>
-            </tr>
-            <tr>
-                <td>{{localize "AKREL.ARMOR.DEFENSE_POINTS"}}</td>
-                <td><input name="system.defensePoints" type="number" value="{{system.defensePoints}}"/></td>
-            </tr>
-            <tr>
-                <td>{{localize "AKREL.ARMOR.PRICE"}}</td>
-                <td><input name="system.price" type="number" value="{{system.price}}"/></td>
-            </tr>
-        </table>
+    <section class="sheet-body">
+        <div class="title-div stacked">
+            <label class="title">{{localize "AKREL.ITEM.DESCRIPTION"}}</label>
+            <textarea name="system.description">{{system.description}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>{{localize "AKREL.ARMOR.WORN_LOCATION"}}</label>
+            <select name="system.wornLocation">
+                {{selectOptions config.wornLocations selected=system.wornLocation localize=true}}
+            </select>
+        </div>
         
-        {{localize "AKREL.ITEM.DESCRIPTION"}}
-        <textarea name="system.description">{{system.description}}</textarea>
+        <div class="form-group">
+            <label>{{localize "AKREL.ARMOR.TYPE"}}</label>
+            <input name="system.armorType" type="text" value="{{system.armorType}}" />
+        </div>
+
+        <div class="form-group">
+            <label>{{localize "AKREL.ARMOR.DURABILITY"}}</label>
+            <input name="system.durability" type="text" value="{{system.durability}}"/>
+        </div>
+
+        <div class="form-group">
+            <label>{{localize "AKREL.ARMOR.DEFENSE_POINTS"}}</label>
+            <input name="system.defensePoints" type="number" value="{{system.defensePoints}}"/>
+        </div>
+
+        <div class="form-group">
+            <label>{{localize "AKREL.ARMOR.PRICE"}}</label>
+            <input name="system.price" type="number" value="{{system.price}}"/>
+        </div>
     </section>
 </form>

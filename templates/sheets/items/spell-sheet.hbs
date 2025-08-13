@@ -1,42 +1,62 @@
-<form class="{{cssClass}}" autocomplete="off">
+<form class="akrel-item-sheet akrel-spell-sheet" autocomplete="off">
     <header class="spell-sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'ITEM.Name'}}"/></h1>
+        <div class="header-container">
+            <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+            <input class="item-name" name="name" type="text" value="{{item.name}}" placeholder="{{localize 'ITEM.Name'}}"/>
+        </div>
     </header>
 
-    {{!-- Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="description">{{localize "AKREL.SHEET.DESCRIPTION_TAB"}}</a>
-        <a class="item" data-tab="details">{{localize "AKREL.SHEET.DETAILS_TAB"}}</a>
-    </nav>
+    
 
     <section class="sheet-body">
+        <div class="form-group-button">
+            <button type="button" class="item-control" data-action="rollSpell">
+                <i class="fas fa-magic"></i> {{localize "AKREL.SPELL.CAST_SPELL"}}
+            </button>
+        </div>
+        
+        {{!-- Navigation --}}
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="description">{{localize "AKREL.SHEET.DESCRIPTION_TAB"}}</a>
+            <a class="item" data-tab="details">{{localize "AKREL.SHEET.DETAILS_TAB"}}</a>
+        </nav>
+
         {{!-- Contenu de l'onglet Description --}}
         <div class="tab description" data-group="primary" data-tab="description">
-            <label for="system.description">{{localize "AKREL.ITEM.DESCRIPTION"}}</label>
-            <textarea name="system.description">{{system.description}}</textarea>
+            <div class="title-div stacked">
+                <label class="title">{{localize "AKREL.ITEM.DESCRIPTION"}}</label>
+                <textarea name="system.description">{{system.description}}</textarea>
+            </div>
+
+            <div class="form-group-desc">
+                <div class="form-group">
+                    <label>{{localize "AKREL.SPELL.LEVEL"}}</label>
+                    <input type="number" name="system.spellLevel" value="{{system.spellLevel}}" data-dtype="Number"/>
+                </div>
+                <div class="form-group">
+                    <label>{{localize "AKREL.SPELL.MANA_COST"}}</label>
+                    <input name="system.manaCost" type="number" value="{{system.manaCost}}" data-dtype="Number"/>
+                </div>
+
+            </div>
         </div>
 
-        {{!-- Contenu de l'onglet Détails --}}
-        <div class="tab details" data-group="primary" data-tab="details">
+            {{!-- Contenu de l'onglet Détails --}}
+        <div class="tab details" data-group="primary" data-tab="details">    
             <div class="form-group">
-    <label>{{localize "AKREL.ITEM.SpellType"}}</label>
-    <select name="system.spellType">
-        {{#select system.spellType}}
-        <option value="offensive">{{localize "AKREL.ITEM.SpellTypeOffensive"}}</option>
-        <option value="healing">{{localize "AKREL.ITEM.SpellTypeHealing"}}</option>
-        <option value="utility">{{localize "AKREL.ITEM.SpellTypeUtility"}}</option>
-        {{/select}}
-    </select>
-</div>
-            <div class="form-group">
-                <label>{{localize "AKREL.SPELL.LEVEL"}}</label>
-                <input type="number" name="system.spellLevel" value="{{system.spellLevel}}" data-dtype="Number"/>
+                <label>{{localize "AKREL.ITEM.SpellType"}}</label>
+                <select name="system.spellType">
+                    {{#select system.spellType}}
+                    <option value="offensive">{{localize "AKREL.ITEM.SpellTypeOffensive"}}</option>
+                    <option value="healing">{{localize "AKREL.ITEM.SpellTypeHealing"}}</option>
+                    <option value="utility">{{localize "AKREL.ITEM.SpellTypeUtility"}}</option>
+                    {{/select}}
+                </select>
             </div>
             <div class="form-group">
-                <label>{{localize "AKREL.SPELL.MANA_COST"}}</label>
-                <input name="system.manaCost" type="number" value="{{system.manaCost}}" data-dtype="Number"/>
-            </div>
+                <label>{{localize "AKREL.SPELL.NATURE"}}</label>
+                <input name="system.spellNature" type="text" value="{{system.spellNature}}"/>
+            </div>          
             <div class="form-group">
                 <label>{{localize "AKREL.SPELL.ATTACK_ATTRIBUTE"}}</label>
                 <select name="system.attackAttribute" data-dtype="String">
@@ -51,20 +71,8 @@
                 <label>{{localize "AKREL.SPELL.EFFECT_DICE_FORMULA"}}</label> <input name="system.dice" type="text" value="{{system.dice}}" placeholder="ex: 2d6+3 ou 1d4"/>
             </div>
             <div class="form-group">
-                <label>{{localize "AKREL.SPELL.NATURE"}}</label>
-                <input name="system.spellNature" type="text" value="{{system.spellNature}}"/>
-            </div>
-            <div class="form-group">
                 <label>{{localize "AKREL.SPELL.IS_QUICK_SPELL"}}</label>
                 <input type="checkbox" name="system.isQuickSpell" {{checked system.isQuickSpell}} data-dtype="Boolean"/>
-            </div>
-
-            <div class="form-group">
-                <button type="button" class="item-control" data-action="rollSpell">
-                    <i class="fas fa-magic"></i> {{localize "AKREL.SPELL.CAST_SPELL"}}
-                </button>
-                <button type="button" class="roll-damage"> <i class="fas fa-dice-d20"></i> {{localize "AKREL.SPELL.ROLL_EFFECT_SIMPLE"}}
-                </button>
             </div>
         </div>
     </section>

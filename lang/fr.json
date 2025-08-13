@@ -68,24 +68,27 @@
             "LEVEL": "Niveau"
         },
         "SPELL": {
-            "ATTACK_ATTRIBUTE": "Attaque avec :",
+            "ATTACK_ATTRIBUTE": "Attaque avec",
+            "EFFECT_DICE_FORMULA" : "Dé",
             "MANA_COST": "Coût en Mana",
             "NATURE": "Nature du sort",
             "LEVEL": "Niveau du sort",
             "DAMAGE_DICE": "Dés de dégâts",
             "IS_QUICK_SPELL": "Sort rapide",
-            "HEALING": "Soins"
+            "HEALING": "Soins",
+            "CAST_SPELL":"Lancer le sort"
         },
         "PASSIVE": {
             "LEVEL": "Niveau",
             "NATURE": "Nature"
         },
         "SHEET": {
+            "DETAILS_TAB": "Configuration",
             "COMPETENCIES": "Compétences",
             "SPELLS": "Compétences",
             "PASSIVE_NAME": "Nom",
             "SPELL_NAME": "Nom",
-            "QUICK_SPELL_SHORT": "Vitesse",
+            "QUICK_SPELL_SHORT": "Rapide",
             "NATURE": "Nature",
             "LEVEL": "Niveau",
             "TYPE": "Type",
@@ -93,15 +96,15 @@
             "CAST_SPELL": "Lancer le sort",
             "EDIT_ITEM": "Éditer l'objet",
             "DELETE_ITEM": "Supprimer l'objet",
-            "NO_SPELLS_FOUND": "Aucune compétence trouvé. Cliquez sur le '+' pour en ajouter un.",
-            "NO_PASSIFS_FOUND": "Aucune compétence passive trouvé. Cliquez sur le '+' pour en ajouter un.",
-            "NO_ARMORS_FOUND": "Aucune armure trouvé. Cliquez sur le '+' pour en ajouter un.",
-            "NO_WEAPONS_FOUND": "Aucune arme trouvé. Cliquez sur le '+' pour en ajouter un.",
-            "NO_LOOTS_FOUND": "Aucun butin trouvé. Cliquez sur le '+' pour en ajouter un.",
+            "NO_SPELLS_FOUND": "Aucune compétence trouvé.",
+            "NO_PASSIVES_FOUND": "Aucune compétence passive trouvé.",
+            "NO_ARMORS_FOUND": "Aucune armure trouvé.",
+            "NO_WEAPONS_FOUND": "Aucune arme trouvé.",
+            "NO_LOOTS_FOUND": "Aucun butin trouvé.",
             "PASSIVES": "Passives",
             "CONFIRM_DELETE": "Confirmer la suppression",
             "CONFIRM_DELETE_ITEM": "Voulez-vous vraiment supprimer {itemName} ?",
-            "DESCRIPTION_TAB": "Description",
+            "DESCRIPTION_TAB": "Informations",
             "CONFIGURATION_TAB": "Configuration",
             "ARMEMENTS": "Armements",
             "ARMORS": "Armures",
@@ -114,7 +117,8 @@
             "GROUP_MEMBER_NAME": "Nom",
             "GROUP_MEMBER_OPINION": "Opinion",
             "QUICK_TRUE": "Oui",
-            "QUICK_FALSE": "Non"
+            "QUICK_FALSE": "Non",
+            "NO_GROUP_MEMBERS_FOUND": "Pas d'opinion"
         },
         "CHAT": {
             "DAMAGE": "Résultat",
@@ -153,6 +157,8 @@
         },
         "ITEM": {
             "DESCRIPTION": "DESCRIPTION",
+            "INFORMATION": "INFORMATIONS",
+            "CONFIGURATION": "CONFIGURATION",
             "HEAD": "Tête",
             "CHEST": "Torse",
             "ARMS": "Mains",

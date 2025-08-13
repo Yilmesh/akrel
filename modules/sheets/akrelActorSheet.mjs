@@ -49,6 +49,11 @@ export default class akrelActorSheet extends ActorSheet {
         context.system = this.actor.system;
         context.config = CONFIG.AKREL;
         
+        // S'assure que groupMembers est toujours un tableau pour une utilisation correcte dans le template
+        if (context.system.groupMembers && !Array.isArray(context.system.groupMembers)) {
+            context.system.groupMembers = Object.values(context.system.groupMembers);
+        }
+
         this._prepareCharacterItems(context);
         
         return context;
@@ -66,15 +71,11 @@ export default class akrelActorSheet extends ActorSheet {
         
         html.find('.stat-roll').on('click', this._onStatRoll.bind(this));
         html.find('.item-delete').on('click', this._onItemDelete.bind(this));
-        html.find(".add-group-member").on('click', async ev => {
-            const currentMembers = this.actor.system.groupMembers || [];
-            const newMember = { name: "", opinion: "" };
-            
-            await this.actor.update({
-                "system.groupMembers": [...currentMembers, newMember]
-            });
-        });
+        
+        html.find(".add-group-member").on('click', this._onGroupMemberAdd.bind(this));
+        
         html.find('.group-member-delete').on('click', this._onGroupMemberDelete.bind(this));
+        
         html.find('.item-roll').on('click', ev => {
             const li = $(ev.currentTarget).parents(".item-row");
             const item = this.actor.items.get(li.data("itemId"));
@@ -86,6 +87,7 @@ export default class akrelActorSheet extends ActorSheet {
                 }
             }
         });
+        
         html.find('.item-name-cell .item-img, .item-name-cell p').on('click', ev => {
             const li = $(ev.currentTarget).parents(".item-row");
             const item = this.actor.items.get(li.data("itemId"));
@@ -93,8 +95,39 @@ export default class akrelActorSheet extends ActorSheet {
                 item.sheet.render(true);
             }
         });
+
+        // NOUVEAU: Ajout de la logique de redimensionnement des textareas
+        this._resizeTextareas(html);
+        html.find('textarea').on('input', this._onTextareaInput.bind(this));
+    }
+    
+    /**
+     * Gère l'événement d'entrée sur les textareas pour le redimensionnement.
+     * @param {Event} event L'événement d'entrée.
+     * @private
+     */
+    _onTextareaInput(event) {
+        event.target.style.height = 'auto';
+        event.target.style.height = (event.target.scrollHeight) + 'px';
     }
 
+    /**
+     * Redimensionne toutes les textareas de la feuille à la taille appropriée.
+     * @param {JQuery} html Le contenu HTML de la feuille.
+     * @private
+     */
+    _resizeTextareas(html) {
+        html.find('textarea').each((index, el) => {
+            el.style.height = 'auto';
+            el.style.height = (el.scrollHeight) + 'px';
+        });
+    }
+
+    /**
+     * Prépare et trie les objets de l'acteur par catégorie.
+     * @param {object} context Le contexte de données du template.
+     * @private
+     */
     _prepareCharacterItems(context) {
         const spells = [];
         const passives = [];
@@ -119,6 +152,11 @@ export default class akrelActorSheet extends ActorSheet {
         context.loots = loots.sort((a, b) => (a.sort || 0) - (b.sort || 0));
     }
     
+    /**
+     * Gère le lancement d'un jet de dé pour une statistique.
+     * @param {Event} event L'événement de clic.
+     * @private
+     */
     _onStatRoll(event) {
         event.preventDefault();
         const element = event.currentTarget;
@@ -127,6 +165,11 @@ export default class akrelActorSheet extends ActorSheet {
         this.actor.rollStat(statKey, statValue);
     }
 
+    /**
+     * Gère la suppression d'un objet.
+     * @param {Event} event L'événement de clic.
+     * @private
+     */
     async _onItemDelete(event) {
         event.preventDefault();
         const li = $(event.currentTarget).parents(".item-row");
@@ -142,11 +185,38 @@ export default class akrelActorSheet extends ActorSheet {
         }
     }
 
+    /**
+     * Gère le clic pour l'ajout d'un membre de groupe.
+     * @param {Event} event L'événement de clic.
+     * @private
+     */
+    async _onGroupMemberAdd(event) {
+        event.preventDefault();
+
+        const currentMembers = Array.isArray(this.actor.system.groupMembers)
+            ? [...this.actor.system.groupMembers]
+            : Object.values(this.actor.system.groupMembers || {});
+        
+        const newMember = { name: "", opinion: "" };
+        
+        await this.actor.update({
+            "system.groupMembers": [...currentMembers, newMember]
+        });
+    }
+
+    /**
+     * Gère la suppression d'un membre de groupe.
+     * @param {Event} event L'événement de clic.
+     * @private
+     */
     async _onGroupMemberDelete(event) {
         event.preventDefault();
-        const li = $(event.currentTarget).parents(".group-member-row");
-        const index = li.data("member-index");
-        if (index === undefined || index === null) {
+        
+        const indexString = $(event.currentTarget).data("index");
+        const index = parseInt(indexString, 10);
+
+        if (isNaN(index)) {
+            ui.notifications.error("L'index de suppression du membre de groupe n'est pas valide.");
             return;
         }
 
@@ -156,9 +226,16 @@ export default class akrelActorSheet extends ActorSheet {
         });
 
         if (confirmed) {
-            const groupMembers = [...this.actor.system.groupMembers];
-            groupMembers.splice(index, 1);
-            await this.actor.update({ "system.groupMembers": groupMembers });
+            const groupMembers = Array.isArray(this.actor.system.groupMembers)
+                ? [...this.actor.system.groupMembers]
+                : Object.values(this.actor.system.groupMembers || {});
+            
+            if (index >= 0 && index < groupMembers.length) {
+                groupMembers.splice(index, 1);
+                await this.actor.update({ "system.groupMembers": groupMembers });
+            } else {
+                ui.notifications.error("L'index de suppression du membre de groupe est hors de portée.");
+            }
         }
     }
 }

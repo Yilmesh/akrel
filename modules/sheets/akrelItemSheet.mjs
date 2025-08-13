@@ -26,7 +26,6 @@ export default class akrelItemSheet extends foundry.appv1.sheets.ItemSheet {
         data.system = data.item.system;
 
         // Assurez-vous que les types d'attributs d'attaque sont disponibles pour les listes déroulantes des templates
-        // C'est important pour le selectOptions de votre spell-sheet.hbs
         data.config.attackTypes = {
             "physical": "AKREL.ATTRIBUTES.PHYSICAL",
             "dexterity": "AKREL.ATTRIBUTES.DEXTERITY",
@@ -50,13 +49,35 @@ export default class akrelItemSheet extends foundry.appv1.sheets.ItemSheet {
         // Gère le bouton "Jet d'Effet (Simple)" sur la feuille de sort
         html.find(".roll-damage").click(this._onRollDamageFromSheet.bind(this));
 
-        // Si vous avez d'autres actions spécifiques aux feuilles d'item, ajoutez-les ici
-        // Ex: html.find(".some-other-button").click(this._onSomeOtherAction.bind(this));
+        // Ajout de la logique de redimensionnement des textareas
+        this._resizeTextareas(html);
+        html.find('textarea').on('input', this._onTextareaInput.bind(this));
+    }
+    
+    /**
+     * Gère l'événement d'entrée sur les textareas pour le redimensionnement.
+     * @param {Event} event L'événement d'entrée.
+     * @private
+     */
+    _onTextareaInput(event) {
+        event.target.style.height = 'auto';
+        event.target.style.height = (event.target.scrollHeight) + 'px';
+    }
+
+    /**
+     * Redimensionne toutes les textareas de la feuille à la taille appropriée.
+     * @param {JQuery} html Le contenu HTML de la feuille.
+     * @private
+     */
+    _resizeTextareas(html) {
+        html.find('textarea').each((index, el) => {
+            el.style.height = 'auto';
+            el.style.height = (el.scrollHeight) + 'px';
+        });
     }
 
     /**
      * Gère le clic sur un élément de contrôle d'item sur la feuille d'item.
-     * Pour les actions de jet (arme/sort), elle délègue à la feuille d'acteur si l'item est possédé.
      * @param {Event} event L'événement de clic.
      * @private
      */
@@ -71,12 +92,10 @@ export default class akrelItemSheet extends foundry.appv1.sheets.ItemSheet {
         switch (action) {
             case "rollWeaponAttack":
                 if (item.type === "weapon") {
-                    // Pour qu'un jet d'arme ait du sens avec les stats de l'acteur,
-                    // l'arme doit être possédée par un acteur.
+                    // CORRECTION : Nous appelons directement la méthode roll() de l'item,
+                    // qui est la méthode standard pour déclencher un jet d'item.
                     if (item.parent instanceof Actor) {
-                        // Accède à la feuille de l'acteur parent et appelle sa méthode de jet
-                        // C'est la solution la plus propre car _showItemRollDialog réside sur la feuille d'acteur.
-                        await item.parent.sheet._showItemRollDialog(item, "weaponAttack");
+                        await item.roll();
                     } else {
                         ui.notifications.warn(game.i18n.localize("AKREL.WARNING.NO_ACTOR_FOR_WEAPON_ROLL"));
                         console.warn(`AKREL | Impossible de lancer un jet d'arme sans un acteur possédant cette arme.`);
@@ -86,9 +105,9 @@ export default class akrelItemSheet extends foundry.appv1.sheets.ItemSheet {
 
             case "rollSpell":
                 if (item.type === "spell") {
-                    // Similaire pour les sorts : ils nécessitent un acteur pour les stats de mana et de jet.
+                    // CORRECTION : Même chose pour les sorts, on utilise item.roll().
                     if (item.parent instanceof Actor) {
-                        await item.parent.sheet._showItemRollDialog(item, "spellCast");
+                        await item.roll();
                     } else {
                         ui.notifications.warn(game.i18n.localize("AKREL.WARNING.NO_ACTOR_FOR_SPELL_ROLL"));
                         console.warn(`AKREL | Impossible de lancer un sort sans un acteur possédant ce sort.`);
@@ -97,7 +116,6 @@ export default class akrelItemSheet extends foundry.appv1.sheets.ItemSheet {
                 break;
 
             case "chat":
-                // Si l'item a une méthode toMessage, utilisez-la. Sinon, loggez un avertissement.
                 if (typeof item.toMessage === 'function') {
                     item.toMessage();
                 } else {
@@ -131,12 +149,10 @@ export default class akrelItemSheet extends foundry.appv1.sheets.ItemSheet {
             const roll = new Roll(rollFormula);
             await roll.evaluate({ async: true });
 
-            // On assume que c'est un jet de "dégâts" ou "effet"
-            // Si vous avez besoin de différencier "dégâts" et "soins", il faudrait ajouter un champ `effectType` au SpellDataModel
-            const rollTypeLabel = game.i18n.localize("AKREL.ROLL.EFFECT"); // Ou AKREL.ROLL.DAMAGES si c'est toujours des dégâts
+            const rollTypeLabel = game.i18n.localize("AKREL.ROLL.EFFECT");
 
             const chatContent = await renderTemplate("systems/akrel/templates/chat/simple-damage-roll-card.hbs", {
-                item: item, // Passer l'item pour l'image et le nom dans le template
+                item: item,
                 itemName: item.name,
                 rollResult: roll.total,
                 rollFormula: rollFormula,
@@ -145,7 +161,7 @@ export default class akrelItemSheet extends foundry.appv1.sheets.ItemSheet {
 
             ChatMessage.create({
                 user: game.user._id,
-                speaker: ChatMessage.getSpeaker({ actor: item.actor }), // Utilise l'acteur parent si l'item en a un
+                speaker: ChatMessage.getSpeaker({ actor: item.actor }),
                 content: chatContent,
                 rolls: [roll],
                 sound: CONFIG.sounds.dice

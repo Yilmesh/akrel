@@ -6,7 +6,7 @@
         </div>
         <div class="experience">
             <input class="experience-text" type="number" name="system.experience" value="{{system.experience}}" placeholder="0"/>
-            <p>{{localize "AKREL.CHARACTER.XP"}}</p>
+            <span>{{localize "AKREL.CHARACTER.XP"}}</span>
         </div>
     </header>
 
@@ -63,9 +63,9 @@
                                 <div class="bar-fill" style="width: {{max 0 (percent system.resources.armor.value system.resources.armor.max)}}%;"></div>
                             </div>
                             <div class="bar-label">
-                                <input type="number" name="system.resources.armor.value" value="{{system.resources.armor.value}}" data-dtype="Number" class="resource-input current-value"/>
+                                <input type="number" name="system.resources.armor.value" value="{{system.resources.armor.value}}" data-dtype="Number" class="resource-input current-value" placeholder="0"/>
                                 <span class="separator">&sol;</span>
-                                <input type="number" name="system.resources.armor.max" value="{{system.resources.armor.max}}" data-dtype="Number" class="resource-input max-value"/>
+                                <input type="number" name="system.resources.armor.max" value="{{system.resources.armor.max}}" data-dtype="Number" class="resource-input max-value" placeholder="0"/>
                             </div>
                         </div>
                         <div class="level-placeholder"></div>
@@ -86,56 +86,56 @@
                         <ul class="stat-ul">
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-mandolin"></i>
-                                <input type="number" name="system.caracs.social" value="{{system.caracs.social}}" class="stat-item" data-dtype="Number">
+                                <input type="number" name="system.caracs.social" value="{{system.caracs.social}}" class="stat-item" data-dtype="Number" placeholder="0">
                                 <a class="stat-roll" title="{{localize "AKREL.ATTRIBUTES.SOCIAL"}}" data-stat-key="social" data-stat-value="{{system.caracs.social}}">
                                     <label for="system.caracs.social">{{localize "AKREL.ATTRIBUTES.SOCIAL"}}</label>
                                 </a>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-hourglass-start"></i>
-                                <input type="number" name="system.caracs.initiative" value="{{system.caracs.initiative}}" class="stat-item" data-dtype="Number">
+                                <input type="number" name="system.caracs.initiative" value="{{system.caracs.initiative}}" class="stat-item" data-dtype="Number" placeholder="0">
                                 <a class="stat-roll" title="{{localize "AKREL.ATTRIBUTES.INITIATIVE"}}" data-stat-key="initiative" data-stat-value="{{system.caracs.initiative}}">
                                     <label for="system.caracs.initiative">{{localize "AKREL.ATTRIBUTES.INITIATIVE"}}</label>
                                 </a>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-axe-battle"></i>
-                                <input type="number" name="system.caracs.physical" value="{{system.caracs.physical}}" class="stat-item" data-dtype="Number">
+                                <input type="number" name="system.caracs.physical" value="{{system.caracs.physical}}" class="stat-item" data-dtype="Number" placeholder="0">
                                 <a class="stat-roll" title="{{localize "AKREL.ATTRIBUTES.PHYSICAL"}}" data-stat-key="physical" data-stat-value="{{system.caracs.physical}}">
                                     <label for="system.caracs.physical">{{localize "AKREL.ATTRIBUTES.PHYSICAL"}}</label>
                                 </a>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-shield-halved"></i>
-                                <input type="number" name="system.caracs.block" value="{{system.caracs.block}}" class="stat-item" data-dtype="Number">
+                                <input type="number" name="system.caracs.block" value="{{system.caracs.block}}" class="stat-item" data-dtype="Number" placeholder="0">
                                 <a class="stat-roll" title="{{localize "AKREL.ATTRIBUTES.BLOCK"}}" data-stat-key="block" data-stat-value="{{system.caracs.block}}">
                                     <label for="system.caracs.block">{{localize "AKREL.ATTRIBUTES.BLOCK"}}</label>
                                 </a>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-staff"></i>
-                                <input type="number" name="system.caracs.intelligence" value="{{system.caracs.intelligence}}" class="stat-item" data-dtype="Number">
+                                <input type="number" name="system.caracs.intelligence" value="{{system.caracs.intelligence}}" class="stat-item" data-dtype="Number" placeholder="0">
                                 <a class="stat-roll" title="{{localize "AKREL.ATTRIBUTES.INTELLIGENCE"}}" data-stat-key="intelligence" data-stat-value="{{system.caracs.intelligence}}">
                                     <label for="system.caracs.intelligence">{{localize "AKREL.ATTRIBUTES.INTELLIGENCE"}}</label>
                                 </a>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-person-running-fast"></i>
-                                <input type="number" name="system.caracs.dodge" value="{{system.caracs.dodge}}" class="stat-item" data-dtype="Number">
+                                <input type="number" name="system.caracs.dodge" value="{{system.caracs.dodge}}" class="stat-item" data-dtype="Number" placeholder="0">
                                 <a class="stat-roll" title="{{localize "AKREL.ATTRIBUTES.DODGE"}}" data-stat-key="dodge" data-stat-value="{{system.caracs.dodge}}">
                                     <label for="system.caracs.dodge">{{localize "AKREL.ATTRIBUTES.DODGE"}}</label>
                                 </a>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-bow-arrow"></i>
-                                <input type="number" name="system.caracs.dexterity" value="{{system.caracs.dexterity}}" class="stat-item" data-dtype="Number">
+                                <input type="number" name="system.caracs.dexterity" value="{{system.caracs.dexterity}}" class="stat-item" data-dtype="Number" placeholder="0">
                                 <a class="stat-roll" title="{{localize "AKREL.ATTRIBUTES.DEXTERITY"}}" data-stat-key="dexterity" data-stat-value="{{system.caracs.dexterity}}">
                                     <label for="system.caracs.dexterity">{{localize "AKREL.ATTRIBUTES.DEXTERITY"}}</label>
                                 </a>
                             </li>
                             <li class="stat-li">
                                 <i class="stat-icon fa-solid fa-eye"></i>
-                                <input type="number" name="system.caracs.vigilance" value="{{system.caracs.vigilance}}" class="stat-item" data-dtype="Number">
+                                <input type="number" name="system.caracs.vigilance" value="{{system.caracs.vigilance}}" class="stat-item" data-dtype="Number" placeholder="0">
                                 <a class="stat-roll" title="{{localize "AKREL.ATTRIBUTES.VIGILANCE"}}" data-stat-key="vigilance" data-stat-value="{{system.caracs.vigilance}}">
                                     <label for="system.caracs.vigilance">{{localize "AKREL.ATTRIBUTES.VIGILANCE"}}</label>
                                 </a>
@@ -155,35 +155,35 @@
                     {{!-- Row 1: Age & Morphology --}}
                     <tr>
                         <td>{{localize "AKREL.CHARACTER.AGE"}}</td>
-                        <td><input type="text" name="system.age" value="{{system.age}}" data-dtype="String"></td>
+                        <td><input type="text" name="system.age" value="{{system.age}}" data-dtype="String" placeholder=" "></td>
                         <td>{{localize "AKREL.CHARACTER.MORPHOLOGY"}}</td>
-                        <td><input type="text" name="system.morphology" value="{{system.morphology}}" data-dtype="String"></td>
+                        <td><input type="text" name="system.morphology" value="{{system.morphology}}" data-dtype="String" placeholder=" "></td>
                     </tr>
                     {{!-- Row 2: Origin & Caste --}}
                     <tr>
                         <td>{{localize "AKREL.CHARACTER.ORIGIN"}}</td>
-                        <td><input type="text" name="system.origin" value="{{system.origin}}" data-dtype="String"></td>
+                        <td><input type="text" name="system.origin" value="{{system.origin}}" data-dtype="String" placeholder=" "></td>
                         <td>{{localize "AKREL.CHARACTER.CASTE"}}</td>
-                        <td><input type="text" name="system.caste" value="{{system.caste}}" data-dtype="String"></td>
+                        <td><input type="text" name="system.caste" value="{{system.caste}}" data-dtype="String" placeholder=" "></td>
                     </tr>
                     {{!-- Row 3: Gender & Divinity --}}
                     <tr>
                         <td>{{localize "AKREL.CHARACTER.GENDER"}}</td>
-                        <td><input type="text" name="system.gender" value="{{system.gender}}" data-dtype="String"></td>
+                        <td><input type="text" name="system.gender" value="{{system.gender}}" data-dtype="String" placeholder=" "></td>
                         <td>{{localize "AKREL.CHARACTER.DIVINITY"}}</td>
-                        <td><input type="text" name="system.divinity" value="{{system.divinity}}" data-dtype="String"></td>
+                        <td><input type="text" name="system.divinity" value="{{system.divinity}}" data-dtype="String" placeholder=" "></td>
                     </tr>
                     {{!-- Row 4: Size & Alignment --}}
                     <tr>
                         <td>{{localize "AKREL.CHARACTER.SIZE"}}</td>
-                        <td><input type="text" name="system.size" value="{{system.size}}" data-dtype="String"></td>
+                        <td><input type="text" name="system.size" value="{{system.size}}" data-dtype="String" placeholder=" "></td>
                         <td>{{localize "AKREL.CHARACTER.ALIGNMENT"}}</td>
-                        <td><input type="text" name="system.alignment" value="{{system.alignment}}" data-dtype="String"></td>
+                        <td><input type="text" name="system.alignment" value="{{system.alignment}}" data-dtype="String" placeholder=" "></td>
                     </tr>
                 </table>
                 <h3 class="section-header">{{localize "AKREL.CHARACTER.STORY"}}</h3>
                 <div class="section-separator"></div>
-                <textarea class="story" name="system.story">{{system.story}}</textarea>
+                <textarea class="story" name="system.story" placeholder="votre histoire">{{system.story}}</textarea>
             </div>
 
             {{!-- Competencies Tab Content --}}
@@ -194,7 +194,6 @@
                     <ol class="items-list items-list--spells">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.ITEM_NAME"}}</div>
-                            <div class="item-detail-header">{{localize "AKREL.SHEET.LEVEL"}}</div>
                             <div class="item-detail-header">{{localize "AKREL.SHEET.QUICK_SPELL_SHORT"}}</div>
                             <div class="item-detail-header">{{localize "AKREL.SHEET.NATURE"}}</div>
                             <div class="item-detail-header">{{localize "AKREL.SHEET.COST"}}</div>
@@ -206,7 +205,6 @@
                                     <img class="item-img" src="{{item.img}}" title="{{item.name}}"/>
                                     <p>{{item.name}}</p>
                                 </div>
-                                <div class="item-detail">{{item.system.spellLevel}}</div>
                                 <div class="item-detail">
                                     {{#if item.system.isQuickSpell}}
                                         {{localize "AKREL.SHEET.QUICK_TRUE"}}
@@ -218,7 +216,7 @@
                                 <div class="item-detail">{{item.system.manaCost}}</div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.ROLL"}}" data-action="roll">
-                                        <i class="fas fa-dice"></i>
+                                        <i class="fa-solid fa-dice-d20"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
@@ -252,7 +250,7 @@
                                 <div class="item-detail">{{item.system.Nature}}</div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.USE_PASSIVE"}}" data-item-type="passive" data-action="roll">
-                                        <i class="fas fa-hand-sparkles"></i>
+                                        <i class="fa-solid fa-message-captions"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
@@ -291,7 +289,7 @@
                                 <div class="item-detail">{{item.system.durability}}</div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.USE_WEAPON"}}" data-item-type="weapon" data-action="roll">
-                                        <i class="fas fa-gavel"></i>
+                                        <i class="fa-solid fa-dice-d20"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
@@ -325,7 +323,7 @@
                                 <div class="item-detail">{{item.system.durability}}</div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.USE_WEAPON"}}" data-item-type="weapon" data-action="roll">
-                                        <i class="fas fa-gavel"></i>
+                                        <i class="fa-solid fa-message-captions"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
@@ -333,8 +331,8 @@
                                 </div>
                             </li>
                         {{/each}}
-                        {{#unless weapons}}
-                            <li class="item flexrow"><p class="notes">{{localize "AKREL.SHEET.NO_WEAPONS_FOUND"}}</p></li>
+                        {{#unless armors}}
+                            <li class="item flexrow"><p class="notes">{{localize "AKREL.SHEET.NO_ARMORS_FOUND"}}</p></li>
                         {{/unless}}
                     </ol>
                 </section>
@@ -359,7 +357,7 @@
                                 <div class="item-detail">{{item.system.price}}</div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.USE_LOOT"}}" data-item-type="loot" data-action="roll">
-                                        <i class="fas fa-flask"></i>
+                                        <i class="fa-solid fa-message-captions"></i>
                                     </a>
                                     <a class="item-control item-delete" title="{{localize "AKREL.ACTIONS.DELETE"}}" data-action="delete">
                                         <i class="fas fa-trash"></i>
