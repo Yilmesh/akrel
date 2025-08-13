@@ -148,7 +148,11 @@
             </table>
             <h3 class="section-header">{{localize "AKREL.CHARACTER.STORY"}}</h3>
             <div class="section-separator"></div>
-            <textarea class="story" name="system.story">{{system.story}}</textarea>
+            <div class="editor-container">
+                <div class="editor" data-edit="system.story" data-target="system.story">
+                    {{{editor system.story target="system.story" button=true owner=owner editable=editable}}}
+                </div>
+            </div>
         </div>
 
         {{!-- Competencies Tab Content --}}

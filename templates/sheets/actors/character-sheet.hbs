@@ -1,11 +1,11 @@
 <form class="akrel-sheet akrel-character-sheet" autocomplete="off">
     <header class="sheet-header">
         <div class="header-info">
-            <input class="header-item character-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize "AKREL.CHARACTER.NAME_PLACEHOLDER"}}"/>
-            <input class="header-item job" name="system.job" type="text" value="{{system.job}}" placeholder="{{localize "AKREL.CHARACTER.JOB_PLACEHOLDER"}}"/>
+            <input class="header-item character-name" name="name" type="text" value="{{actor.name}}" placeholder="{{localize "AKREL.CHARACTER.NAME_PLACEHOLDER"}}" data-dtype="String"/>
+            <input class="header-item job" name="system.job" type="text" value="{{system.job}}" placeholder="{{localize "AKREL.CHARACTER.JOB_PLACEHOLDER"}}" data-dtype="String"/>
         </div>
         <div class="experience">
-            <input class="experience-text" type="number" name="system.experience" value="{{system.experience}}" placeholder="0"/>
+            <input class="experience-text" type="number" name="system.experience" value="{{system.experience}}" placeholder="0" data-dtype="Number"/>
             <span>{{localize "AKREL.CHARACTER.XP"}}</span>
         </div>
     </header>
@@ -183,7 +183,11 @@
                 </table>
                 <h3 class="section-header">{{localize "AKREL.CHARACTER.STORY"}}</h3>
                 <div class="section-separator"></div>
-                <textarea class="story" name="system.story" placeholder="votre histoire">{{system.story}}</textarea>
+                <div class="editor-container">
+                    <div class="editor" data-edit="system.story" data-target="system.story">
+                        {{{editor system.story target="system.story" button=true owner=owner editable=editable}}}
+                    </div>
+                </div>
             </div>
 
             {{!-- Competencies Tab Content --}}
@@ -236,7 +240,6 @@
                     <ol class="items-list items-list--passives">
                         <li class="items-header flexrow">
                             <div class="item-name-header">{{localize "AKREL.SHEET.ITEM_NAME"}}</div>
-                            <div class="item-detail-header">{{localize "AKREL.SHEET.LEVEL"}}</div>
                             <div class="item-detail-header">{{localize "AKREL.SHEET.NATURE"}}</div>
                             <div class="item-actions-header"></div>
                         </li>
@@ -246,7 +249,6 @@
                                     <img class="item-img" src="{{item.img}}" title="{{item.name}}"/>
                                     <p>{{item.name}}</p>
                                 </div>
-                                <div class="item-detail">{{item.system.Level}}</div>
                                 <div class="item-detail">{{item.system.Nature}}</div>
                                 <div class="item-actions-cell flexrow">
                                     <a class="item-control item-roll" title="{{localize "AKREL.ACTIONS.USE_PASSIVE"}}" data-item-type="passive" data-action="roll">

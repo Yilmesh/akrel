@@ -96,28 +96,63 @@ export default class akrelActorSheet extends ActorSheet {
             }
         });
 
-        // NOUVEAU: Ajout de la logique de redimensionnement des textareas
-        this._resizeTextareas(html);
-        html.find('textarea').on('input', this._onTextareaInput.bind(this));
+        // NOUVEAU: Écouteur pour l'ouverture de l'éditeur de texte riche en pop-up
+        html.find('.editor-edit-button').on('click', this._onOpenRichTextEditor.bind(this));
+
+        // NOUVEAU: Redimensionnement des textareas, en ignorant celles qui sont des prévisualisations d'éditeur
+        this._resizeNonEditorTextareas(html);
+        html.find('textarea:not(.editor-content-preview)').on('input', this._onNonEditorTextareaInput.bind(this));
+    }
+
+    /**
+     * Gère l'événement de clic pour ouvrir l'éditeur de texte riche dans une pop-up.
+     * @param {Event} event L'événement de clic.
+     * @private
+     */
+    async _onOpenRichTextEditor(event) {
+        event.preventDefault();
+        const button = $(event.currentTarget);
+        const fieldName = button.data("edit-field"); // Ex: "system.story"
+
+        // Récupérer le contenu actuel de la field
+        const currentContent = foundry.utils.getProperty(this.actor, fieldName) || "";
+
+        // Ouvrir l'éditeur de texte riche de Foundry
+        // activateEditor est une méthode de la classe parente ActorSheet
+        this.activateEditor(fieldName, {
+            element: button.closest('.editor-container').find('.editor-content-preview')[0], // Élément visuel de référence
+            save_callback: async (editorName, htmlContent) => {
+                // Callback qui sera appelé lorsque l'éditeur est sauvegardé
+                await this.actor.update({ [editorName]: htmlContent });
+                // Re-rendre la feuille pour que la textarea de prévisualisation soit mise à jour
+                this.render(false); 
+            },
+            // Options supplémentaires pour TinyMCE si nécessaire
+            tinymce: {
+                menubar: false,
+                toolbar: "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                height: 400
+            }
+        });
     }
     
     /**
-     * Gère l'événement d'entrée sur les textareas pour le redimensionnement.
+     * Gère l'événement d'entrée sur les textareas non-éditeurs pour le redimensionnement.
      * @param {Event} event L'événement d'entrée.
      * @private
      */
-    _onTextareaInput(event) {
+    _onNonEditorTextareaInput(event) {
         event.target.style.height = 'auto';
         event.target.style.height = (event.target.scrollHeight) + 'px';
     }
 
     /**
-     * Redimensionne toutes les textareas de la feuille à la taille appropriée.
+     * Redimensionne toutes les textareas de la feuille qui ne sont pas des prévisualisations d'éditeur.
      * @param {JQuery} html Le contenu HTML de la feuille.
      * @private
      */
-    _resizeTextareas(html) {
-        html.find('textarea').each((index, el) => {
+    _resizeNonEditorTextareas(html) {
+        html.find('textarea:not(.editor-content-preview)').each((index, el) => {
             el.style.height = 'auto';
             el.style.height = (el.scrollHeight) + 'px';
         });

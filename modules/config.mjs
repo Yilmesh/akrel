@@ -35,7 +35,9 @@ export const AKREL = {
         "chest": "AKREL.ITEM.CHEST",
         "arms": "AKREL.ITEM.ARMS",
         "pant": "AKREL.ITEM.LEGS",
-        "feets": "AKREL.ITEM.FEETS"
+        "feets": "AKREL.ITEM.FEETS",
+        "shield": "AKREL.ITEM.SHIELDS",
+        "jewel": "AKREL.ITEM.JEWELS"
     },
 
     defaultActorImages: {

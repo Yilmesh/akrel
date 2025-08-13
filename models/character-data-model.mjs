@@ -43,7 +43,7 @@ export class CharacterDataModel extends foundry.abstract.TypeDataModel {
             divinity: new StringField({ initial: ""}),
             size: new StringField({ initial: ""}),
             alignment: new StringField({ initial: ""}),
-            story: new HTMLField({ initial: ""}),
+            story: new HTMLField({ initial: " votre histoire commence ici"}),
 
             // Ressources du personnage - DÉFINITION CORRIGÉE DU LABEL
             resources: new SchemaField({

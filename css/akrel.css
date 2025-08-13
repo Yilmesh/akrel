@@ -547,6 +547,52 @@ html {
     z-index: 3;
 }
 
+/* --- Styles pour l'éditeur pop-up --- */
+.akrel-character-sheet .editor-container {
+    position: relative; /* Conteneur pour positionner le bouton */
+    margin-top: -5px;
+    background-color: var(--akrel-color-input-background);
+    padding: 5px 10px 5px 10px;
+    font-size: 1.3em;
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-character-sheet .editor p {
+    min-height: 200px;
+}
+
+.akrel-character-sheet .editor-content-preview {
+    width: calc(100% - 30px); /* Laisse de l'espace pour le bouton */
+    height: 90px; /* Ajustez la hauteur de la prévisualisation */
+    background-color: transparent; /* Transparente car le fond est sur le container */
+    color: var(--akrel-color-text-primary);
+    border: none;
+    resize: vertical; /* Permet le redimensionnement vertical */
+    overflow-y: auto; /* Active le défilement si le contenu dépasse */
+    padding-right: 10px; /* Pour éviter que le texte ne chevauche le bouton */
+    font-family: inherit; /* Utilise la même police que le reste de la feuille */
+    font-size: 1em; /* Ajustez si nécessaire */
+    line-height: 1.4;
+    cursor: default; /* Indique qu'elle n'est pas directement modifiable */
+    pointer-events: none; /* Empêche la sélection de texte directe */
+}
+
+.akrel-character-sheet .editor a {
+    color: var(--akrel-color-text-primary);
+    background-color: var(--akrel-color-background);
+    border: var(--akrel-color-background);
+}
+
+.akrel-character-sheet .editor i {
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-character-sheet .editor a:hover {
+    background-color: #9a79ad; /* Couleur plus foncée au survol */
+    border: none;
+}
+
+
 /* --- Sheet Tabs (Navigation) --- */
 .akrel-character-sheet .sheet-tabs {
     position: absolute;
@@ -598,11 +644,13 @@ html {
 
 
 /* --- Item Lists (Skills, Spells, etc.) --- */
-.akrel-character-sheet .story {
-    width: 470px;
-    margin-left: 20px;
-    margin-right: 20px;
+.akrel-character-sheet .story { /* Ceci s'applique au div .editor-container */
+    width: calc(100% - 20px); /* Ajusté pour prendre en compte le padding du .editor-container */
+    margin: 0 10px; /* Centré avec une marge horizontale */
+    /* min-height, background-color, color, border, padding, resize sont maintenant sur .editor-container */
+    /* font-size, line-height sont sur .editor-content-preview */
 }
+
 
 .item-section {
     margin-top: 10px;
@@ -624,6 +672,8 @@ html {
     border: none;
     margin-bottom: -11px;
 }
+
+
 
 .akrel-character-sheet .section-separator {
     width: 80%; /* Largeur du séparateur, ajustez si besoin */
@@ -652,7 +702,6 @@ html {
     display: flex;
     align-items: center; /* Centre verticalement le contenu de l'en-tête */
     text-align: center;
-    font-weight: bold;
     color: var(--akrel-color-text-primary);
     border-bottom: 1px solid var(--akrel-color-text-primary);
     padding: 5px 0; /* Padding vertical, l'horizontal est géré par les largeurs des enfants */
@@ -660,6 +709,7 @@ html {
     text-transform: uppercase;
     flex-wrap: nowrap;
     box-sizing: border-box;
+    font-size: 1.2em;
     min-height: 30px; /* Hauteur minimale pour les en-têtes */
 }
 
@@ -895,9 +945,15 @@ html {
     box-shadow: none;
 }
 
-.akrel-character-sheet textarea {
+.akrel-character-sheet .group-member-row {
+    font-size: 1.2em;
+    min-height: auto;
+
+}
+
+.akrel-character-sheet textarea { /* Ceci s'applique aux textareas des membres du groupe */
     width: 100%;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-family: "Modesto Condensed";
     background-color: var(--akrel-color-input-background);
     color: var(--akrel-color-text-primary);
@@ -1303,6 +1359,63 @@ html {
     border: none;
 }
 
+/* --- Styles pour l'éditeur pop-up (NPC Sheet) --- */
+.akrel-npc-sheet .editor-container {
+    position: relative; /* Conteneur pour positionner le bouton */
+    width: calc(100% - 60px); /* Ajusté pour prendre en compte les marges précédentes */
+    margin-left: 30px;
+    margin-right: 30px;
+    background-color: var(--akrel-color-input-background);
+    padding: 5px 10px 5px 10px;
+    font-size: 1.2em;
+    min-height: 100px; /* Hauteur minimale pour la prévisualisation */
+    color: var(--akrel-color-text-primary);
+}
+
+.akrel-npc-sheet .editor a {
+    color: var(--akrel-color-text-primary);
+    background-color: var(--akrel-color-input-background);
+}
+
+.akrel-npc-sheet .editor-content-preview {
+    width: calc(100% - 30px); /* Laisse de l'espace pour le bouton */
+    height: 90px; /* Hauteur de la prévisualisation */
+    background-color: transparent;
+    color: var(--akrel-color-text-primary);
+    border: none;
+    resize: vertical;
+    overflow-y: auto;
+    padding-right: 10px;
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.4;
+    cursor: default;
+    pointer-events: none;
+}
+
+.akrel-npc-sheet .editor-edit-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--akrel-color-interactive);
+    color: var(--akrel-color-background);
+    border-radius: 3px;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.2s ease;
+}
+
+.akrel-npc-sheet .editor-edit-button:hover {
+    background-color: #9a79ad;
+}
+
+
 /* --- Identity Tab (Table/Grid) --- */
 .akrel-npc-sheet .tab.identity table {
     width: calc(100% - 60px);
@@ -1375,7 +1488,7 @@ html {
     margin-bottom: -11px;
 }
 
-.akrel-npc-sheet textarea {
+.akrel-npc-sheet textarea { /* Ceci s'applique aux autres textareas, PAS à l'éditeur de texte riche */
     width: calc(100% - 60px);
     font-size: 1.5em;
     font-family: "Modesto Condensed";
@@ -1590,7 +1703,6 @@ html {
 /* Styling for the Item Roll Chat Card */
 /* ----------------------------------- */
 .akrel-chat-card {
-    
     border-radius: 5px;
 }
 .akrel-chat-card.akrel-roll-chat-card {
@@ -1837,7 +1949,7 @@ html {
 }
 
 /* ----------------------------------- */
-/*              CSS ITEM               */
+/* CSS ITEM               */
 /* ----------------------------------- */
 
 .akrel-item-sheet {
@@ -2021,4 +2133,3 @@ html {
 .akrel-spell-sheet select {
     margin-right: 1em;
 }
-

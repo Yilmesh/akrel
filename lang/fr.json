@@ -164,6 +164,8 @@
             "ARMS": "Mains",
             "LEGS": "Jambes",
             "FEETS": "Pieds",
+            "JEWELS": "Bijoux",
+            "SHIELDS": "Bouclier",
             "SpellType": "Type de Compétence",
             "SpellTypeOffensive": "Compétence Offensive",
             "SpellTypeHealing": "Compétence de Soin",
