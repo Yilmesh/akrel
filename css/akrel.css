@@ -290,7 +290,7 @@ html {
     padding: 0;
     max-width: 100%;
     max-height: 100%;
-    object-fit: cover;
+    object-fit: fill;
     object-position: 50% 0%;
 }
 
@@ -547,34 +547,16 @@ html {
     z-index: 3;
 }
 
-/* --- Styles pour l'éditeur pop-up --- */
 .akrel-character-sheet .editor-container {
-    position: relative; /* Conteneur pour positionner le bouton */
-    margin-top: -5px;
     background-color: var(--akrel-color-input-background);
-    padding: 5px 10px 5px 10px;
+    color: var(--akrel-color-text-primary);
     font-size: 1.3em;
-    color: var(--akrel-color-text-primary);
+    padding: 5px 10px 5px 10px;
+    min-height: 300px;
 }
 
-.akrel-character-sheet .editor p {
-    min-height: 200px;
-}
-
-.akrel-character-sheet .editor-content-preview {
-    width: calc(100% - 30px); /* Laisse de l'espace pour le bouton */
-    height: 90px; /* Ajustez la hauteur de la prévisualisation */
-    background-color: transparent; /* Transparente car le fond est sur le container */
-    color: var(--akrel-color-text-primary);
-    border: none;
-    resize: vertical; /* Permet le redimensionnement vertical */
-    overflow-y: auto; /* Active le défilement si le contenu dépasse */
-    padding-right: 10px; /* Pour éviter que le texte ne chevauche le bouton */
-    font-family: inherit; /* Utilise la même police que le reste de la feuille */
-    font-size: 1em; /* Ajustez si nécessaire */
-    line-height: 1.4;
-    cursor: default; /* Indique qu'elle n'est pas directement modifiable */
-    pointer-events: none; /* Empêche la sélection de texte directe */
+.akrel-character-sheet .editor {
+    height: 300px;
 }
 
 .akrel-character-sheet .editor a {
